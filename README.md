@@ -1,96 +1,72 @@
-# Site pessoal — Rafael Felizola
+# rafael-felizola
 
-Site estático bilingue (PT-BR + EN) de autoridade profissional para trader.
-Sem backend, sem serviços pagos. Pronto para hospedar de graça no **GitHub Pages** (ou Cloudflare Pages).
+Site pessoal de Rafael Felizola, trader. Bilíngue (PT/EN), estático, publicado no GitHub Pages.
+
+## Regras do projeto
+
+- Rendimentos **só em porcentagem**. Nunca valores em dólar, saldo ou tamanho de posição.
+- **Fidelidade total aos dados**: nenhum número de rendimento, GEX, POP, ATR etc. é inventado ou calculado no site.
+- O aviso **"Resultados passados não garantem resultados futuros. Não é recomendação de investimento."** aparece no rodapé de todas as páginas e na seção Rendimentos.
+- Construção aos poucos, uma parte por vez, com pré-visualização antes de seguir.
 
 ## Estrutura
 
 ```
-rafael-felizola-site/
-├── index.html          # Página única
-├── css/styles.css      # Visual dark / trading
-├── js/i18n.js          # Textos PT e EN
-├── js/main.js          # Troca de idioma + menu mobile
-└── README.md           # Este arquivo
+index.html                 página única (seções abaixo)
+assets/css/style.css       visual: fundo #0a0e14, dourado #c9a227, DM Sans + JetBrains Mono
+assets/js/main.js          textos PT/EN (window.I18N), troca de idioma, menu mobile
+assets/js/performance.js   desenha Rendimentos a partir de data/performance.json
+data/performance.json      dados reais (gerado pelo TT Journal) — único arquivo a atualizar
+gex/index.html             Mercúrio (painel de GEX do MyGex) — lê gex/data/atual.json
+gex/data/atual.json        última rodada do MyGex (gravada pelo bot)
+scripts/gerar_performance.py     gera o performance.json pelo TT Journal (com --api baixa da tastytrade)
+scripts/validate_performance.py  valida o performance.json antes de publicar
+scripts/atualizar-mercurio.ps1   roda o MyGex e entrega o atual.json ao site (via Google Drive)
+scripts/teste_mercurio.py        teste do Mercúrio sem credenciais (refaz a última rodada pela coleta gravada)
+BOT.md                     instruções para o Grok bot (rendimentos e GEX)
+.nojekyll                  GitHub Pages serve os arquivos como estão
 ```
 
-## Pré-visualizar localmente
+## Seções
 
-Qualquer uma destas opções:
+1. **Início** (`#hero`): eyebrow "Especulação financeira", tagline, botão principal "Mercúrio".
+2. **Sobre** (`#about`): bio adiada (selo "Bio completa em breve").
+3. **Mercados** (`#markets`): "Onde especulo" — Opções (US), Ações & ETFs, Futuros.
+4. **Rendimentos** (`#performance`): acumulado do ano sobre a margem utilizada, trades fechados, taxa de acerto, gráfico mês a mês, "Como é calculado".
+5. **Insights** (`#insights`): textos de exemplo marcados como "Amostra".
+6. **Contato** (`#contact`): e-mail provisório.
+7. **Mercúrio (Gestor de GEX)** (`gex/`).
+8. **Área do aluno**: botão no topo que leva ao servidor Discord JRBFT (`window.SITE.studentUrl` em `assets/js/main.js`; vazio = leva a Contato).
 
-```bash
-# Opção 1 — abrir o arquivo no navegador
-open index.html          # macOS
-xdg-open index.html      # Linux
-start index.html         # Windows
+## Contrato do `data/performance.json`
 
-# Opção 2 — servidor local simples (recomendado)
-python3 -m http.server 8080
-# depois acesse http://localhost:8080
-```
+O site lê apenas estes campos (os demais são ignorados):
 
-Troque o idioma com os botões **PT | EN** no topo (sem recarregar a página). A preferência fica salva no navegador (`localStorage`).
+| Campo | Uso |
+|---|---|
+| `ytd_return_on_margin_pct` | número grande "No ano" (mostrado com 1 casa decimal) |
+| `ytd_closed_trades` | trades fechados no ano |
+| `ytd_win_rate_pct` | taxa de acerto |
+| `period.start`, `period.end` | período exibido; o mês de `end` é marcado `*` se `notes` contiver "parcial" |
+| `monthly[]` → `month` (AAAA-MM), `return_on_margin_pct`, `closed_trades` | gráfico; `closed_trades = 0` aparece como "—" |
+| `method.name/numerator/denominator/monthly/ytd/excluded` | "Como é calculado" (PT vem do arquivo; EN é tradução fixa em performance.js) |
+| `account_label` | linha "Tastytrade (conta pessoal)" |
+| `last_updated` | "Atualizado em" |
 
-## Personalizar antes de publicar
+Para atualizar os rendimentos basta substituir esse arquivo e publicar — não é preciso mexer no código.
+Se o arquivo não carregar, a seção mostra "Dados indisponíveis no momento" (nunca números antigos embutidos).
 
-1. **E-mail** — em `index.html`, busque `contact@rafaelfelizola.com` e troque pelo endereço real (também no `mailto:`).
-2. **Bio / textos** — edite as strings em `js/i18n.js` (objetos `pt` e `en`) para manter os dois idiomas alinhados.
-3. **Insights** — os três cards estão marcados como **Amostra / Sample**. Substitua títulos e textos pelos seus artigos reais (ou remova a seção).
-4. **Newsletter** — o formulário está desabilitado de propósito. Para ativar, conecte um serviço gratuito (Buttondown, Mailchimp free, etc.) e remova o atributo `disabled`.
+## Onde roda
 
-## Publicar de graça no GitHub Pages
+O projeto é desenvolvido aqui e copiado para o Grok bot do Rafael, que executa duas tarefas: atualizar `data/performance.json` (TT Journal) e atualizar `gex/` (MyGex). Ver `BOT.md`.
 
-### 1. Criar o repositório
+## Publicação
 
-1. Acesse [github.com/new](https://github.com/new).
-2. Nome sugerido: `rafael-felizola` ou `rafaelfelizola.github.io`.
-3. Deixe **público** (necessário para Pages gratuito em contas pessoais sem GitHub Pro).
-4. Não precisa adicionar README/licença se for subir esta pasta.
+- Repo: `felizolarafael-bot/rafael-felizola` (privado até o site ficar pronto).
+- Depois: tornar público e ativar Pages em **Settings → Pages → Deploy from branch → main / (root)**.
 
-### 2. Enviar os arquivos
+## Pendente
 
-No terminal, dentro desta pasta:
-
-```bash
-git init
-git add .
-git commit -m "Site inicial Rafael Felizola"
-git branch -M main
-git remote add origin https://github.com/SEU_USUARIO/SEU_REPO.git
-git push -u origin main
-```
-
-Substitua `SEU_USUARIO` e `SEU_REPO` pelos seus dados.
-
-### 3. Ativar o GitHub Pages
-
-1. No repositório: **Settings → Pages**.
-2. Em **Source**, escolha **Deploy from a branch**.
-3. Branch: **main**, pasta: **/ (root)**.
-4. Salve. Em 1–2 minutos o site estará em:
-
-   `https://SEU_USUARIO.github.io/SEU_REPO/`
-
-Se o repositório se chamar `SEU_USUARIO.github.io`, o site fica na raiz:
-`https://SEU_USUARIO.github.io/`
-
-### 4. Domínio próprio (opcional, depois)
-
-Em **Settings → Pages → Custom domain**, informe o domínio (ex.: `rafaelfelizola.com`) e configure os DNS no registrador conforme as instruções do GitHub. Isso continua gratuito no Pages.
-
-## Alternativa: Cloudflare Pages (também grátis)
-
-1. Crie conta em [pages.cloudflare.com](https://pages.cloudflare.com).
-2. Conecte o mesmo repositório GitHub.
-3. Build: deixe vazio (site estático). Output directory: `/` ou `.`
-4. Deploy.
-
-## O que este site NÃO faz
-
-- Não inventa P&L, win rate ou credenciais.
-- Não reivindica afiliação a corretoras.
-- Não vende mentoria com hard-sell (só autoridade + contato suave).
-
-## Licença / uso
-
-Conteúdo e código feitos para uso pessoal de Rafael Felizola. Ajuste à vontade.
+- Bio, e-mail definitivo de contato, textos reais de Insights.
+- Atualização automática dos rendimentos (TT Journal, dias úteis às 18:28).
+- Subir as mudanças ao GitHub e ativar o Pages.

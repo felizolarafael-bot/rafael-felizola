@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Rafael Felizola — Professional trader. US options, equities/ETFs, and futures.">
-  <meta name="author" content="Rafael Felizola">
+  <meta name="description" content="J.Rafael B. Felizola T. — especulação com disciplina e responsabilidade em opções, ações & ETFs dos EUA.">
+  <meta name="author" content="J.Rafael B. Felizola T.">
   <meta name="theme-color" content="#0a0e14">
-  <title>Rafael Felizola | Trader</title>
+  <title>J.Rafael B. Felizola T. | Trader</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%230a0e14'/><text y='68' x='50' text-anchor='middle' font-size='48' font-family='system-ui' font-weight='700' fill='%23c9a227'>RF</text></svg>">
 </head>
 <body>
@@ -22,23 +22,24 @@
         <span class="logo-mark">RF</span>
         <span class="logo-text">Rafael Felizola</span>
       </a>
-      <nav class="nav" aria-label="Primary">
+      <nav class="nav" aria-label="Principal">
         <ul class="nav-list">
           <li><a href="#about" data-i18n="nav.about">Sobre</a></li>
           <li><a href="#markets" data-i18n="nav.markets">Mercados</a></li>
-          <li><a href="#insights" data-i18n="nav.insights">Insights</a></li>
+          <li><a href="#performance" data-i18n="nav.perf">Rendimentos</a></li>
+          <li><a href="#trades" data-i18n="nav.trades">Operações</a></li>
+          <li><a href="#insights" data-i18n="nav.insights">Artigos</a></li>
+          <li><a href="gex/" data-i18n="nav.gex">Mercúrio</a></li>
           <li><a href="#contact" data-i18n="nav.contact">Contato</a></li>
         </ul>
       </nav>
       <div class="header-actions">
-        <div class="lang-switcher" role="group" aria-label="Language">
+        <div class="lang-switcher" role="group" aria-label="Idioma / Language">
           <button type="button" class="lang-btn is-active" data-lang="pt" aria-pressed="true">PT</button>
           <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
         </div>
         <button type="button" class="menu-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu">
-          <span class="menu-bar"></span>
-          <span class="menu-bar"></span>
-          <span class="menu-bar"></span>
+          <span class="menu-bar"></span><span class="menu-bar"></span><span class="menu-bar"></span>
         </button>
       </div>
     </div>
@@ -46,184 +47,142 @@
       <ul>
         <li><a href="#about" data-i18n="nav.about">Sobre</a></li>
         <li><a href="#markets" data-i18n="nav.markets">Mercados</a></li>
-        <li><a href="#insights" data-i18n="nav.insights">Insights</a></li>
+        <li><a href="#performance" data-i18n="nav.perf">Rendimentos</a></li>
+        <li><a href="#trades" data-i18n="nav.trades">Operações</a></li>
+        <li><a href="#insights" data-i18n="nav.insights">Artigos</a></li>
+        <li><a href="gex/" data-i18n="nav.gex">Mercúrio</a></li>
         <li><a href="#contact" data-i18n="nav.contact">Contato</a></li>
       </ul>
     </nav>
   </header>
 
   <main id="main">
-    <!-- HERO -->
+    <!-- 1. INÍCIO -->
     <section id="hero" class="hero">
       <div class="hero-grid" aria-hidden="true"></div>
       <div class="container hero-inner">
-        <p class="eyebrow" data-i18n="hero.eyebrow">Trader profissional</p>
-        <h1 class="hero-title">Rafael Felizola</h1>
-        <p class="hero-tagline" data-i18n="hero.tagline">
-          Análise disciplinada e gestão de risco em opções americanas, ações, ETFs e futuros.
-        </p>
+        <p class="eyebrow" data-i18n="hero.eyebrow">Especulação financeira</p>
+        <h1 class="hero-title">J.Rafael B. Felizola T.</h1>
+        <p class="hero-tagline" data-i18n="hero.tagline">Onde a aposta termina.</p>
         <div class="hero-actions">
-          <a href="#markets" class="btn btn-primary" data-i18n="hero.cta_primary">Ver abordagem</a>
+          <a href="gex/" class="btn btn-primary" data-i18n="hero.cta_gex">Mercúrio</a>
+          <a href="#markets" class="btn btn-ghost" data-i18n="hero.cta_primary">Ver abordagem</a>
           <a href="#contact" class="btn btn-ghost" data-i18n="hero.cta_secondary">Contato</a>
         </div>
-        <ul class="hero-markets" aria-label="Markets">
+        <ul class="hero-markets" aria-label="Mercados">
           <li><span class="dot"></span><span data-i18n="hero.m1">Opções US</span></li>
           <li><span class="dot"></span><span data-i18n="hero.m2">Ações &amp; ETFs</span></li>
-          <li><span class="dot"></span><span data-i18n="hero.m3">Futuros</span></li>
         </ul>
       </div>
     </section>
 
-    <!-- ABOUT -->
+    <!-- 2. SOBRE -->
     <section id="about" class="section">
       <div class="container">
         <header class="section-header">
           <p class="eyebrow" data-i18n="about.eyebrow">Sobre</p>
-          <h2 data-i18n="about.title">Disciplina acima de narrativa</h2>
+          <h2 data-i18n="about.title">Conhecimento prático acima de narrativa</h2>
         </header>
-        <div class="about-grid">
-          <div class="about-copy">
-            <p data-i18n="about.p1">
-              Sou trader profissional com foco em mercados americanos. Trabalho com opções, ações, ETFs e futuros — sempre com ênfase em processo, gestão de risco e clareza sobre o que é conhecido e o que não é.
-            </p>
-            <p data-i18n="about.p2">
-              Minha abordagem prioriza estrutura: definição de tese, dimensionamento de posição, cenários de saída e revisão contínua. Não há atalhos; há consistência operacional.
-            </p>
-            <p data-i18n="about.p3">
-              Este site é um espaço de autoridade e contato — sem promessas de resultado e sem afiliação a corretoras.
-            </p>
-          </div>
-          <aside class="about-card" aria-labelledby="principles-title">
-            <h3 id="principles-title" data-i18n="about.principles_title">Princípios</h3>
-            <ul>
-              <li data-i18n="about.pr1">Risco primeiro, retorno depois</li>
-              <li data-i18n="about.pr2">Processo documentado e revisável</li>
-              <li data-i18n="about.pr3">Transparência sobre incerteza</li>
-              <li data-i18n="about.pr4">Sem claims de performance</li>
-            </ul>
-          </aside>
+        <div class="about-copy">
+          <p data-i18n="about.lead">João Rafael Bezerra Felizola Torres é advogado, formado pela Universidade Estadual Vale do Acaraú, com atuação profissional em mais de 1.400 processos em diversas áreas do Direito público e privado.</p>
+          <p data-i18n="about.p2">Atua no mercado financeiro desde 2015, quando fez sua primeira operação em bolsa. Só entre 2019 e 2026 realizou mais de 3.700 trades, que se desdobraram em mais de 32 mil negócios. Trata a especulação financeira como ofício, com método, lógica, psicologia, números e gestão.</p>
+          <p data-i18n="about.p3" data-i18n-html>É autor do livro <em>Especular é Preciso: quando a sorte muda de lado</em>, obra que retrata sua visão de mercado.</p>
         </div>
       </div>
     </section>
 
-    <!-- MARKETS / APPROACH -->
+    <!-- 3. MERCADOS -->
     <section id="markets" class="section section-alt">
       <div class="container">
         <header class="section-header">
           <p class="eyebrow" data-i18n="markets.eyebrow">Mercados &amp; abordagem</p>
-          <h2 data-i18n="markets.title">Onde atuo e como penso</h2>
-          <p class="section-lead" data-i18n="markets.lead">
-            Três frentes complementares, unidas por gestão de risco e disciplina operacional.
-          </p>
+          <h2 data-i18n="markets.title">Onde especulo</h2>
+          <p class="section-lead" data-i18n="markets.lead">Dois mercados: à vista e futuro, ambos com análise bayesiana, método e responsabilidade.</p>
         </header>
-        <div class="cards markets-cards">
-          <article class="card">
-            <div class="card-icon" aria-hidden="true">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19V5M4 19h16M8 15l3-4 3 2 4-6"/></svg>
+        <div class="market-groups">
+          <div class="market-group">
+            <h3 class="market-group-title" data-i18n="markets.spot_title">Mercado à Vista</h3>
+            <p class="market-group-lead" data-i18n="markets.spot_lead">Ações e ETFs.</p>
+            <div class="cards market-cards">
+              <article class="card">
+                <div class="card-icon" aria-hidden="true">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+                </div>
+                <h3 data-i18n="markets.eq_title">Ações &amp; ETFs</h3>
+                <p data-i18n="markets.eq_body">Ação é uma fração do capital de uma empresa; ETF é um fundo negociado em bolsa que replica um índice ou uma cesta de ativos (como SPY e QQQ). O ganho operacional está na simplicidade e na liquidez: spreads curtos, entrada e saída a qualquer momento do pregão, sem vencimento e sem alavancagem embutida. O ETF dá diversificação em uma única ordem. Também são o ativo-objeto das opções, base de várias estruturas.</p>
+              </article>
             </div>
-            <h3 data-i18n="markets.opt_title">Opções (US)</h3>
-            <p data-i18n="markets.opt_body">
-              Estruturas direcionais e de volatilidade com atenção a greeks, liquidez e risco assimétrico. Foco em setups com tese clara e definição prévia de invalidação.
-            </p>
-          </article>
-          <article class="card">
-            <div class="card-icon" aria-hidden="true">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          </div>
+          <div class="market-group">
+            <h3 class="market-group-title" data-i18n="markets.deriv_title">Mercado Futuro</h3>
+            <p class="market-group-lead" data-i18n="markets.deriv_lead">Opções.</p>
+            <div class="cards market-cards">
+              <article class="card">
+                <div class="card-icon" aria-hidden="true">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19V5M4 19h16M8 15l3-4 3 2 4-6"/></svg>
+                </div>
+                <h3 data-i18n="markets.opt_title">Opções (US)</h3>
+                <p data-i18n="markets.opt_body">Opção é um contrato derivado de um ativo à vista que dá ao comprador o direito, e ao vendedor a obrigação, de negociar um ativo por um preço (strike) até uma data. A vantagem operacional é a flexibilidade: dá para montar posições com risco e retorno definidos ou indefinidos, ganhar com alta, queda ou lateralização, usar o tempo a favor ao vender prêmio, proteger uma carteira etc. Em contrapartida, exige conhecimento, prática e método: prazo, volatilidade e margem precisam ser geridos.</p>
+              </article>
             </div>
-            <h3 data-i18n="markets.eq_title">Ações &amp; ETFs</h3>
-            <p data-i18n="markets.eq_body">
-              Exposição a equities e veículos líquidos (incluindo ETFs setoriais e de índice). Seleção baseada em contexto macro, fluxo e estrutura de preço — não em narrativa isolada.
-            </p>
-          </article>
-          <article class="card">
-            <div class="card-icon" aria-hidden="true">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12h4l2-7 4 14 2-7h6"/></svg>
-            </div>
-            <h3 data-i18n="markets.fut_title">Futuros</h3>
-            <p data-i18n="markets.fut_body">
-              Contratos futuros para expressão eficiente de visão de mercado e hedge. Alavancagem tratada com rigor: tamanho de posição subordinado ao risco tolerável.
-            </p>
-          </article>
-        </div>
-        <div class="approach-note">
-          <p data-i18n="markets.note">
-            <strong>Nota:</strong> Nenhuma afiliação a corretoras é reivindicada neste site. Conteúdo educacional/autoridade — não constitui recomendação de investimento.
-          </p>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- INSIGHTS -->
+    <!-- 4. RENDIMENTOS (dados: data/performance.json, gerado pelo TT Journal) -->
+    <section id="performance" class="section">
+      <div class="container">
+        <header class="section-header">
+          <p class="eyebrow" data-i18n="perf.eyebrow">Rendimentos</p>
+          <h2 data-i18n="perf.title">Resultado do ano</h2>
+          <p class="section-lead" data-i18n="perf.lead">Resultado real dos meus trades fechados, só em porcentagem. Depósitos e saques não entram.</p>
+        </header>
+        <div id="perf-root" class="perf">
+          <p class="perf-empty" data-i18n="perf.loading">Carregando dados…</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. OPERAÇÕES FECHADAS (dados: data/trades-fechados.json, gerado pelo TT Journal; sem valores em dólar) -->
+    <section id="trades" class="section section-alt">
+      <div class="container">
+        <header class="section-header">
+          <p class="eyebrow" data-i18n="tr.eyebrow">Operações</p>
+          <h2 data-i18n="tr.title">Operações fechadas</h2>
+          <p class="section-lead" data-i18n="tr.lead">Cada trade fechado do ano, do mais recente ao mais antigo. Só ativo, datas, duração, ganho ou perda e o resultado em % sobre o valor de abertura.</p>
+        </header>
+        <div id="tr-root" class="tr">
+          <p class="perf-empty" data-i18n="perf.loading">Carregando dados…</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. INSIGHTS -->
     <section id="insights" class="section">
       <div class="container">
         <header class="section-header">
-          <p class="eyebrow" data-i18n="insights.eyebrow">Insights</p>
-          <h2 data-i18n="insights.title">Notas de mercado</h2>
-          <p class="section-lead" data-i18n="insights.lead">
-            Exemplos de formato — artigos amostra para ilustrar o tom. Substitua pelos seus textos reais.
-          </p>
+          <p class="eyebrow" data-i18n="insights.eyebrow">Artigos</p>
+          <h2 data-i18n="insights.title">Pensar o mercado com precisão</h2>
+          <p class="section-lead" data-i18n="insights.lead">Artigos educativos sobre mercado financeiro.</p>
         </header>
-        <div class="cards insight-cards">
-          <article class="card insight-card">
-            <span class="badge" data-i18n="insights.sample">Amostra</span>
-            <time datetime="2026-09-15" data-i18n="insights.i1_date">15 set 2026</time>
-            <h3 data-i18n="insights.i1_title">Volatilidade implícita e disciplina de entrada</h3>
-            <p data-i18n="insights.i1_body">
-              Quando a IV sobe, o prêmio enriquece — e o erro de timing também. Uma nota sobre filtrar setups por contexto de volatilidade, não só por direção.
-            </p>
-            <span class="insight-meta" data-i18n="insights.i1_read">Leitura · ~4 min</span>
-          </article>
-          <article class="card insight-card">
-            <span class="badge" data-i18n="insights.sample">Amostra</span>
-            <time datetime="2026-08-28" data-i18n="insights.i2_date">28 ago 2026</time>
-            <h3 data-i18n="insights.i2_title">ETFs líquidos como termômetro de fluxo</h3>
-            <p data-i18n="insights.i2_body">
-              Setoriais e de índice podem revelar rotação antes do headline. Como observar volume relativo e estrutura sem transformar cada candle em tese.
-            </p>
-            <span class="insight-meta" data-i18n="insights.i2_read">Leitura · ~3 min</span>
-          </article>
-          <article class="card insight-card">
-            <span class="badge" data-i18n="insights.sample">Amostra</span>
-            <time datetime="2026-08-10" data-i18n="insights.i3_date">10 ago 2026</time>
-            <h3 data-i18n="insights.i3_title">Futuros: tamanho de posição antes da opinião</h3>
-            <p data-i18n="insights.i3_body">
-              Alavancagem sem regra de risco é opinião cara. Um framework simples para dimensionar exposição em contratos a partir do drawdown máximo aceitável.
-            </p>
-            <span class="insight-meta" data-i18n="insights.i3_read">Leitura · ~5 min</span>
-          </article>
-        </div>
+        <div id="ins-root" class="ins"></div>
       </div>
     </section>
 
-    <!-- CONTACT -->
-    <section id="contact" class="section section-alt">
+    <!-- 6. CONTATO (e-mail provisório) -->
+    <section id="contact" class="section">
       <div class="container contact-inner">
         <header class="section-header">
           <p class="eyebrow" data-i18n="contact.eyebrow">Contato</p>
           <h2 data-i18n="contact.title">Vamos conversar</h2>
-          <p class="section-lead" data-i18n="contact.lead">
-            Para assuntos profissionais, use o e-mail abaixo. Substitua pelo endereço definitivo quando for publicar.
-          </p>
+          <p class="section-lead" data-i18n="contact.lead">Para assuntos profissionais, use o e-mail abaixo.</p>
         </header>
         <div class="contact-card">
-          <a class="contact-email" href="mailto:contact@rafaelfelizola.com">
+          <div class="contact-email">
             <span class="contact-label" data-i18n="contact.email_label">E-mail</span>
             <span class="contact-value">contact@rafaelfelizola.com</span>
-          </a>
-          <p class="contact-hint" data-i18n="contact.hint">
-            Placeholder editável — troque em index.html e nas strings i18n se necessário.
-          </p>
-          <form class="newsletter" onsubmit="return false;" aria-labelledby="nl-title">
-            <h3 id="nl-title" data-i18n="contact.nl_title">Newsletter (opcional)</h3>
-            <p class="nl-desc" data-i18n="contact.nl_desc">
-              Campo visual apenas — conecte a um serviço gratuito (ex.: Buttondown, Mailchimp free) se quiser ativar.
-            </p>
-            <div class="nl-row">
-              <label class="sr-only" for="nl-email" data-i18n="contact.nl_label">Seu e-mail</label>
-              <input id="nl-email" type="email" name="email" autocomplete="email" placeholder="you@email.com" data-i18n-placeholder="contact.nl_ph" disabled>
-              <button type="button" class="btn btn-primary" disabled data-i18n="contact.nl_btn">Em breve</button>
-            </div>
-          </form>
+          </div>
         </div>
       </div>
     </section>
@@ -231,10 +190,8 @@
 
   <footer class="site-footer">
     <div class="container footer-inner">
-      <p class="footer-brand">© <span id="year"></span> Rafael Felizola</p>
-      <p class="footer-disclaimer" data-i18n="footer.disclaimer">
-        Conteúdo informativo. Não constitui recomendação de investimento. Trading envolve risco de perda.
-      </p>
+      <p class="footer-brand">© <span id="year"></span> J.Rafael B. Felizola T.</p>
+      <p class="footer-disclaimer" data-i18n="footer.disclaimer">Resultados passados não garantem resultados futuros. Não é recomendação de investimento.</p>
       <p class="footer-lang">
         <button type="button" class="lang-btn-text" data-lang="pt">Português</button>
         <span aria-hidden="true">·</span>
@@ -243,7 +200,9 @@
     </div>
   </footer>
 
-  <script src="js/i18n.js"></script>
-  <script src="js/main.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/performance.js"></script>
+  <script src="assets/js/trades.js"></script>
+  <script src="assets/js/insights.js"></script>
 </body>
 </html>

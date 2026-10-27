@@ -1,0 +1,548 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}
+
+/* harmonia 2026-10-09 */
+:root{--gap-b:16px;--pad-b:14px 18px;--ctl-h:36px}
+.read{gap:var(--gap-b)}
+.regime,.vol{padding:var(--pad-b)}
+.vol{gap:12px}
+.read h2,.vol h2{font:600 12px/1.3 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0}
+.sub{font:600 12px/1.3 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+.scenwrap,.mapwrap{margin:0}
+.dt.ivt{width:auto;min-width:min(100%,460px)}
+.dt.ivt th,.dt.ivt td{text-align:right;padding-left:14px}
+.dt.ivt th:first-child,.dt.ivt td:first-child{text-align:left;padding-left:0;font-weight:600;color:var(--ink)}
+header{align-items:center}
+.tabs{align-items:center;align-self:center}
+.tabs button{box-sizing:border-box;height:var(--ctl-h);padding-top:0;padding-bottom:0;display:inline-flex;align-items:center}
+
+/* site: barra e aviso */
+.site-bar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 16px;background:#0a0e14;color:#e8ecf1;font:500 13px "DM Sans",system-ui,sans-serif;border-bottom:1px solid rgba(201,162,39,.35)}
+.site-bar a{color:#d4b84a;text-decoration:none}.site-bar a:hover{color:#e8c547}
+.site-bar b{color:#d4b84a;font-weight:600;letter-spacing:.02em}
+.site-bar .mstamp{color:#9aa4b2;font-family:"JetBrains Mono",ui-monospace,monospace;font-size:12px}
+.site-disc{margin:28px auto 36px;padding:0 16px;max-width:760px;text-align:center;font:400 12px "DM Sans",system-ui,sans-serif;color:var(--muted)}
+</style></head><body>
+<div class="site-bar"><a href="../">← Rafael Felizola</a><b>Mercúrio</b><span class="mstamp" id="mc-stamp"></span></div>
+<title>Mercúrio · GEX</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+:root{
+  --bg:#F3F5F3; --panel:#FFFFFF; --ink:#15201C; --muted:#5E6B66; --line:#DCE2DF;
+  --pos:#0E7C6B; --neg:#B5472D; --flip:#B8860B; --spot:#15201C; --chip:#E8EEEB;
+  --sans:"Barlow",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --cond:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){color-scheme:dark;
+    --bg:#0E1412; --panel:#151D1A; --ink:#E4ECE8; --muted:#90A09A; --line:#26312D;
+    --pos:#35B59E; --neg:#E0765A; --flip:#E0B040; --spot:#E4ECE8; --chip:#1D2824;}
+}
+:root[data-theme="dark"]{color-scheme:dark;
+  --bg:#0E1412; --panel:#151D1A; --ink:#E4ECE8; --muted:#90A09A; --line:#26312D;
+  --pos:#35B59E; --neg:#E0765A; --flip:#E0B040; --spot:#E4ECE8; --chip:#1D2824;}
+body{background:var(--bg);color:var(--ink);font:15px/1.5 var(--sans)}
+.wrap{max-width:1180px;margin:0 auto;padding:24px 16px 48px;display:flex;flex-direction:column;gap:20px}
+header{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:12px;border-bottom:1px solid var(--line);padding-bottom:14px}
+h1{font:700 30px/1.1 var(--cond);letter-spacing:.01em;margin:0;text-wrap:balance}
+.stamp{font:12px var(--mono);color:var(--muted)}
+.tabs{display:flex;flex-wrap:wrap;gap:6px}   /* 2026.10.25-1: abas quebram linha no celular */
+.tabs button{font:600 14px var(--cond);letter-spacing:.06em;padding:8px 18px;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:6px;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.tabs button.sob{border-style:dashed;color:var(--muted)}
+.tabs button:focus-visible{outline:2px solid var(--pos);outline-offset:2px}
+.read{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 18px}
+.read h2{font:600 12px var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
+.read{display:flex;flex-direction:column;gap:16px}
+.read h2{margin:0}
+.regime{display:grid;grid-template-columns:auto 1fr;gap:6px 18px;align-items:center;padding:14px 16px;border-radius:8px;background:color-mix(in srgb,var(--c) 12%,var(--panel));border:1px solid color-mix(in srgb,var(--c) 45%,transparent)}
+.regime.pos{--c:var(--pos)} .regime.neg{--c:var(--neg)} .regime.warn{--c:var(--flip)}
+.regime .rl{font:600 11px var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);grid-column:1/-1}
+.regime .rv{font:700 28px/1.05 var(--cond);color:var(--c);letter-spacing:.02em}
+.regime .rt{font-size:13.5px;display:grid;gap:2px}
+@media (max-width:600px){.regime{grid-template-columns:1fr}}
+.rhead{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px}
+.subtabs{display:flex;gap:4px;background:var(--chip);padding:3px;border-radius:7px}
+.subtabs button{font:600 13px var(--cond);letter-spacing:.05em;padding:6px 12px;border:0;border-radius:5px;background:transparent;color:var(--muted);cursor:pointer}
+.subtabs button[aria-selected="true"]{background:var(--panel);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.12)}
+.subtabs button:focus-visible{outline:2px solid var(--pos);outline-offset:1px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:10px}
+.tile{border-radius:8px;padding:12px 14px;background:var(--chip);border-left:4px solid var(--c);display:flex;flex-direction:column;gap:2px}
+.tile.pos{--c:var(--pos)} .tile.neg{--c:var(--neg)} .tile.warn{--c:var(--flip)} .tile.neu{--c:var(--muted)}
+.vol{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 18px;display:flex;flex-direction:column;gap:14px}
+.vol h2{font:600 12px var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0}
+.vol .note{font-size:12.5px;color:var(--muted);margin:0}
+.vol .ts svg{width:100%;height:auto;display:block}
+.tile .h{font:600 11px var(--sans);letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.tile .v{font:700 22px/1.15 var(--cond);color:var(--c)}
+.tile .s{font:600 13px var(--sans)}
+.tile .d{font-size:13px;color:var(--muted)}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:16px;align-items:start}
+@media (min-width:900px){.two{grid-template-columns:minmax(0,1.9fr) minmax(0,1fr)}}
+.sub{font:600 11px var(--sans);letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
+.ladder{display:flex;flex-direction:column}
+.lrow{display:grid;grid-template-columns:62px 1fr 64px 46px 54px 56px 50px 128px 56px;align-items:center;gap:8px;padding:5px 0;border-top:1px solid var(--line);font-size:13.5px}
+.lrow .p{font:600 13.5px var(--mono);font-variant-numeric:tabular-nums}
+.lrow .n{display:flex;align-items:center;gap:6px;min-width:0}
+.lrow .n i{width:9px;height:9px;border-radius:2px;flex:none;background:var(--k)}
+.lrow .n em{font-style:normal;font:11px var(--mono);color:var(--muted)}
+.lrow .pc{font:12px var(--mono);text-align:right;color:var(--muted);font-variant-numeric:tabular-nums}
+.lrow .bar{height:6px;border-radius:3px;background:var(--line);position:relative;overflow:hidden}
+.score{border:1px solid var(--line);border-radius:8px;padding:14px 16px;background:var(--panel);margin:12px 0}
+.score h3{margin:0 0 10px;font:700 18px var(--cond);letter-spacing:.02em}
+.sgeral{display:flex;align-items:baseline;gap:12px;margin-bottom:10px}.sgeral b{font:700 34px/1 var(--cond)}.sgeral span{color:var(--muted);font-size:13px}
+.sgeral.pos b{color:var(--pos)}.sgeral.mid b{color:var(--flip)}.sgeral.neg b{color:var(--neg)}.sgeral.none b{color:var(--muted)}
+.srow{display:grid;grid-template-columns:minmax(150px,1.3fr) minmax(90px,1.6fr) 44px minmax(90px,.9fr);gap:10px;align-items:center;padding:5px 0;border-top:1px solid var(--line);font-size:13px}
+.srow .sb{height:8px;border-radius:4px;background:var(--line);overflow:hidden}.srow .sb b{display:block;height:100%;background:var(--muted)}
+.srow.pos .sb b{background:var(--pos)}.srow.mid .sb b{background:var(--flip)}.srow.neg .sb b{background:var(--neg)}
+.srow .sp{font:700 14px var(--mono);text-align:right}.srow.pos .sp{color:var(--pos)}.srow.mid .sp{color:var(--flip)}.srow.neg .sp{color:var(--neg)}
+.srow .sk{color:var(--muted);font-size:12px}
+@media (max-width:560px){.srow{grid-template-columns:1fr 44px;row-gap:3px}.srow .sn{grid-column:1/3}.srow .sb{grid-column:1}.srow .sk{grid-column:1/3}}
+.lrow .pie{width:18px;height:18px;border-radius:50%;justify-self:end;background:var(--line);border:1px solid var(--line)}
+.lrow .pie.on{background:conic-gradient(var(--pos) 0 calc(var(--a)*1%),var(--neg) 0)}
+@media (max-width:460px){.lrow .pie{display:none}}
+.lrow .bar b{position:absolute;top:0;bottom:0;background:var(--k);opacity:.75}
+/* destaque das barreiras: call wall (verde), put wall (terracota) e gamma flip (âmbar) */
+.lrow.hl{--hc:var(--muted);background:color-mix(in srgb,var(--hc) 14%,var(--panel));border-radius:6px;padding:6px 8px;margin:2px -8px;border-top-color:transparent;box-shadow:inset 4px 0 0 var(--hc)}
+.lrow.hl+.lrow{border-top-color:transparent}
+.lrow.hl .p,.lrow.hl .n{color:color-mix(in srgb,var(--hc) 75%,var(--ink));font-weight:700}
+.lrow.hl .n{font-style:italic}
+.lrow.hl-c{--hc:var(--pos)} .lrow.hl-p{--hc:var(--neg)}
+.lrow.hl-f{--hc:var(--flip);background:color-mix(in srgb,var(--hc) 7%,var(--panel));box-shadow:inset 3px 0 0 color-mix(in srgb,var(--hc) 60%,transparent)}
+.lrow.hl-f .p,.lrow.hl-f .n{font-weight:600;color:color-mix(in srgb,var(--hc) 55%,var(--ink))}
+.lrow.spot{background:color-mix(in srgb,var(--ink) 13%,var(--panel));color:var(--ink);border-radius:6px;padding:7px 8px;margin:3px -8px;border:0;box-shadow:inset 3px 0 0 var(--muted)}
+.lrow.spot .pc,.lrow.spot .n em{color:var(--ink)}
+.k-res{--k:var(--pos)} .k-sup{--k:var(--neg)} .k-flip{--k:var(--flip)} .k-mag{--k:#6A63B8} .k-vanna{--k:#2F7FB8} .k-risk{--k:var(--neg)} .k-em{--k:#2F7FB8} .k-atr{--k:#A0643C} .k-otm{--k:var(--muted)} .k-grid{--k:var(--line)} .lrow.k-grid .n{color:var(--muted)} .lrow.k-grid .p{font-weight:400;color:var(--muted)}
+.scen{display:flex;flex-direction:column;gap:10px}
+.scen2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:10px}
+.sc{border:1px solid var(--line);border-radius:8px;padding:10px 12px;display:grid;gap:3px}
+.sc .if{font:700 15px var(--cond);letter-spacing:.02em;color:var(--c)}
+.sc.pos{--c:var(--pos)} .sc.neg{--c:var(--neg)}
+.sc .th{font-size:13.5px}
+.keyl{display:flex;flex-wrap:wrap;gap:10px;font-size:11.5px;color:var(--muted)}
+.keyl span{display:inline-flex;align-items:center;gap:5px}
+.keyl i{width:9px;height:9px;border-radius:2px;background:var(--k)}
+@media (max-width:460px){.lrow{grid-template-columns:46px minmax(0,1fr) 32px 36px 56px;gap:6px;font-size:12.5px}.lrow .p{font-size:12px}.lrow .bar,.lrow .pc,.lrow .prm,.lrow .sbh{display:none}.lrow .prm-m{display:block;font:400 10.5px var(--mono);color:var(--muted)}.lrow .n{flex-wrap:wrap;row-gap:0}.lrow .n em{flex-basis:100%;padding-left:15px}.lrow .pop,.lrow .atu{font-size:11px}}
+.lrow .pop{font:600 12px var(--mono);text-align:right;font-variant-numeric:tabular-nums}
+.lrow .vf{font:11.5px var(--mono);text-align:right;color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap}
+.lrow.spot .vf{color:var(--ink)}
+.lrow .vf .vcv,.lhead .hc{color:var(--pos)} .lrow .vf .vpv,.lhead .hp{color:var(--neg)} .lrow .vf .vsep{color:var(--muted)}
+.lrow .vf .dom{font-weight:600} .lrow .vf .vcv:not(.dom),.lrow .vf .vpv:not(.dom){opacity:.75}
+.lhead .hc,.lhead .hp{letter-spacing:.02em}
+@media (max-width:460px){.lrow .vf{white-space:normal;line-height:1.2}.lrow .vf .vsep{display:none}.lrow .vf .vcv,.lrow .vf .vpv{display:block}.lhead .h-vf{font-size:9.5px}}
+.lrow .vf .fx{color:var(--flip);font-style:normal;margin-right:4px;cursor:help}
+.qa{font-size:12.5px;color:var(--muted);margin:8px 0 0;line-height:1.5}
+.qa b{color:var(--ink);font-weight:600}
+.atrl{font-size:12.5px;color:var(--muted);margin:0 0 6px;line-height:1.5;display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px}
+.atrl b{color:var(--ink)} .atrl .hot{color:var(--neg)}
+.atrl .ab{display:inline-block;width:90px;height:6px;background:var(--chip);border-radius:3px;overflow:hidden;vertical-align:middle}
+.atrl .ab i{display:block;height:100%;background:#A0643C}
+.atrl .ab.hot i{background:var(--neg)}
+.sg{font-size:12.5px;color:var(--muted);margin:-4px 0 0;line-height:1.5;padding-left:10px;border-left:3px solid var(--line)}
+.sg b{color:var(--ink)} .sg.pos{border-left-color:var(--pos)} .sg.warn{border-left-color:var(--flip)} .sg.neg{border-left-color:var(--neg)}
+.sg .sgl{font-weight:700;letter-spacing:.04em}
+.sg.pos .sgl{color:var(--pos)} .sg.warn .sgl{color:var(--flip)} .sg.neg .sgl{color:var(--neg)}
+.qa .ok{color:var(--pos);font-weight:600;cursor:help}
+.qa .warn{color:var(--neg);font-weight:600}
+.lrow .ve{font:11.5px var(--mono);color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+.lrow .ve b{font-weight:600;color:var(--ink)}
+.lrow .ve .dte{color:var(--ink)}
+.lrow.spot .ve,.lrow.spot .ve b{color:var(--ink)}
+.w45 .lrow,.w45 .lhead{grid-template-columns:56px minmax(0,1fr) 138px 54px 40px 50px 54px 44px 120px 26px}
+.w45 .lrow .n{display:grid;grid-template-columns:9px minmax(0,1fr);column-gap:6px;align-items:center}.w45 .lrow .n em{grid-column:2}
+@media (max-width:460px){.w45 .lrow,.w45 .lhead{grid-template-columns:42px minmax(0,1fr) 46px 30px 34px 56px}.w45 .lrow .vf{font-size:10.5px}.w45 .lrow .vf .fx{margin-right:2px}.w45 .lrow .ve{white-space:normal;line-height:1.15}.w45 .vp{display:block;font-size:10.5px}.w45 .vd{display:none}.w45 .vs{display:none}.w45 .pcv,.w45 .dte{display:block}.w45 .lrow .n em{display:none}}
+.lrow .pop.lv{font-weight:400;font-style:italic;color:var(--muted)}
+.lrow.spot .pop{color:var(--ink)}
+.lhead{display:grid;grid-template-columns:62px 1fr 64px 46px 54px 56px 50px 128px 56px;gap:8px;font:600 10.5px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:0 0 4px}
+.lhead .h-pc,.lhead .h-pop,.lhead .h-prm,.lhead .h-sbh,.lhead .h-atu,.lhead .h-vf{text-align:right}.lhead .h-ve{text-align:left}
+.lrow .prm{font:12px var(--mono);text-align:right;font-variant-numeric:tabular-nums;cursor:help}.lrow .prm-m{display:none}.lrow.spot .prm{color:var(--ink)}
+.lrow .sbh{font:12px var(--mono);text-align:right;font-variant-numeric:tabular-nums;cursor:help}.lrow .sbh.up,.lrow .prm-m .up{color:var(--pos)}.lrow .sbh.dn,.lrow .prm-m .dn{color:var(--neg)}
+@media (max-width:460px){.lrow .pop .prm-m{display:block;font:400 10.5px var(--mono);color:var(--muted)}}
+.w45 .lrow.spot .n{display:flex}
+.lrow .atu{font:12px var(--mono);text-align:right;font-variant-numeric:tabular-nums;cursor:help}.lrow .atu.hi{color:var(--muted)}.lrow.spot .atu{color:var(--ink)}
+@media (max-width:460px){.lhead{grid-template-columns:46px minmax(0,1fr) 32px 36px 56px;gap:6px}.lhead .h-pc,.lhead .h-bar,.lhead .h-prm,.lhead .h-sbh{display:none}}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,520px),1fr));gap:20px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:16px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.card-h{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px}
+.card-h h3{font:700 20px var(--cond);margin:0;letter-spacing:.02em}
+.card-h .exp{font:12px var(--mono);color:var(--muted)}
+.pill{font:600 11px var(--sans);letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:99px}
+.pill.pos{background:color-mix(in srgb,var(--pos) 16%,transparent);color:var(--pos)}
+.pill.neg{background:color-mix(in srgb,var(--neg) 16%,transparent);color:var(--neg)}
+.lv{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+@media (max-width:520px){.lv{grid-template-columns:repeat(2,1fr)}}
+.lv div{background:var(--chip);border-radius:6px;padding:8px 10px}
+.lv span{display:block;font:600 10.5px var(--sans);letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.lv b{font:600 17px var(--mono);font-variant-numeric:tabular-nums}
+.lv small{font:11px var(--mono);color:var(--muted);margin-left:4px}
+.chart{overflow-x:auto}
+.chart svg{display:block;width:100%;min-width:480px;height:auto}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font:12px var(--sans);color:var(--muted)}
+.legend i{display:inline-block;width:14px;height:3px;vertical-align:middle;margin-right:5px}
+table.vn{width:100%;border-collapse:collapse;font:13px var(--mono);font-variant-numeric:tabular-nums}
+table.vn td{padding:4px 0;border-top:1px solid var(--line)}
+table.vn td:first-child{font-family:var(--sans);color:var(--muted)}
+table.vn td:last-child{text-align:right}
+.note{font-size:12.5px;color:var(--muted);margin:0}
+.dt{width:100%;border-collapse:collapse;font:13px var(--mono);font-variant-numeric:tabular-nums}
+.dt caption{text-align:left;font:700 15px var(--cond);letter-spacing:.02em;padding-bottom:4px}
+.dt th{font:600 10.5px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:right;padding:4px 0}
+.dt th:first-child,.dt td:first-child{text-align:left;font-family:var(--sans);color:var(--muted)}
+.dt td{padding:5px 0;border-top:1px solid var(--line);text-align:right}
+.dt .up{color:var(--pos)} .dt .dn{color:var(--neg)} .dt .eq{color:var(--muted)}
+.htab{overflow-x:auto}
+.ivgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+.ivgrid .htab table{min-width:0;width:100%}
+@media (max-width:699px){.ivgrid{grid-template-columns:1fr}}
+.htab table{min-width:560px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:10px}
+.kpi{background:var(--chip);border-radius:8px;padding:10px 12px;display:flex;flex-direction:column;gap:2px}
+.kpi .h{font:600 10.5px var(--sans);letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.kpi .v{font:700 26px/1.1 var(--cond);font-variant-numeric:tabular-nums}
+.kpi .d{font-size:12.5px;color:var(--muted)}
+.ok{color:var(--pos)} .ko{color:var(--neg)}
+.agr{border:1px solid var(--line);border-radius:8px;padding:12px 14px;display:flex;flex-direction:column;gap:8px}
+.agr h3{font:600 11px var(--sans);letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:0}
+.agr .vd{font:700 20px/1.2 var(--cond)}
+.agr .vd.pos{color:var(--pos)} .agr .vd.neg{color:var(--neg)} .agr .vd.wait{color:var(--muted)}
+.agr .dt td.best{font-weight:700}
+.agr .dt .nd{padding-left:12px}
+.agr .dt .rg{font-family:var(--sans);font-size:12px;color:var(--muted);text-align:left;padding-left:14px}
+@media (max-width:460px){.agr .dt .rg{display:none}.agr .htab table{min-width:0}}
+.agr .prog{height:6px;background:var(--chip);border-radius:3px;overflow:hidden;max-width:320px}
+.agr .prog b{display:block;height:100%;background:var(--flip)}
+footer{font-size:12px;color:var(--muted)}
+.esc{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 18px;display:flex;flex-direction:column;gap:10px}
+.esc .dt.ivt{min-width:min(100%,760px)}
+.esc h2{font:600 12px var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0}
+.esc tbody tr{cursor:pointer}.esc tbody tr:hover td{background:var(--chip)}.esc tbody tr.cur td:first-child{text-decoration:underline}
+.trd .htab table{min-width:0}
+.trd td,.trd th{vertical-align:top;padding-left:10px}.trd td:first-child,.trd th:first-child{padding-left:0}
+.trd td small{display:block;font:11px var(--mono);color:var(--muted)}
+.esc .ap{display:inline-block;font:600 11px var(--sans);letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:99px;white-space:nowrap}
+.esc .ap.sim{background:color-mix(in srgb,var(--pos) 16%,transparent);color:var(--pos)}.esc .ap.nao{background:color-mix(in srgb,var(--neg) 14%,transparent);color:var(--neg)}
+.trd td.mt,.trd th.mt{text-align:left;font:12.5px var(--sans);color:var(--muted)}.trd td.mt b{color:var(--ink);font-weight:600}.trd td.mt .av{color:var(--flip)}
+.esc td.rg{text-align:left;padding-left:14px;font-weight:600}.esc td.rg.pos{color:var(--pos)}.esc td.rg.neg{color:var(--neg)}.esc td.rg.warn{color:var(--flip)}
+</style>
+
+<div class="wrap">
+<header>
+  <div>
+    <h1>GEX - Mercúrio</h1>
+    <div class="stamp" id="stamp"></div>
+  </div>
+</header>
+<!-- 2026.10.26-1 (decisão do Rafael 26/10 15:36): sem barra de abas; o ativo é escolhido na tabela "Ativos escolhidos" -->
+
+<section class="esc" id="esc" aria-label="Ativos escolhidos" hidden></section>
+<!-- 2026.10.26-1 (decisão do Rafael 26/10 15:36): seção "Mapa para o trader" retirada do painel; gex\data\mapa-trader.json continua saindo para o bot -->
+<section class="read" id="read"></section>
+<section class="read" id="mapa" aria-label="Mapa de preços" hidden></section>
+<section class="vol" id="vol" hidden></section>
+<div class="grid" id="cards" hidden></div>
+
+<footer>Fonte: tastytrade (cotações de opções com open interest, IV, bid/ask e volume). GEX = gamma Black-Scholes × OI × 100 × spot² × 1%, calls positivas e puts negativas (premissa padrão: dealers comprados em calls e vendidos em puts). IV única por strike: a implícita no preço da opção OTM (Black-76, forward pela paridade put-call). Faixa do flip: perfil com essa IV × perfil com a IV da tasty da opção OTM; a margem do regime usa o limite mais próximo do preço. Walls: maior GEX de calls / de puts por strike; strike com OI casado de box (perna ITM a ≥2% do preço com OI ≥ 50% da OTM) entra pelo GEX líquido. Faixa lida: adaptativa pela IV de cada vencimento, com os limites de 90% de probabilidade OTM (put e call) no mapa. Open interest: fechamento do pregão anterior, publicado 1x/dia antes da abertura. Não é recomendação.<span id="ver"></span></footer>
+</div>
+
+<script>
+const D={"SPY": {"spot": 763.33, "regime": {"tone": "neg", "label": "GAMMA NEGATIVO", "why": "0DTE (29/09): GEX −$1,28 bi por 1%; preço 0,16% abaixo da faixa do flip (764,5–764,6).", "act": "Movimentos tendem a acelerar (dealers vendem na queda e compram na alta). Recuperar 764,6 devolve o gamma positivo. Piso: put wall 764."}, "lv0": [[770.47, "atr", "Teto do ATR diário (est.)", "mín. do dia 762,57 + 7,90", {"otm": 97, "k": "nível", "atr": 100}], [770, "res", "GEX +", "", {"otm": 97, "k": "call", "pr": 0.04, "pb": 0.04, "pa": 0.05, "hv": 0.0, "sb": 0.04, "vf": 5406528, "vc": 613215, "vp": 4793312, "nc": 136270, "np": 7075, "oi": 17171, "atr": 94}], [769, "res", "3º maior GEX +", "", {"otm": 95, "k": "call", "pr": 0.07, "pb": 0.06, "pa": 0.07, "hv": 0.0, "sb": 0.06, "vf": 7641556, "vc": 1300618, "vp": 6340938, "nc": 200095, "np": 10961, "oi": 12952, "atr": 81}], [768, "res", "2º maior GEX +", "", {"otm": 94, "k": "call", "pr": 0.09, "pb": 0.08, "pa": 0.09, "hv": 0.0, "sb": 0.08, "vf": 11416054, "vc": 1985592, "vp": 9430462, "nc": 233599, "np": 19545, "oi": 18731, "atr": 69}], [767, "res", "Call wall (maior GEX +) · limite OTM 90%", "", {"otm": 90, "k": "call", "pr": 0.14, "pb": 0.13, "pa": 0.14, "hv": 0.0, "sb": 0.13, "vf": 20127602, "vc": 3852562, "vp": 16275039, "nc": 285375, "np": 42218, "oi": 16959, "atr": 56}], [766, "mag", "Max pain", "", {"otm": 84, "k": "call", "pr": 0.23, "pb": 0.22, "pa": 0.23, "hv": 0.02, "sb": 0.2, "vf": 36863028, "vc": 8672310, "vp": 28190718, "nc": 385436, "np": 95724, "oi": 12398, "atr": 56}], [765.41, "em", "Movimento esperado (+)", "straddle 29/09 · ±0,27%", {"otm": 79, "k": "nível", "atr": 56}], [764.53, "flip", "Gamma flip", "faixa 764,5–764,6", {"otm": 69, "k": "nível", "atr": 56}], [764, "sup", "Put wall", "", {"otm": 61, "k": "call", "pr": 0.69, "pb": 0.69, "pa": 0.7, "hv": 0.32, "sb": 0.38, "vf": 68417263, "vc": 17522548, "vp": 50894714, "nc": 252123, "np": 354667, "oi": 10837, "atr": 56}], [762, "risk", "Maior bolsão de GEX −", "", {"otm": 69, "k": "put", "pr": 0.53, "pb": 0.52, "pa": 0.53, "hv": 0.17, "sb": 0.35, "vf": 24385456, "vc": 9068160, "vp": 15317295, "nc": 50519, "np": 291758, "oi": 7831, "atr": 63}], [761.25, "em", "Movimento esperado (−)", "straddle 29/09", {"otm": 77, "k": "nível", "atr": 73}], [759.08, "atr", "Piso do ATR diário (est.)", "máx. do dia 766,98 − 7,90", {"otm": 92, "k": "nível", "atr": 100}], [759, "otm", "Limite OTM 90% (put)", "29/09", {"otm": 92, "k": "put", "pr": 0.1, "pb": 0.1, "pa": 0.11, "hv": 0.0, "sb": 0.1, "vf": 3785394, "vc": 2255312, "vp": 1530081, "nc": 5155, "np": 145722, "oi": 9180, "atr": 101}]], "scen": [{"tone": "pos", "if": "Acima de 764,6", "then": "0DTE em gamma positivo: preço tende a oscilar entre 764 e 767; níveis acima: 767, 768, 769."}, {"tone": "neg", "if": "Abaixo de 764,5", "then": "0DTE vira gamma negativo: movimentos aceleram. Níveis abaixo: 762."}], "d0lab": "29/09", "ts0": "29/09 13:41", "otm0": {"exp": "29/09", "dte": 0, "put90": 759, "call90": 767}, "volf0": {"total": 345685754, "vol_oi": 16.4}, "sinal0": {"cls": "neg", "cen": [{"h": "Padrão", "total": -1.28, "flip": 764.53, "reg": "NEGATIVO", "muda": false}, {"h": "25% das puts vendidas por clientes", "total": 0.82, "flip": 762.33, "reg": "FRÁGIL", "muda": true}, {"h": "25% das calls compradas por clientes", "total": -2.74, "flip": 767.29, "reg": "NEGATIVO", "muda": false}], "vira_puts": 15, "vira_calls": null, "nivel": "MODERADO", "robusto": false}, "atr0": {"atr": 7.9, "pct": 1.03, "fonte": "estimado", "n": 3, "pc": 765.61, "lo": 757.71, "hi": 773.51, "tr": 4.41, "usado": 56, "rest": {"excedido": false, "teto": 770.47, "piso": 759.08, "lo_ref": 762.57, "hi_ref": 766.98}}, "vol": {"ivx": 16.14, "ivx5": 0.57, "ivr": 35, "ivp": 23, "hv30": 10.29, "hv60": 11.59, "hv90": 11.35, "vrp": 5.85, "ivhv": 1.57, "p7": {"exp": "06/10", "dte": 7.1, "iv": 13.62}, "p30": {"exp": "30/10", "dte": 31.1, "iv": 16.24}, "p45": {"exp": "06/11", "dte": 38.2, "iv": 16.53}, "slope": 2.6, "forma": "Contango", "sk0": {"exp": "29/09", "put": 18.3, "call": 17.5, "atm": 17.2, "kp": 761, "kc": 765, "skew": 0.9, "dn": 1.1}, "sk30": {"exp": "30/10", "put": 15.8, "call": 11.8, "atm": 13.4, "kp": 745, "kc": 787, "skew": 4.0, "dn": 2.4}, "em": {"impl": 0.82, "real": 0.65, "x": 1.27}, "vix": {"v": 16.16, "prev": 16.07}, "upd": "2026-09-29T16:18:56.395Z"}, "qa": {"oi": "28/09", "avisos": [], "info": ["spot confere com a paridade do 0DTE (-0,01%)", "0DTE: volume do dia já é 16,4× o OI de ontem"]}, "regime45": {"tone": "neg", "label": "GAMMA NEGATIVO", "why": "Janela 0–45 DTE (29/09 → 06/11): GEX −$6,59 bi por 1%; preço 0,70% abaixo da faixa do flip (770,7–770,7).", "act": "Movimentos tendem a acelerar (dealers vendem na queda e compram na alta). Recuperar 770,7 devolve o gamma positivo. Piso: put wall 761."}, "lv45": [[807, "otm", "Limite OTM 90% (call)", "06/11 · 38d", {"otm": 90, "k": "call", "pr": 1.41, "pb": 1.39, "pa": 1.42, "hv": 0.94, "sb": 0.47, "vf": 25184, "vc": 8538, "vp": 16646, "nc": 232, "np": 4, "oi": 3773, "atr": 241}], [790, "res", "GEX +", "16/10 · 17d · 57%", {"otm": 76, "k": "call", "pr": 4.46, "pb": 4.41, "pa": 4.5, "hv": 3.2, "sb": 1.26, "vf": 3635469, "vc": 1533042, "vp": 2102428, "nc": 21981, "np": 848, "oi": 63885, "atr": 147}], [785, "res", "Call wall (maior GEX +)", "09/10 · 10d · 47%", {"otm": 70, "k": "call", "pr": 6.0, "pb": 5.96, "pa": 6.05, "hv": 4.38, "sb": 1.63, "vf": 7893678, "vc": 4353754, "vp": 3539924, "nc": 43356, "np": 1774, "oi": 208969, "atr": 119}], [783, "res", "GEX +", "30/10 · 31d · 57%", {"otm": 68, "k": "call", "pr": 6.74, "pb": 6.69, "pa": 6.79, "hv": 4.93, "sb": 1.81, "vf": 3319416, "vc": 886553, "vp": 2432863, "nc": 10190, "np": 1375, "oi": 43252, "atr": 108}], [781.64, "atr", "Teto do ATR semanal (est.)", "mín. da semana 763,72 + 17,93", {"otm": 93, "k": "nível", "atr": 100}], [780, "res", "3º maior GEX +", "16/10 · 17d · 25%", {"otm": 64, "k": "call", "pr": 7.95, "pb": 7.89, "pa": 8.0, "hv": 5.86, "sb": 2.09, "vf": 20356762, "vc": 8405280, "vp": 11951482, "nc": 84021, "np": 8040, "oi": 80413, "fx": 1.1, "atr": 91}], [775, "res", "2º maior GEX +", "30/09 · 1d · 34%", {"otm": 58, "k": "call", "pr": 10.25, "pb": 10.2, "pa": 10.3, "hv": 7.67, "sb": 2.58, "vf": 14089316, "vc": 8085472, "vp": 6003844, "nc": 70880, "np": 5610, "oi": 97768, "atr": 63}], [774.3, "em", "Movimento esperado (+)", "até sexta 02/10 · ±1,17%", {"otm": 79, "k": "nível", "atr": 59}], [772, "res", "GEX +", "02/10 · 3d · 68%", {"otm": 55, "k": "call", "pr": 11.8, "pb": 11.74, "pa": 11.87, "hv": 8.94, "sb": 2.87, "vf": 12879528, "vc": 8611354, "vp": 4268174, "nc": 69319, "np": 5505, "oi": 43528, "fx": 1.7, "atr": 46}], [770.65, "flip", "Gamma flip", "faixa 770,7–770,7", {"otm": 53, "k": "nível", "atr": 43}], [765, "risk", "Bolsão de GEX − + max pain", "30/09 · 1d · 32%", {"otm": 53, "k": "put", "pr": 12.07, "pb": 12.02, "pa": 12.13, "hv": 8.57, "sb": 3.51, "vf": 71071128, "vc": 31772871, "vp": 39298258, "nc": 83321, "np": 136268, "oi": 77993, "fx": 2.8, "atr": 43}], [761, "sup", "Put wall", "30/09 · 1d · 93%", {"otm": 58, "k": "put", "pr": 10.65, "pb": 10.59, "pa": 10.72, "hv": 6.9, "sb": 3.75, "vf": 10553576, "vc": 4985798, "vp": 5567778, "nc": 7101, "np": 38075, "oi": 79354, "atr": 58}], [760, "risk", "Bolsão de GEX −", "30/09 · 1d · 33%", {"otm": 59, "k": "put", "pr": 10.35, "pb": 10.3, "pa": 10.39, "hv": 6.52, "sb": 3.82, "vf": 31608612, "vc": 8221994, "vp": 23386618, "nc": 9258, "np": 106398, "oi": 108472, "fx": 1.1, "atr": 63}], [756.32, "em", "Movimento esperado (−)", "até sexta 02/10", {"otm": 78, "k": "nível", "atr": 84}], [755, "risk", "Maior bolsão de GEX −", "30/10 · 31d · 39%", {"otm": 64, "k": "put", "pr": 8.88, "pb": 8.84, "pa": 8.92, "hv": 4.84, "sb": 4.04, "vf": 14297014, "vc": 6383829, "vp": 7913184, "nc": 5035, "np": 53600, "oi": 136918, "atr": 91}], [753.42, "atr", "Piso do ATR semanal (est.)", "fech. de referência 771,35 − 17,93", {"otm": 83, "k": "nível", "atr": 100}], [750, "risk", "Bolsão de GEX −", "16/10 · 17d · 47%", {"otm": 68, "k": "put", "pr": 7.64, "pb": 7.61, "pa": 7.68, "hv": 3.5, "sb": 4.14, "vf": 14581832, "vc": 8380204, "vp": 6201628, "nc": 4402, "np": 51936, "oi": 166404, "atr": 119}], [700, "otm", "Limite OTM 90% (put)", "06/11 · 38d", {"otm": 90, "k": "put", "pr": 2.12, "pb": 2.11, "pa": 2.14, "hv": 0.02, "sb": 2.1, "vf": 2001188, "vc": 1399770, "vp": 601418, "nc": 206, "np": 5906, "oi": 49519, "atr": 398}]], "scen45": [{"tone": "pos", "if": "Acima de 770,7", "then": "Janela em gamma positivo: preço tende a oscilar entre 761 e 785; níveis acima: 772, 775, 780."}, {"tone": "neg", "if": "Abaixo de 770,7", "then": "Janela vira gamma negativo: movimentos aceleram. Níveis abaixo: 765 (30/09), 761 (30/09), 760 (30/09)."}], "tiles45": [{"h": "Janela 29/09 → 06/11", "tone": "neg", "v": "Negativo", "s": "−$6,59 bi por 1%", "d": "14 vencimentos somados. Flip 770,7–770,7."}, {"h": "Peso por vencimento", "tone": "neg", "v": "Depende desta semana", "s": "16/10 −$2,41 bi · 30/09 −$2,15 bi", "d": "Depois de sexta (02/10) sobra −$3,23 bi (49% do atual)."}, {"h": "Margem até o flip", "tone": "neg", "v": "Abaixo do flip", "s": "0,70–0,70%", "d": "Janela vira gamma negativo abaixo de 770,7."}, {"h": "Movimento esperado · até sexta (02/10)", "tone": "neg", "v": "Passa da put wall", "s": "±8,99 (±1,17%) → 756,3–774,3", "d": "Straddle ATM 765 de 02/10. Walls: put 761 / call 785."}], "semana": [{"exp": "29/09", "sai": "−$0,72 bi", "sai_v": -0.72, "depois": "−$5,88 bi", "depois_v": -5.88, "flip": "770,7–770,7", "reg": "NEGATIVO"}, {"exp": "30/09", "sai": "−$2,15 bi", "sai_v": -2.15, "depois": "−$3,73 bi", "depois_v": -3.73, "flip": "770,9–771,0", "reg": "NEGATIVO"}, {"exp": "01/10", "sai": "−$0,12 bi", "sai_v": -0.12, "depois": "−$3,61 bi", "depois_v": -3.61, "flip": "771,0–771,1", "reg": "NEGATIVO"}, {"exp": "02/10", "sai": "−$0,38 bi", "sai_v": -0.38, "depois": "−$3,23 bi", "depois_v": -3.23, "flip": "773,0–773,2", "reg": "NEGATIVO"}], "w45lab": "29/09 → 06/11", "ts45": "28/09 17:49", "fri": "02/10", "otm45": {"exp": "06/11", "dte": 39, "put90": 700, "call90": 807, "curto": "02/10"}, "volf45": {"total": 742470436, "vol_oi": 0.79}, "sinal45": {"cls": "neg", "cen": [{"h": "Padrão", "total": -6.59, "flip": 770.65, "reg": "NEGATIVO", "muda": false}, {"h": "25% das puts vendidas por clientes", "total": 2.16, "flip": 762.54, "reg": "FRÁGIL", "muda": true}, {"h": "25% das calls compradas por clientes", "total": -12.05, "flip": 779.03, "reg": "NEGATIVO", "muda": false}], "vira_puts": 19, "vira_calls": null, "nivel": "MODERADO", "robusto": false}, "atrw": {"atr": 17.93, "pct": 2.34, "fonte": "estimado", "n": 0, "pc": 771.35, "rest": {"excedido": false, "teto": 781.64, "piso": 753.42, "lo_ref": 763.72, "hi_ref": 771.35}, "centro": "semana anterior", "lo": 753.42, "hi": 789.28, "h": 769.54, "l": 763.715, "tr": 7.63, "usado": 43}, "tiles": [{"h": "0DTE · 29/09", "tone": "neg", "v": "Negativo", "s": "−$1,28 bi por 1%", "d": "Call wall 767, put wall 764. Flip 764,5–764,6."}, {"h": "Janela 0–45 DTE · de 28/09 17:49", "tone": "neg", "v": "Negativo", "s": "−$6,59 bi por 1%", "d": "Flip 770,7–770,7. Detalhes na aba 45 DTE."}, {"h": "Margem até o flip (0DTE)", "tone": "neg", "v": "Abaixo do flip", "s": "0,16–0,16%", "d": "Corte do regime: 1% de folga até o limite mais próximo da faixa."}, {"h": "Movimento esperado · 0DTE (29/09)", "tone": "neg", "v": "Passa da put wall", "s": "±2,08 (±0,27%) → 761,3–765,4", "d": "Straddle ATM 763 de 29/09. Walls: put 764 / call 767."}], "cards": [{"t": "0DTE", "tv": -1.28, "exp": "29/09/2026", "regime": "neg", "net": "−$1,28 bi", "cw": 767, "pw": 764, "flip": 764.53, "flip2": 764.56, "flipTxt": "764,5–764,6", "mp": 766, "mpl": "Max pain 29/09", "stats": [["GEX total (US$ por 1% de movimento)", "−$1,28 bi"], ["GEX de calls na call wall", "+$407 mi"], ["GEX de puts na put wall", "−$673 mi"], ["Contratos lidos", "92"]], "em": [761.25, 765.41]}, {"t": "Janela 0–45 DTE", "tv": -6.59, "exp": "29/09 → 06/11 · 14 vencimentos", "regime": "neg", "net": "−$6,59 bi", "cw": 785, "pw": 761, "flip": 770.65, "flip2": 770.66, "flipTxt": "770,7–770,7", "mp": 765, "mpl": "Max pain 16/10", "stats": [["GEX total (US$ por 1% de movimento)", "−$6,59 bi"], ["GEX de calls na call wall", "+$1.223 mi"], ["GEX de puts na put wall", "−$1.516 mi"], ["Contratos lidos", "2292"]], "em": [756.32, 774.3]}]}, "QQQ": {"spot": 736.93, "regime": {"tone": "neg", "label": "GAMMA NEGATIVO", "why": "0DTE (29/09): GEX −$2,39 bi por 1%; preço 0,26% abaixo da faixa do flip (738,9–739,0).", "act": "Movimentos tendem a acelerar (dealers vendem na queda e compram na alta). Recuperar 739,0 devolve o gamma positivo. Piso: put wall 735."}, "lv0": [[747.55, "atr", "Teto do ATR diário (est.)", "mín. do dia 736,00 + 11,55", {"otm": 98, "k": "nível", "atr": 100}], [742, "otm", "Limite OTM 90% (call)", "29/09", {"otm": 92, "k": "call", "pr": 0.12, "pb": 0.12, "pa": 0.13, "hv": 0.01, "sb": 0.12, "vf": 3676582, "vc": 1440150, "vp": 2236432, "nc": 115212, "np": 4192, "oi": 7462, "atr": 52}], [740, "res", "GEX +", "", {"otm": 84, "k": "call", "pr": 0.28, "pb": 0.27, "pa": 0.28, "hv": 0.07, "sb": 0.2, "vf": 32700469, "vc": 8839022, "vp": 23861446, "nc": 321419, "np": 68469, "oi": 11164, "atr": 40}], [739.38, "em", "Movimento esperado (+)", "straddle 29/09 · ±0,33%", {"otm": 80, "k": "nível", "atr": 40}], [739, "res", "2º maior GEX +", "", {"otm": 76, "k": "call", "pr": 0.43, "pb": 0.43, "pa": 0.44, "hv": 0.19, "sb": 0.25, "vf": 42218750, "vc": 11546858, "vp": 30671892, "nc": 265445, "np": 114876, "oi": 7714, "atr": 40}], [738.88, "flip", "Gamma flip", "faixa 738,9–739,0", {"otm": 75, "k": "nível", "atr": 40}], [738, "res", "3º maior GEX +", "", {"otm": 66, "k": "call", "pr": 0.7, "pb": 0.7, "pa": 0.71, "hv": 0.41, "sb": 0.3, "vf": 55242436, "vc": 17560634, "vp": 37681803, "nc": 249087, "np": 194738, "oi": 8294, "atr": 40}], [737, "res", "Call wall (maior GEX +)", "", {"otm": 53, "k": "call", "pr": 1.1, "pb": 1.1, "pa": 1.11, "hv": 0.78, "sb": 0.32, "vf": 56921322, "vc": 18984894, "vp": 37936428, "nc": 171809, "np": 284168, "oi": 10158, "atr": 40}], [736, "risk", "Maior bolsão de GEX − + max pain", "", {"otm": 60, "k": "put", "pr": 0.88, "pb": 0.87, "pa": 0.88, "hv": 0.56, "sb": 0.32, "vf": 30746366, "vc": 8559428, "vp": 22186938, "nc": 52033, "np": 253565, "oi": 22837, "atr": 40}], [735, "sup", "Put wall", "", {"otm": 71, "k": "put", "pr": 0.56, "pb": 0.55, "pa": 0.56, "hv": 0.27, "sb": 0.28, "vf": 18256800, "vc": 4106798, "vp": 14150003, "nc": 17588, "np": 254955, "oi": 42470, "atr": 48}], [734.48, "em", "Movimento esperado (−)", "straddle 29/09", {"otm": 76, "k": "nível", "atr": 53}], [732, "otm", "Limite OTM 90% (put)", "29/09", {"otm": 91, "k": "put", "pr": 0.14, "pb": 0.13, "pa": 0.14, "hv": 0.01, "sb": 0.12, "vf": 2605097, "vc": 1511975, "vp": 1093122, "nc": 3070, "np": 80972, "oi": 10974, "atr": 74}], [729.03, "atr", "Piso do ATR diário (est.)", "máx. do dia 740,58 − 11,55", {"otm": 97, "k": "nível", "atr": 100}]], "scen": [{"tone": "pos", "if": "Acima de 739,0", "then": "0DTE em gamma positivo: preço tende a oscilar entre 735 e 737; níveis acima: 737, 738, 739."}, {"tone": "neg", "if": "Abaixo de 738,9", "then": "0DTE vira gamma negativo: movimentos aceleram. Níveis abaixo: 736, 735."}], "d0lab": "29/09", "ts0": "29/09 13:41", "otm0": {"exp": "29/09", "dte": 0, "put90": 732, "call90": 742}, "volf0": {"total": 272359577, "vol_oi": 11.06}, "sinal0": {"cls": "neg", "cen": [{"h": "Padrão", "total": -2.39, "flip": 738.97, "reg": "NEGATIVO", "muda": false}, {"h": "25% das puts vendidas por clientes", "total": 0.25, "flip": 736.6, "reg": "FRÁGIL", "muda": true}, {"h": "25% das calls compradas por clientes", "total": -3.85, "flip": 741.17, "reg": "NEGATIVO", "muda": false}], "vira_puts": 23, "vira_calls": null, "nivel": "MODERADO", "robusto": false}, "atr0": {"atr": 11.55, "pct": 1.57, "fonte": "estimado", "n": 3, "pc": 736.53, "lo": 724.98, "hi": 748.08, "tr": 4.58, "usado": 40, "rest": {"excedido": false, "teto": 747.55, "piso": 729.03, "lo_ref": 736.0, "hi_ref": 740.58}}, "vol": {"ivx": 21.98, "ivx5": 0.79, "ivr": 48, "ivp": 35, "hv30": 15.59, "hv60": 18.74, "hv90": 20.26, "vrp": 6.39, "ivhv": 1.41, "p7": {"exp": "06/10", "dte": 7.1, "iv": 19.33}, "p30": {"exp": "30/10", "dte": 31.1, "iv": 22.1}, "p45": {"exp": "06/11", "dte": 38.2, "iv": 22.54}, "slope": 2.8, "forma": "Contango", "sk0": {"exp": "29/09", "put": 21.8, "call": 21.7, "atm": 21.3, "kp": 735, "kc": 739, "skew": 0.1, "dn": 0.5}, "sk30": {"exp": "30/10", "put": 22.1, "call": 17.6, "atm": 19.4, "kp": 709, "kc": 766, "skew": 4.6, "dn": 2.7}, "em": {"impl": 1.0, "real": 0.98, "x": 1.02}, "vix": {"v": 16.16, "prev": 16.07}, "upd": "2026-09-29T16:26:32.779Z"}, "qa": {"oi": "28/09", "avisos": [], "info": ["spot confere com a paridade do 0DTE (-0,02%)", "0DTE: volume do dia já é 11,1× o OI de ontem"]}, "regime45": {"tone": "neg", "label": "GAMMA NEGATIVO", "why": "Janela 0–45 DTE (29/09 → 06/11): GEX −$2,02 bi por 1%; preço 0,54% abaixo da faixa do flip (740,2–740,3).", "act": "Movimentos tendem a acelerar (dealers vendem na queda e compram na alta). Recuperar 740,3 devolve o gamma positivo. Piso: put wall 730."}, "lv45": [[795, "otm", "Limite OTM 90% (call)", "06/11 · 38d", {"otm": 91, "k": "call", "pr": 2.02, "pb": 1.99, "pa": 2.05, "hv": 1.52, "sb": 0.5, "vf": 149458, "vc": 120228, "vp": 29230, "nc": 2196, "np": 5, "oi": 9327, "atr": 240}], [775, "res", "GEX +", "16/10 · 17d · 80%", {"otm": 80, "k": "call", "pr": 5.14, "pb": 5.08, "pa": 5.21, "hv": 3.99, "sb": 1.16, "vf": 1191600, "vc": 1137160, "vp": 54439, "nc": 7388, "np": 14, "oi": 55533, "atr": 164}], [760, "res", "2º maior GEX +", "16/10 · 17d · 74%", {"otm": 69, "k": "call", "pr": 9.54, "pb": 9.46, "pa": 9.63, "hv": 7.46, "sb": 2.08, "vf": 7893562, "vc": 6463962, "vp": 1429599, "nc": 32192, "np": 536, "oi": 127078, "atr": 107}], [758.04, "atr", "Teto do ATR semanal (est.)", "mín. da semana 731,63 + 26,41", {"otm": 93, "k": "nível", "atr": 100}], [755, "res", "GEX +", "16/10 · 17d · 44%", {"otm": 64, "k": "call", "pr": 11.48, "pb": 11.39, "pa": 11.57, "hv": 9.03, "sb": 2.45, "vf": 9219062, "vc": 7139798, "vp": 2079264, "nc": 32551, "np": 1103, "oi": 51375, "atr": 88}], [750, "res", "3º maior GEX +", "16/10 · 17d · 51%", {"otm": 60, "k": "call", "pr": 13.66, "pb": 13.57, "pa": 13.76, "hv": 10.82, "sb": 2.84, "vf": 19370224, "vc": 13832612, "vp": 5537612, "nc": 69782, "np": 3718, "oi": 80432, "atr": 70}], [748.87, "em", "Movimento esperado (+)", "até sexta 02/10 · ±1,71%", {"otm": 79, "k": "nível", "atr": 65}], [745, "res", "Call wall (maior GEX +)", "30/09 · 1d · 45%", {"otm": 56, "k": "call", "pr": 16.09, "pb": 15.99, "pa": 16.19, "hv": 12.86, "sb": 3.23, "vf": 23373022, "vc": 14952034, "vp": 8420988, "nc": 67084, "np": 7446, "oi": 77710, "atr": 51}], [740.2, "flip", "Gamma flip", "faixa 740,2–740,3", {"otm": 52, "k": "nível", "atr": 49}], [736, "risk", "Maior bolsão de GEX −", "29/09 · 0d · 76%", {"otm": 52, "k": "put", "pr": 17.41, "pb": 17.29, "pa": 17.53, "hv": 13.54, "sb": 3.87, "vf": 74053462, "vc": 25757241, "vp": 48296221, "nc": 64272, "np": 141496, "oi": 44511, "fx": 4.6, "atr": 49}], [730, "sup", "Put wall", "29/09 · 0d · 32%", {"otm": 56, "k": "put", "pr": 15.09, "pb": 14.99, "pa": 15.19, "hv": 10.91, "sb": 4.18, "vf": 50968526, "vc": 10818440, "vp": 40150086, "nc": 9512, "np": 151540, "oi": 207946, "atr": 55}], [726, "res", "Almofada de GEX +", "30/09 · 1d · 98%", {"otm": 59, "k": "put", "pr": 13.72, "pb": 13.62, "pa": 13.83, "hv": 9.35, "sb": 4.38, "vf": 3633715, "vc": 544185, "vp": 3089530, "nc": 392, "np": 18945, "oi": 45623, "atr": 70}], [725, "risk", "Bolsão de GEX −", "29/09 · 0d · 48%", {"otm": 60, "k": "put", "pr": 13.41, "pb": 13.3, "pa": 13.52, "hv": 8.99, "sb": 4.42, "vf": 23932294, "vc": 10749052, "vp": 13183241, "nc": 7287, "np": 85815, "oi": 174031, "atr": 74}], [723.65, "em", "Movimento esperado (−)", "até sexta 02/10", {"otm": 78, "k": "nível", "atr": 79}], [720, "risk", "Bolsão de GEX − + max pain", "30/09 · 1d · 75%", {"otm": 64, "k": "put", "pr": 11.88, "pb": 11.8, "pa": 11.97, "hv": 7.31, "sb": 4.57, "vf": 60165571, "vc": 5504710, "vp": 54660860, "nc": 2769, "np": 88632, "oi": 117960, "atr": 93}], [718.09, "atr", "Piso do ATR semanal (est.)", "fech. de referência 744,50 − 26,41", {"otm": 85, "k": "nível", "atr": 100}], [700, "risk", "Bolsão de GEX −", "16/10 · 17d · 56%", {"otm": 75, "k": "put", "pr": 7.39, "pb": 7.34, "pa": 7.44, "hv": 2.8, "sb": 4.59, "vf": 17576723, "vc": 1651706, "vp": 15925018, "nc": 405, "np": 43591, "oi": 144053, "atr": 168}], [650, "otm", "Limite OTM 90% (put)", "06/11 · 38d", {"otm": 91, "k": "put", "pr": 2.49, "pb": 2.46, "pa": 2.52, "hv": 0.08, "sb": 2.41, "vf": 812824, "vc": 700374, "vp": 112449, "nc": 79, "np": 1065, "oi": 40799, "atr": 358}]], "scen45": [{"tone": "pos", "if": "Acima de 740,3", "then": "Janela em gamma positivo: preço tende a oscilar entre 730 e 745; níveis acima: 745, 750, 755."}, {"tone": "neg", "if": "Abaixo de 740,2", "then": "Janela vira gamma negativo: movimentos aceleram. Níveis abaixo: 736 (29/09), 730 (29/09), 725 (29/09)."}], "tiles45": [{"h": "Janela 29/09 → 06/11", "tone": "neg", "v": "Negativo", "s": "−$2,02 bi por 1%", "d": "14 vencimentos somados. Flip 740,2–740,3."}, {"h": "Peso por vencimento", "tone": "neg", "v": "Depende desta semana", "s": "29/09 −$1,84 bi · 16/10 +$0,58 bi", "d": "Depois de sexta (02/10) sobra +$0,24 bi (-12% do atual)."}, {"h": "Margem até o flip", "tone": "neg", "v": "Abaixo do flip", "s": "0,54–0,55%", "d": "Janela vira gamma negativo abaixo de 740,2."}, {"h": "Movimento esperado · até sexta (02/10)", "tone": "neg", "v": "Passa das duas walls", "s": "±12,61 (±1,71%) → 723,6–748,9", "d": "Straddle ATM 736 de 02/10. Walls: put 730 / call 745."}], "semana": [{"exp": "29/09", "sai": "−$1,84 bi", "sai_v": -1.84, "depois": "−$0,18 bi", "depois_v": -0.18, "flip": "736,8–736,9", "reg": "NEGATIVO"}, {"exp": "30/09", "sai": "+$0,16 bi", "sai_v": 0.16, "depois": "−$0,34 bi", "depois_v": -0.34, "flip": "737,7–737,9", "reg": "NEGATIVO"}, {"exp": "01/10", "sai": "+$0,01 bi", "sai_v": 0.01, "depois": "−$0,35 bi", "depois_v": -0.35, "flip": "737,8–738,1", "reg": "NEGATIVO"}, {"exp": "02/10", "sai": "−$0,58 bi", "sai_v": -0.58, "depois": "+$0,24 bi", "depois_v": 0.24, "flip": "734,4–734,7", "reg": "FRÁGIL"}], "w45lab": "29/09 → 06/11", "ts45": "28/09 17:49", "fri": "02/10", "otm45": {"exp": "06/11", "dte": 39, "put90": 650, "call90": 795, "curto": "02/10"}, "volf45": {"total": 853338959, "vol_oi": 0.82}, "sinal45": {"cls": "neg", "cen": [{"h": "Padrão", "total": -2.02, "flip": 740.2, "reg": "NEGATIVO", "muda": false}, {"h": "25% das puts vendidas por clientes", "total": 3.29, "flip": 718.15, "reg": "ESTÁVEL", "muda": true}, {"h": "25% das calls compradas por clientes", "total": -6.32, "flip": 751.77, "reg": "NEGATIVO", "muda": false}], "vira_puts": 10, "vira_calls": null, "nivel": "DEPENDE DA HIPÓTESE", "robusto": false}, "atrw": {"atr": 26.41, "pct": 3.59, "fonte": "estimado", "n": 0, "pc": 744.5, "rest": {"excedido": false, "teto": 758.04, "piso": 718.09, "lo_ref": 731.63, "hi_ref": 744.5}, "centro": "semana anterior", "lo": 718.09, "hi": 770.91, "h": 741.42, "l": 731.63, "tr": 12.87, "usado": 49}, "tiles": [{"h": "0DTE · 29/09", "tone": "neg", "v": "Negativo", "s": "−$2,39 bi por 1%", "d": "Call wall 737, put wall 735. Flip 738,9–739,0."}, {"h": "Janela 0–45 DTE · de 28/09 17:49", "tone": "neg", "v": "Negativo", "s": "−$2,02 bi por 1%", "d": "Flip 740,2–740,3. Detalhes na aba 45 DTE."}, {"h": "Margem até o flip (0DTE)", "tone": "neg", "v": "Abaixo do flip", "s": "0,26–0,28%", "d": "Corte do regime: 1% de folga até o limite mais próximo da faixa."}, {"h": "Movimento esperado · 0DTE (29/09)", "tone": "neg", "v": "Passa das duas walls", "s": "±2,45 (±0,33%) → 734,5–739,4", "d": "Straddle ATM 737 de 29/09. Walls: put 735 / call 737."}], "cards": [{"t": "0DTE", "tv": -2.39, "exp": "29/09/2026", "regime": "neg", "net": "−$2,39 bi", "cw": 737, "pw": 735, "flip": 738.88, "flip2": 738.97, "flipTxt": "738,9–739,0", "mp": 736, "mpl": "Max pain 29/09", "stats": [["GEX total (US$ por 1% de movimento)", "−$2,39 bi"], ["GEX de calls na call wall", "+$558 mi"], ["GEX de puts na put wall", "−$2.242 mi"], ["Contratos lidos", "90"]], "em": [734.48, 739.38]}, {"t": "Janela 0–45 DTE", "tv": -2.02, "exp": "29/09 → 06/11 · 14 vencimentos", "regime": "neg", "net": "−$2,02 bi", "cw": 745, "pw": 730, "flip": 740.2, "flip2": 740.31, "flipTxt": "740,2–740,3", "mp": 720, "mpl": "Max pain 16/10", "stats": [["GEX total (US$ por 1% de movimento)", "−$2,02 bi"], ["GEX de calls na call wall", "+$717 mi"], ["GEX de puts na put wall", "−$2.278 mi"], ["Contratos lidos", "2454"]], "em": [723.65, 748.87]}]}, "SPX": {"spot": 7663.29, "regime": {"tone": "neg", "label": "GAMMA NEGATIVO", "why": "0DTE (29/09): GEX −$16,58 bi por 1%; preço 0,32% abaixo da faixa do flip (7.687,7–7.687,8).", "act": "Movimentos tendem a acelerar (dealers vendem na queda e compram na alta). Recuperar 7.687,8 devolve o gamma positivo. Piso: put wall 7650."}, "lv0": [[7737.36, "atr", "Teto do ATR diário (est.)", "mín. do dia 7.655,55 + 81,81", {"otm": 98, "k": "nível", "atr": 100}], [7725, "res", "2º maior GEX +", "", {"otm": 97, "k": "call", "pr": 0.38, "pb": 0.35, "pa": 0.4, "hv": 0.0, "sb": 0.37, "vf": 5177002, "vc": 1318988, "vp": 3858015, "nc": 35173, "np": 609, "oi": 4008, "atr": 85}], [7720, "res", "3º maior GEX +", "", {"otm": 97, "k": "call", "pr": 0.42, "pb": 0.4, "pa": 0.45, "hv": 0.0, "sb": 0.42, "vf": 8273178, "vc": 1909652, "vp": 6363525, "nc": 44933, "np": 1085, "oi": 4581, "atr": 79}], [7700, "mag", "Max pain · limite OTM 90%", "", {"otm": 92, "k": "call", "pr": 1.0, "pb": 0.95, "pa": 1.05, "hv": 0.04, "sb": 0.96, "vf": 41850795, "vc": 8295000, "vp": 33555795, "nc": 82950, "np": 8463, "oi": 6608, "atr": 54}], [7687.66, "flip", "Gamma flip", "faixa 7.687,7–7.687,8", {"otm": 84, "k": "nível", "atr": 54}], [7682.61, "em", "Movimento esperado (+)", "straddle 29/09 · ±0,25%", {"otm": 80, "k": "nível", "atr": 54}], [7675, "res", "Call wall (maior GEX +)", "", {"otm": 70, "k": "call", "pr": 4.55, "pb": 4.5, "pa": 4.6, "hv": 1.86, "sb": 2.69, "vf": 78633425, "vc": 15865850, "vp": 62767575, "nc": 34870, "np": 35765, "oi": 3888, "atr": 54}], [7660, "risk", "Maior bolsão de GEX −", "", {"otm": 53, "k": "put", "pr": 9.0, "pb": 8.9, "pa": 9.1, "hv": 5.32, "sb": 3.68, "vf": 75462600, "vc": 23041200, "vp": 52421400, "nc": 21840, "np": 58246, "oi": 6523, "atr": 54}], [7655, "res", "Almofada de GEX +", "", {"otm": 61, "k": "put", "pr": 6.65, "pb": 6.6, "pa": 6.7, "hv": 3.39, "sb": 3.26, "vf": 43021330, "vc": 12197250, "vp": 30824080, "nc": 9035, "np": 46352, "oi": 1731, "atr": 55}], [7650, "sup", "Put wall", "", {"otm": 68, "k": "put", "pr": 5.25, "pb": 5.2, "pa": 5.3, "hv": 2.02, "sb": 3.23, "vf": 55529565, "vc": 12932640, "vp": 42596925, "nc": 7698, "np": 81137, "oi": 8186, "atr": 61}], [7643.97, "em", "Movimento esperado (−)", "straddle 29/09", {"otm": 76, "k": "nível", "atr": 68}], [7625, "otm", "Limite OTM 90% (put)", "29/09", {"otm": 91, "k": "put", "pr": 1.18, "pb": 1.15, "pa": 1.2, "hv": 0.05, "sb": 1.12, "vf": 9438882, "vc": 4036350, "vp": 5402532, "nc": 1065, "np": 45979, "oi": 2552, "atr": 91}], [7617.79, "atr", "Piso do ATR diário (est.)", "máx. do dia 7.699,60 − 81,81", {"otm": 94, "k": "nível", "atr": 100}]], "scen": [{"tone": "pos", "if": "Acima de 7.687,8", "then": "0DTE em gamma positivo: preço tende a oscilar entre 7650 e 7675; níveis acima: 7.675, 7.720, 7.725."}, {"tone": "neg", "if": "Abaixo de 7.687,7", "then": "0DTE vira gamma negativo: movimentos aceleram. Níveis abaixo: 7.660, 7.650."}], "d0lab": "29/09", "ts0": "29/09 13:41", "otm0": {"exp": "29/09", "dte": 0, "put90": 7625, "call90": 7700}, "volf0": {"total": 912520970, "vol_oi": 6.65}, "sinal0": {"cls": "neg", "cen": [{"h": "Padrão", "total": -16.58, "flip": 7687.66, "reg": "NEGATIVO", "muda": false}, {"h": "25% das puts vendidas por clientes", "total": -1.66, "flip": 7666.71, "reg": "NEGATIVO", "muda": false}, {"h": "25% das calls compradas por clientes", "total": -23.22, "flip": 7710.08, "reg": "NEGATIVO", "muda": false}], "vira_puts": 28, "vira_calls": null, "nivel": "MODERADO", "robusto": false}, "atr0": {"atr": 81.81, "pct": 1.07, "fonte": "estimado", "n": 3, "pc": 7683.69, "lo": 7601.88, "hi": 7765.5, "tr": 44.05, "usado": 54, "rest": {"excedido": false, "teto": 7737.36, "piso": 7617.79, "lo_ref": 7655.55, "hi_ref": 7699.6}}, "vol": {"ivx": 15.98, "ivx5": 0.82, "ivr": 35, "ivp": 22, "hv30": 10.62, "hv60": 11.76, "hv90": 11.1, "vrp": 5.36, "ivhv": 1.51, "p7": {"exp": "06/10", "dte": 7.1, "iv": 13.45}, "p30": {"exp": "29/10", "dte": 30.1, "iv": 16.03}, "p45": {"exp": "13/11", "dte": 45.2, "iv": 16.9}, "slope": 2.6, "forma": "Contango", "sk0": {"exp": "29/09", "put": 17.0, "call": 16.5, "atm": 16.8, "kp": 7645, "kc": 7680, "skew": 0.5, "dn": 0.1}, "sk30": {"exp": "28/10", "put": 15.1, "call": 11.4, "atm": 12.8, "kp": 7500, "kc": 7875, "skew": 3.7, "dn": 2.3}, "em": {"impl": 0.76, "real": 0.67, "x": 1.14}, "vix": {"v": 16.16, "prev": 16.07}, "upd": "2026-09-29T16:27:58.917Z"}, "qa": {"oi": "28/09", "avisos": [], "info": ["spot confere com a paridade do 0DTE (-0,02%)", "0DTE: volume do dia já é 6,7× o OI de ontem"]}, "regime45": {"tone": "neg", "label": "GAMMA NEGATIVO", "why": "Janela 0–45 DTE (29/09 → 06/11): GEX −$10,68 bi por 1%; preço 0,24% abaixo da faixa do flip (7.702,1–7.702,2).", "act": "Movimentos tendem a acelerar (dealers vendem na queda e compram na alta). Recuperar 7.702,2 devolve o gamma positivo. Piso: put wall 7600."}, "lv45": [[8100, "otm", "Limite OTM 90% (call)", "06/11 · 38d", {"otm": 91, "k": "call", "pr": 13.65, "pb": 13.3, "pa": 14.0, "hv": 10.48, "sb": 3.17, "vf": 608455, "vc": 487385, "vp": 121070, "nc": 1273, "np": 3, "oi": 21467, "atr": 233}], [8000, "res", "GEX + · box (OI casado)", "30/10 · 31d · 42%", {"otm": 83, "k": "call", "pr": 27.5, "pb": 27.0, "pa": 28.0, "hv": 21.55, "sb": 5.95, "vf": 758214615, "vc": 14806910, "vp": 743407705, "nc": 36751, "np": 24170, "oi": 475902, "atr": 179}], [7950, "res", "GEX +", "16/10 · 17d · 47%", {"otm": 79, "k": "call", "pr": 38.2, "pb": 37.7, "pa": 38.7, "hv": 29.94, "sb": 8.26, "vf": 11490728, "vc": 7827988, "vp": 3662740, "nc": 8315, "np": 136, "oi": 65105, "atr": 152}], [7900, "res", "3º maior GEX +", "16/10 · 17d · 48%", {"otm": 73, "k": "call", "pr": 51.85, "pb": 51.3, "pa": 52.4, "hv": 40.77, "sb": 11.08, "vf": 8247972, "vc": 4799588, "vp": 3448385, "nc": 20852, "np": 158, "oi": 74949, "atr": 126}], [7852.44, "atr", "Teto do ATR semanal (est.)", "mín. da semana 7.666,60 + 185,84", {"otm": 94, "k": "nível", "atr": 100}], [7850, "res", "2º maior GEX +", "16/10 · 17d · 32%", {"otm": 67, "k": "call", "pr": 69.2, "pb": 68.7, "pa": 69.7, "hv": 54.4, "sb": 14.8, "vf": 24110722, "vc": 12116318, "vp": 11994405, "nc": 13788, "np": 691, "oi": 61862, "atr": 99}], [7800, "res", "Call wall (maior GEX + líquido)", "16/10 · 17d · 27%", {"otm": 61, "k": "call", "pr": 90.35, "pb": 89.8, "pa": 90.9, "hv": 71.18, "sb": 19.17, "vf": 41584590, "vc": 22101805, "vp": 19482785, "nc": 27326, "np": 1488, "oi": 91158, "atr": 72}], [7773.86, "em", "Movimento esperado (+)", "até sexta 02/10 · ±1,17%", {"otm": 80, "k": "nível", "atr": 58}], [7750, "res", "GEX +", "30/09 · 1d · 36%", {"otm": 55, "k": "call", "pr": 115.05, "pb": 114.5, "pa": 115.6, "hv": 91.38, "sb": 23.67, "vf": 98913440, "vc": 33715015, "vp": 65198425, "nc": 21466, "np": 7027, "oi": 67199, "atr": 45}], [7702.14, "flip", "Gamma flip", "faixa 7.702,1–7.702,2", {"otm": 49, "k": "nível", "atr": 41}], [7700, "risk", "Bolsão de GEX −", "30/09 · 1d · 43%", {"otm": 49, "k": "call", "pr": 143.3, "pb": 142.6, "pa": 144.0, "hv": 115.18, "sb": 28.12, "vf": 148418090, "vc": 61446870, "vp": 86971220, "nc": 20688, "np": 18104, "oi": 106956, "atr": 41}], [7650, "risk", "Maior bolsão de GEX −", "30/09 · 1d · 36%", {"otm": 56, "k": "put", "pr": 110.35, "pb": 109.7, "pa": 111.0, "hv": 78.18, "sb": 32.17, "vf": 60015435, "vc": 11371370, "vp": 48644065, "nc": 1639, "np": 20172, "oi": 66199, "atr": 50}], [7625, "risk", "Bolsão de GEX −", "02/10 · 3d · 33%", {"otm": 59, "k": "put", "pr": 102.3, "pb": 101.7, "pa": 102.9, "hv": 68.37, "sb": 33.93, "vf": 26612340, "vc": 7024640, "vp": 19587700, "nc": 748, "np": 10560, "oi": 25921, "atr": 64}], [7600, "sup", "Put wall (maior GEX − líquido)", "30/09 · 1d · 44%", {"otm": 61, "k": "put", "pr": 94.9, "pb": 94.3, "pa": 95.5, "hv": 59.44, "sb": 35.46, "vf": 48418360, "vc": 6108680, "vp": 42309680, "nc": 469, "np": 24279, "oi": 82552, "atr": 77}], [7593.52, "em", "Movimento esperado (−)", "até sexta 02/10", {"otm": 77, "k": "nível", "atr": 81}], [7557.57, "atr", "Piso do ATR semanal (est.)", "fech. de referência 7.743,41 − 185,84", {"otm": 84, "k": "nível", "atr": 100}], [7500, "risk", "Bolsão de GEX − + max pain", "16/10 · 17d · 45%", {"otm": 70, "k": "put", "pr": 70.65, "pb": 70.1, "pa": 71.2, "hv": 31.88, "sb": 38.77, "vf": 28307682, "vc": 4539215, "vp": 23768468, "nc": 197, "np": 17074, "oi": 104960, "atr": 131}], [7025, "otm", "Limite OTM 90% (put)", "06/11 · 38d", {"otm": 90, "k": "put", "pr": 21.3, "pb": 20.9, "pa": 21.7, "hv": 0.31, "sb": 20.99, "vf": 814775, "vc": 338440, "vp": 476335, "nc": 5, "np": 646, "oi": 4530, "atr": 387}]], "scen45": [{"tone": "pos", "if": "Acima de 7.702,2", "then": "Janela em gamma positivo: preço tende a oscilar entre 7600 e 7800; níveis acima: 7.750, 7.800, 7.850."}, {"tone": "neg", "if": "Abaixo de 7.702,1", "then": "Janela vira gamma negativo: movimentos aceleram. Níveis abaixo: 7.650 (30/09), 7.625 (02/10), 7.600 (30/09)."}], "tiles45": [{"h": "Janela 29/09 → 06/11", "tone": "neg", "v": "Negativo", "s": "−$10,68 bi por 1%", "d": "28 vencimentos somados. Flip 7.702,1–7.702,2."}, {"h": "Peso por vencimento", "tone": "neg", "v": "Depende desta semana", "s": "30/09 −$5,55 bi · 29/09 −$4,33 bi", "d": "Depois de sexta (02/10) sobra −$0,99 bi (9% do atual)."}, {"h": "Margem até o flip", "tone": "neg", "v": "Abaixo do flip", "s": "0,24–0,24%", "d": "Janela vira gamma negativo abaixo de 7.702,1."}, {"h": "Movimento esperado · até sexta (02/10)", "tone": "neg", "v": "Passa da put wall", "s": "±90,17 (±1,17%) → 7.593,5–7.773,9", "d": "Straddle ATM 7675 de 02/10. Walls: put 7600 / call 7800."}], "semana": [{"exp": "29/09", "sai": "−$4,33 bi", "sai_v": -4.33, "depois": "−$6,36 bi", "depois_v": -6.36, "flip": "7.698,0–7.698,1", "reg": "NEGATIVO"}, {"exp": "30/09", "sai": "−$5,55 bi", "sai_v": -5.55, "depois": "−$0,80 bi", "depois_v": -0.8, "flip": "7.686,7–7.686,8", "reg": "NEGATIVO"}, {"exp": "01/10", "sai": "+$0,27 bi", "sai_v": 0.27, "depois": "−$1,07 bi", "depois_v": -1.07, "flip": "7.688,3–7.688,3", "reg": "NEGATIVO"}, {"exp": "02/10", "sai": "−$0,07 bi", "sai_v": -0.07, "depois": "−$0,99 bi", "depois_v": -0.99, "flip": "7.689,4–7.689,5", "reg": "NEGATIVO"}], "w45lab": "29/09 → 06/11", "ts45": "28/09 17:49", "fri": "02/10", "otm45": {"exp": "06/11", "dte": 39, "put90": 7025, "call90": 8100, "curto": "02/10"}, "volf45": {"total": 7640448375, "vol_oi": 0.26}, "sinal45": {"cls": "neg", "cen": [{"h": "Padrão", "total": -10.68, "flip": 7702.14, "reg": "NEGATIVO", "muda": false}, {"h": "25% das puts vendidas por clientes", "total": 29.81, "flip": 7598.24, "reg": "ESTÁVEL", "muda": true}, {"h": "25% das calls compradas por clientes", "total": -45.83, "flip": 7800.18, "reg": "NEGATIVO", "muda": false}], "vira_puts": 7, "vira_calls": null, "nivel": "DEPENDE DA HIPÓTESE", "robusto": false}, "atrw": {"atr": 185.84, "pct": 2.42, "fonte": "estimado", "n": 0, "pc": 7743.41, "rest": {"excedido": false, "teto": 7852.44, "piso": 7557.57, "lo_ref": 7666.6, "hi_ref": 7743.41}, "centro": "semana anterior", "lo": 7557.57, "hi": 7929.25, "h": 7724.15, "l": 7666.6, "tr": 76.81, "usado": 41}, "tiles": [{"h": "0DTE · 29/09", "tone": "neg", "v": "Negativo", "s": "−$16,58 bi por 1%", "d": "Call wall 7675, put wall 7650. Flip 7.687,7–7.687,8."}, {"h": "Janela 0–45 DTE · de 28/09 17:49", "tone": "neg", "v": "Negativo", "s": "−$10,68 bi por 1%", "d": "Flip 7.702,1–7.702,2. Detalhes na aba 45 DTE."}, {"h": "Margem até o flip (0DTE)", "tone": "neg", "v": "Abaixo do flip", "s": "0,32–0,32%", "d": "Corte do regime: 1% de folga até o limite mais próximo da faixa."}, {"h": "Movimento esperado · 0DTE (29/09)", "tone": "neg", "v": "Passa das duas walls", "s": "±19,32 (±0,25%) → 7.644,0–7.682,6", "d": "Straddle ATM 7665 de 29/09. Walls: put 7650 / call 7675."}], "cards": [{"t": "0DTE", "tv": -16.58, "exp": "29/09/2026", "regime": "neg", "net": "−$16,58 bi", "cw": 7675, "pw": 7650, "flip": 7687.66, "flip2": 7687.79, "flipTxt": "7.687,7–7.687,8", "mp": 7700, "mpl": "Max pain 29/09", "stats": [["GEX total (US$ por 1% de movimento)", "−$16,58 bi"], ["GEX de calls na call wall", "+$1.650 mi"], ["GEX de puts na put wall", "−$5.461 mi"], ["Contratos lidos", "184"]], "em": [7643.97, 7682.61]}, {"t": "Janela 0–45 DTE", "tv": -10.68, "exp": "29/09 → 06/11 · 28 vencimentos", "regime": "neg", "net": "−$10,68 bi", "cw": 7800, "pw": 7600, "flip": 7702.14, "flip2": 7702.22, "flipTxt": "7.702,1–7.702,2", "mp": 7500, "mpl": "Max pain 16/10", "stats": [["GEX total (US$ por 1% de movimento)", "−$10,68 bi"], ["GEX líquido na call wall", "+$4.997 mi"], ["GEX líquido na put wall", "−$4.908 mi"], ["Walls pelo GEX líquido", "maior GEX bruto de calls e de puts caiu na mesma strike (OI casado, típico de box)"], ["Box ignorado nas walls", "8000 (calls) — OI casado com a perna ITM; vale o GEX líquido"], ["Contratos lidos", "2820"]], "em": [7593.52, 7773.86]}]}, "meta": {"stamp": "Dados tastytrade · 29/09 13:41 (Fortaleza) · SPY 763,33 · QQQ 736,93 · SPX 7.663,29 · modo rápido (0DTE)", "mode": "quick", "pre": false, "contratos": 366, "versao": "2026.09.28-3"}};
+const fmt=n=>(n==null||isNaN(n))?"—":Number(n).toLocaleString("pt-BR",{maximumFractionDigits:2});
+const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function pct(x,spot){if(x==null||!spot)return "";const p=(x-spot)/spot*100;return (p>0?"+":"")+p.toFixed(2).replace(".",",")+"%"}
+function curve(c,spot){
+  if(!c.prof||!c.prof.length)return "";
+  const W=640,H=200,L=46,R=10,T=22,B=26,iw=W-L-R,ih=H-T-B,P=c.prof;
+  const x0=P[0][0],x1=P[P.length-1][0],ys=P.map(p=>p[1]),mx=Math.max(...ys.map(Math.abs))||1;
+  const X=v=>L+(v-x0)/(x1-x0)*iw, Y=v=>T+ih/2-(v/mx)*(ih/2);
+  let o=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Curva de GEX por preço">`;
+  if(c.em){o+=`<rect x="${X(Math.max(c.em[0],x0))}" y="${T}" width="${X(Math.min(c.em[1],x1))-X(Math.max(c.em[0],x0))}" height="${ih}" fill="#2F7FB8" opacity=".10"/><text x="${X(Math.min(c.em[1],x1))+4}" y="${T+ih-6}" text-anchor="start" font-size="10" font-family="var(--sans)" fill="#2F7FB8">movimento esperado</text>`}
+  [1,.5,0,-.5,-1].forEach(f=>{const yy=Y(mx*f);o+=`<line x1="${L}" x2="${W-R}" y1="${yy}" y2="${yy}" stroke="var(--line)" stroke-width="${f===0?1.5:1}"/><text x="${L-6}" y="${yy+4}" text-anchor="end" font-size="10" font-family="var(--mono)" fill="var(--muted)">${(mx*f).toFixed(1).replace(".",",")}</text>`});
+  const pos=P.map(p=>`${X(p[0])},${Y(Math.max(p[1],0))}`).join(" "), neg=P.map(p=>`${X(p[0])},${Y(Math.min(p[1],0))}`).join(" ");
+  o+=`<polygon points="${X(x0)},${Y(0)} ${pos} ${X(x1)},${Y(0)}" fill="var(--pos)" opacity=".18"/><polygon points="${X(x0)},${Y(0)} ${neg} ${X(x1)},${Y(0)}" fill="var(--neg)" opacity=".18"/>`;
+  o+=`<polyline points="${P.map(p=>`${X(p[0])},${Y(p[1])}`).join(" ")}" fill="none" stroke="var(--ink)" stroke-width="1.8"/>`;
+  if(c.flip&&c.flip2){const a=X(Math.min(c.flip,c.flip2)),b=X(Math.max(c.flip,c.flip2));o+=`<rect x="${a}" y="${T}" width="${Math.max(2,b-a)}" height="${ih}" fill="var(--flip)" opacity=".3"/>`}
+  const sx=X(spot);o+=`<line x1="${sx}" x2="${sx}" y1="${T-4}" y2="${T+ih}" stroke="var(--spot)" stroke-dasharray="4 3"/><text x="${sx}" y="${T-8}" text-anchor="middle" font-size="10" font-weight="600" font-family="var(--sans)" fill="var(--spot)">spot ${fmt(spot)}</text>`;
+  for(let i=0;i<=6;i++){const v=x0+(x1-x0)*i/6;o+=`<text x="${X(v)}" y="${H-8}" text-anchor="middle" font-size="10" font-family="var(--mono)" fill="var(--muted)">${Math.round(v)}</text>`}
+  return o+"</svg>";}
+function chart(c,spot){
+  const W=640,H=260,L=46,R=10,T=26,B=30,n=c.s.length,iw=W-L-R,ih=H-T-B;
+  if(!n)return "";
+  const mx=Math.max(...c.g.map(Math.abs))||1,bw=iw/n;
+  const y=v=>T+ih/2-(v/mx)*(ih/2);
+  const xs=k=>{ // interpolated x for a price level
+    const s=c.s; if(k<=s[0])return L; if(k>=s[n-1])return L+iw;
+    let i=s.findIndex(v=>v>=k); const a=s[i-1],b=s[i]; return L+bw*(i-1+(k-a)/(b-a))+bw/2;};
+  let o=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="GEX líquido por strike">`;
+  [1,.5,-.5,-1].forEach(f=>{const yy=y(mx*f);o+=`<line x1="${L}" x2="${W-R}" y1="${yy}" y2="${yy}" stroke="var(--line)" stroke-width="1"/><text x="${L-6}" y="${yy+4}" text-anchor="end" font-size="10" font-family="var(--mono)" fill="var(--muted)">${Math.round(mx*f)}M</text>`});
+  c.g.forEach((v,i)=>{const x=L+i*bw+bw*.12,y0=y(0),y1=y(v);o+=`<rect x="${x}" y="${Math.min(y0,y1)}" width="${bw*.76}" height="${Math.max(1,Math.abs(y1-y0))}" fill="${v>=0?'var(--pos)':'var(--neg)'}"><title>${c.s[i]}: ${fmt(v)}</title></rect>`});
+  o+=`<line x1="${L}" x2="${W-R}" y1="${y(0)}" y2="${y(0)}" stroke="var(--muted)" stroke-width="1"/>`;
+  const step=Math.ceil(n/12);
+  c.s.forEach((s,i)=>{if(i%step===0)o+=`<text x="${L+i*bw+bw/2}" y="${H-10}" text-anchor="middle" font-size="10" font-family="var(--mono)" fill="var(--muted)">${s}</text>`});
+  const mark=(k,col,lab,row,dash)=>{const x=xs(k);o+=`<line x1="${x}" x2="${x}" y1="${T-4}" y2="${T+ih}" stroke="${col}" stroke-width="1.5" ${dash?'stroke-dasharray="4 3"':''}/><text x="${Math.min(Math.max(x,L+20),W-R-20)}" y="${10+row*11}" text-anchor="middle" font-size="10" font-weight="600" font-family="var(--sans)" fill="${col}">${lab}</text>`};
+  mark(spot,"var(--spot)","spot "+fmt(spot),0,true);
+  if(c.flip2){const x1=xs(c.flip2),x2=xs(c.flip);o+=`<rect x="${Math.min(x1,x2)}" y="${T-4}" width="${Math.max(2,Math.abs(x2-x1))}" height="${ih+4}" fill="var(--flip)" opacity=".22"/>`;}
+  if(c.flip) mark(c.flip,"var(--flip)","flip "+(c.flipTxt||fmt(c.flip)),1,false);
+  return o+"</svg>";
+}
+let VIEW="d0";try{VIEW=localStorage.getItem("gex-view")||"d0"}catch(e){}
+function render(t){
+  if(!D[t]||!D[t].lv0){renderSob(t);return}
+  ["cards"].forEach(i=>{const e=document.getElementById(i);if(e&&e.dataset.sob){e.hidden=false;delete e.dataset.sob}});
+  const st=document.getElementById("stamp"); if(st&&D.meta)st.textContent=D.meta.stamp; const vr=document.getElementById("ver"); if(vr&&D.meta&&D.meta.versao)vr.textContent=` Script gestor-gex ${D.meta.versao}.`;
+  const d=D[t];
+  const usd=v=>v==null?"":v>=1e9?(v/1e9).toFixed(1).replace(".",",")+" bi":v>=1e6?(v/1e6).toFixed(1).replace(".",",")+" mi":v>=1e3?Math.round(v/1e3)+" mil":v>0?"<1 mil":"0";
+  const pieCell=P=>{ // pizza: fatia de volume financeiro de calls (verde) × puts (vermelho) no strike
+    if(!P||P.vf==null||!(P.vc+P.vp>0))return `<span class="pie" title="Sem volume negociado neste strike."></span>`;
+    const a=Math.round(P.vc/(P.vc+P.vp)*100);
+    return `<span class="pie on" style="--a:${a}" title="Volume financeiro do strike: calls ${a}% (verde) × puts ${100-a}% (vermelho)."></span>`;};
+  const vfCell=(P,l)=>!P||P.vf==null?`<span class="vf"></span>`:`<span class="vf" title="Volume financeiro negociado no strike ${fmt(l[0])}: calls $${usd(P.vc)} (${fmt(P.nc)} contratos) · puts $${usd(P.vp)} (${fmt(P.np)} contratos)${P.oi!=null?` · OI de ontem ${fmt(P.oi)} contratos`:""}. Prêmio = contratos × preço × 100 (aprox.: preço do fim da rodada)."><span class="vcv${P.vc>=P.vp?" dom":""}">${P.fx!==undefined?`<i class="fx" title="Fluxo novo: volume do dia ${P.fx!=null?`= ${fmt(P.fx)}× o`:"acima do"} OI de ontem neste strike. O GEX daqui usa o OI de ontem e pode estar desatualizado.">●</i>`:""}${usd(P.vc)}</span><span class="vsep"> · </span><span class="vpv${P.vp>P.vc?" dom":""}">${usd(P.vp)}</span></span>`;
+  const sgLine=(G,w)=>{if(!G)return "";const tone={"ROBUSTO":"pos","MODERADO":"warn"}[G.nivel]||"neg";
+    const fr=(v,lado,verbo)=>v==null?`${lado}: não muda até 50%`:`muda se ≥ <b>${v}%</b> das ${lado} tiverem sido ${verbo} por clientes`;
+    const c=(G.cen||[]).slice(1).filter(x=>x.muda)[0];
+    const tip=(G.cen||[]).map(x=>`${x.h}: ${x.reg}, GEX ${x.total>0?"+":""}${String(x.total).replace(".",",")} bi, flip ${x.flip!=null?fmt(x.flip):"fora de ±6%"}`).join(" · ");
+    return `<p class="sg ${tone}" title="${esc(tip)}">Convenção de sinal (dealer comprado em calls, vendido em puts): <span class="sgl">${esc(G.nivel)}</span> · regime ${w?"da janela ":""}${fr(G.vira_puts,"puts","vendidas")} · ${fr(G.vira_calls,"calls","compradas")}${c?` · com ${esc(c.h.toLowerCase())}: ${esc(c.reg)}, flip ${c.flip!=null?fmt(c.flip):"fora de ±6%"}`:""}.</p>`};
+  const restSpan=(A,per,base)=>{const f2=v=>v==null?"—":Number(v).toLocaleString("pt-BR",{minimumFractionDigits:2,maximumFractionDigits:2});const R=A.rest;if(!R)return "";
+    const fixa=A.pc!=null?`${base||"fechamento anterior"} ${f2(A.pc)} ± ATR = ${f2(A.lo)}–${f2(A.hi)}`:"";
+    if(R.excedido)return `<span class="hot" title="${fixa}">ATR ${per==="dia"?"do dia":"da semana"} já excedido (range ${f2(R.hi_ref-R.lo_ref)} &gt; ${f2(A.atr)})</span>`;
+    return `<span title="Teto = mínima ${per==="dia"?"do dia":"da semana"} (ou fechamento de referência, se menor) + ATR; piso = máxima (ou fechamento, se maior) − ATR. Faixa fixa: ${fixa}.">ATR restante: teto <b>${f2(R.teto)}</b> · piso <b>${f2(R.piso)}</b></span>`};
+  const atrLine=A=>{if(!A)return "";const f2=v=>v==null?"—":Number(v).toLocaleString("pt-BR",{minimumFractionDigits:2,maximumFractionDigits:2});
+    const src=A.fonte==="real"?`ATR diário (${A.n} pregões gravados)`:`ATR diário <span title="Estimado pela volatilidade histórica de 30 dias da tasty (1,6 × σ diário × preço) até haver 14 pregões gravados (${A.n} de 14).">estimado pela HV30 (${A.n} de 14 pregões)</span>`;
+    const hot=A.usado!=null&&A.usado>=100;
+    return `<p class="atrl"><span>${src}: <b>${f2(A.atr)}</b> (${String(A.pct).replace(".",",")}%)</span>${restSpan(A,"dia")}${A.usado!=null?`<span class="${hot?"hot":""}">hoje já usou <b class="${hot?"hot":""}">${A.usado}%</b> do ATR (true range ${f2(A.tr)}) <span class="ab${hot?" hot":""}"><i style="width:${Math.min(100,A.usado)}%"></i></span></span>`:""}</p>`};
+  const atrWLine=A=>{if(!A)return "";const f2=v=>v==null?"—":Number(v).toLocaleString("pt-BR",{minimumFractionDigits:2,maximumFractionDigits:2});
+    const src=A.fonte==="real"?`ATR semanal 5 (${A.n} semanas gravadas)`:`ATR semanal 5 <span title="Estimado pela volatilidade histórica de 30 dias da tasty (1,6 × σ semanal × preço) até haver 5 semanas completas gravadas (${A.n} de 5).">estimado pela HV30 (${A.n} de 5 semanas)</span>`;
+    const hot=A.usado!=null&&A.usado>=100, base=A.centro==="semana anterior"?"fechamento da semana anterior":"fechamento anterior (semana não gravada desde segunda)";
+    return `<p class="atrl"><span>${src}: <b>${f2(A.atr)}</b> (${String(A.pct).replace(".",",")}%)</span>${restSpan(A,"semana",base)}${A.usado!=null?`<span class="${hot?"hot":""}">a semana já usou <b class="${hot?"hot":""}">${A.usado}%</b> do ATR semanal (range ${f2(A.tr)}) <span class="ab${hot?" hot":""}"><i style="width:${Math.min(100,A.usado)}%"></i></span></span>`:""}</p>`};
+  const Q=d.qa, qaLine=w=>!Q?"":`<p class="qa">Dados: <b>OI de ${Q.oi||"—"}</b> (fechamento do pregão anterior; o que abrir hoje só entra no GEX amanhã) · ${Q.avisos&&Q.avisos.length?`<span class="warn">⚠ ${Q.avisos.map(esc).join(" · ")}</span>`:`<span class="ok" title="${esc((Q.info||[]).filter(x=>!x.startsWith("0DTE")).join(" · ")||"sem avisos")}">✓ checagens ok</span>`}${!w&&Q.info?Q.info.filter(x=>x.startsWith("0DTE")).map(x=>` · ${esc(x.replace(/^0DTE: /,""))}`).join(""):""}${w?` · <i class="fx" style="color:var(--flip);font-style:normal">●</i> no Vol. US$ = volume do dia ≥ OI de ontem no strike`:""}</p>`;
+  const f2p=v=>Number(v).toLocaleString("pt-BR",{minimumFractionDigits:2,maximumFractionDigits:2});
+  const prmCell=(P,l,wv)=>!P||P.pr==null?`<span class="prm"></span>`:`<span class="prm" title="Prêmio da ${l[0]<d.spot?"put":"call"} ${fmt(l[0])} (${(wv?d.otm45:d.otm0)?(wv?d.otm45:d.otm0).exp:""}): mid ${f2p(P.pr)} · bid ${f2p(P.pb)} / ask ${f2p(P.pa)} · US$ ${Math.round(P.pr*100).toLocaleString("pt-BR")} por contrato (mid) · US$ ${Math.round(P.pb*100).toLocaleString("pt-BR")} pelo bid">${f2p(P.pr)}</span>`;
+  const sgn=v=>(v>0?"+":v<0?"−":"")+f2p(Math.abs(v));
+  const sbCell=(P,l)=>!P||P.sb==null?`<span class="sbh"></span>`:`<span class="sbh ${P.sb>0?"up":P.sb<0?"dn":""}" title="Prêmio ${f2p(P.pr)} · pela HV30 ${f2p(P.hv)} · diferença ${sgn(P.sb)} (${P.pr>0?Math.round(P.sb/P.pr*100):0}% do prêmio)">${sgn(P.sb)}</span>`;
+  const prmM=P=>!P||P.pr==null?"":`<span class="prm-m">${f2p(P.pr)}${P.sb!=null?` <span class="${P.sb>0?"up":"dn"}">${sgn(P.sb)}</span>`:""}</span>`;
+  const atuCell=(P,l,wv)=>!P||P.atr==null?`<span class="atu"></span>`:`<span class="atu${P.atr>100?" hi":""}" title="Se o preço tocar ${fmt(l[0])}, o range ${wv?"da semana chega a":"desde o fechamento anterior chega a"} ${P.atr}% do ${wv?"ATR semanal":"ATR diário"}${P.atr>100?" (além do range típico)":""}.">${P.atr}%</span>`;
+  const isVence=s=>/^\d\d\/\d\d( · \d+d)?( · \d+%)?$/.test(s||"");
+  const venceCell=s=>{if(!isVence(s))return `<span class="ve"></span>`;const pp=s.split(" · "),dd=pp[0],dte=pp.find(x=>/d$/.test(x)),pc=pp.find(x=>/%$/.test(x));
+    const tail=[dte?`<span class="dte">${dte.replace("d","")} DTE</span>`:"",pc?`<span class="pcv">${pc}</span>`:""].filter(Boolean);
+    return `<span class="ve" title="Vencimento que mais contribui para o GEX deste strike${dte?` (${dte.replace("d","")} dias corridos até lá)`:""}${pc?`; ${pc} do total no mesmo sinal`:""}"><b>${dd}</b>${tail.length?`<span class="vp"><span class="vd"> · </span>${tail.join('<span class="vs"> · </span>')}</span>`:""}</span>`};
+  const ladder=(levels,wv)=>{
+    const lv=[...levels,[d.spot,"spot","PREÇO AGORA",""]].sort((a,b)=>b[0]-a[0]);
+    const mxp=Math.max(1e-9,...levels.map(l=>Math.abs((l[0]-d.spot)/d.spot)));
+    return lv.map(l=>{
+      if(l[1]==="spot")return `<div class="lrow spot"><span class="p">${fmt(l[0])}</span><span class="n"><b>● Preço agora</b></span>${wv?`<span class="ve"></span>`:""}<span class="pc">0,00%</span><span class="pop"></span><span class="prm"></span><span class="sbh"></span><span class="atu"></span><span class="vf"></span><span></span></div>`;
+      const P=l[4], popCell=!P||P.otm==null?`<span class="pop"></span>`
+        :`<span class="pop${P.k==="nível"?" lv":""}" title="${P.k==="nível"?`Probabilidade de o preço terminar ${l[0]<d.spot?"acima":"abaixo"} de ${fmt(l[0])}`:`Probabilidade de a ${P.k} ${fmt(l[0])} vencer OTM (preço ${P.k==="put"?"acima":"abaixo"} de ${fmt(l[0])})`}">${P.otm}%</span>`;
+      const p=(l[0]-d.spot)/d.spot, w=Math.abs(p)/mxp*50;
+      const vc=wv&&isVence(l[3]);
+      return `<div class="lrow k-${l[1]}${/call wall/i.test(l[2])?" hl hl-c":/put wall/i.test(l[2])?" hl hl-p":l[1]==="flip"?" hl hl-f":""}"><span class="p">${fmt(l[0])}</span><span class="n"><i></i>${l[2]} <em>${vc?"":l[3]}</em></span>${wv?venceCell(vc?l[3]:""):""}<span class="pc">${pct(l[0],d.spot)}</span>${popCell.replace("</span>",prmM(P)+"</span>")}${prmCell(P,l,wv)}${sbCell(P,l)}${atuCell(P,l,wv)}${vfCell(P,l)}${pieCell(P)}</div>`;}).join("");};
+  const w=VIEW==="w45";
+  const R=w?d.regime45:d.regime, TL=w?d.tiles45:d.tiles, LV=w?d.lv45:d.lv0, SC=w?d.scen45:d.scen;
+  document.getElementById("read").innerHTML=`
+   <div class="rhead"><h2>Leitura rápida · ${t} ${fmt(d.spot)}${d.ts0?` · ${d.ts0}`:""}</h2>
+    <div class="subtabs" role="tablist"><button role="tab" id="v-d0" aria-selected="${!w}" data-v="d0">0DTE · ${d.d0lab||""}</button><button role="tab" id="v-w45" aria-selected="${w}" data-v="w45">45 DTE · ${d.w45lab||""}</button></div></div>
+   ${qaLine(w)}
+   <div class="regime ${R.tone}"><span class="rl">${w?`Regime da janela · ${t} · 45 DTE (contexto; o veredito do dia é o 0DTE)`:`Regime atual · ${t} · 0DTE`}</span><span class="rv">${R.label}</span><span class="rt"><span>${R.why}</span><b>${R.act}</b></span></div>
+   <div class="vol" id="venc"></div>
+   ${sgLine(w?d.sinal45:d.sinal0,w)}
+   
+   <div class="scenwrap">
+    <div><p class="sub">${w?"Cenários da janela (45 DTE)":"Cenários do dia (0DTE)"}</p>
+     <div class="scen scen2">${SC.map(x=>`<div class="sc ${x.tone}"><span class="if">${x.tone==="pos"?"▲":"▼"} ${x.if}</span><span class="th">${x.then}</span></div>`).join("")}</div></div>
+   </div>
+   <div class="mapwrap">
+    <div><p class="sub">${w?`Mapa de preços · 45 DTE (${d.w45lab})`:`Mapa de preços · 0DTE (${d.d0lab})`}</p>${w?atrWLine(d.atrw):atrLine(d.atr0)}<div class="${w?"w45":""}"><div class="lhead"><span class="h-p">Preço</span><span class="h-n">Nível</span>${w?'<span class="h-ve">Vence · DTE</span>':""}<span class="h-pc">Dist.</span><span class="h-pop">OTM</span><span class="h-prm" title="Prêmio (mid, em pontos) da opção OTM no strike — put abaixo do preço, call acima — no mesmo vencimento da coluna OTM. Passe o mouse para ver bid/ask e US$ por contrato.">Prêmio</span><span class="h-sbh" title="Prêmio de mercado menos o preço da mesma opção pela volatilidade realizada de 30 dias (HV30 da tasty). Positivo = opção cara frente ao que o ativo vem andando. A HV30 é uma só para todos os strikes (não tem skew) e olha para trás.">vs HV</span><span class="h-atu" title="${w?"Quanto do ATR semanal seria usado na semana se o preço tocar o nível (range desde o fechamento da semana anterior, com a máxima e a mínima da semana)":"Quanto do ATR diário seria usado se o preço tocar o nível (true range desde o fechamento anterior, com a máxima e a mínima já feitas)"}">ATR</span><span class="h-vf" title="Volume financeiro (US$) negociado no pregão no strike: calls · puts; o lado maior em negrito">US$ <span class="hc">Calls</span> · <span class="hp">Puts</span></span><span class="h-bar"></span></div><div class="ladder">${ladder(LV,w)}</div></div>
+     ${(w?d.otm45:d.otm0)?`<p class="note" style="margin-top:6px">OTM = probabilidade de a put (abaixo do preço) ou a call (acima) daquele strike vencer fora do dinheiro em ${(w?d.otm45:d.otm0).exp} (${(w?d.otm45:d.otm0).dte} DTE). Em itálico (flip, movimento esperado e ATR): probabilidade de o preço terminar sem passar do nível (aquém dele) no vencimento${(w?d.otm45:d.otm0).curto?` (movimento esperado até sexta e ATR semanal: no vencimento de ${(w?d.otm45:d.otm0).curto})`:""}. Neutra a risco, com a IV do próprio preço das opções. Prêmio = preço médio (mid, em pontos) da opção OTM daquele strike no mesmo vencimento; vs HV = prêmio menos o preço da mesma opção pela volatilidade realizada de 30 dias (positivo = cara frente ao que o ativo anda; a HV não tem skew, então puts distantes tendem a parecer mais caras). No celular os dois ficam embaixo da OTM. ATR = quanto do ${w?"ATR semanal o range da semana (desde o fechamento da semana anterior, com máxima e mínima da semana)":"ATR diário o range desde o fechamento anterior (com máxima e mínima do dia)"} atinge se o preço tocar o nível (níveis dentro do range já feito mostram o que já foi usado; acima de 100% = além do range típico, em cinza). US$ Calls · Puts = volume financeiro negociado no pregão naquele strike, separado em calls (verde) e puts (vermelho), lado maior em negrito; prêmio = contratos × preço × 100${w?"; soma todos os vencimentos da janela":""}. Passe o mouse para ver o número de contratos e o OI.</p>`:""}
+     ${w?`<p class="note" style="margin-top:6px">Vence = vencimento que mais contribui para o GEX daquele strike, quantos dias corridos faltam para ele (DTE) e quanto ele pesa (no mesmo sinal): quando esse vencimento passa, o nível perde essa parte.${D.meta&&D.meta.mode==="quick"?` Janela atualizada em ${d.ts45} (modo rápido não recalcula a janela).`:""}</p>`:""}</div>
+   </div>
+   ${w&&d.semana&&d.semana.length?`<div><p class="sub">O que vence até sexta (${d.fri||""})</p><div class="htab"><table class="dt"><tr><th>Vencimento</th><th>GEX que sai</th><th>Janela depois</th><th>Flip depois</th><th>Regime depois</th></tr>${d.semana.map(s=>`<tr><td>${s.exp}</td><td class="${s.sai_v>=0?"up":"dn"}">${s.sai}</td><td>${s.depois}</td><td>${s.flip}</td><td>${s.reg}</td></tr>`).join("")}</table></div><p class="note" style="margin-top:6px">Acumulado: cada linha remove esse vencimento e os anteriores. Preço mantido no atual.</p></div>`:""}
+   <div class="keyl"><span class="k-res"><i></i>call wall / concentração de GEX + (teto, ímã ou almofada)</span><span class="k-sup"><i></i>put wall (piso)</span><span class="k-flip"><i></i>gamma flip</span><span class="k-mag"><i></i>max pain (ímã)</span><span class="k-risk"><i></i>bolsão de GEX − (acelera)</span><span class="k-em"><i></i>movimento esperado (straddle ATM)</span><span class="k-atr"><i></i>teto/piso do ATR restante (diário no 0DTE, semanal no 45 DTE)</span><span class="k-otm"><i></i>limite OTM 90% (o mapa vai até aqui)</span></div>`;
+  // Mapa de preços em seção própria (2026.10.15-3): move o bloco do mapa (e o que vem depois dele) para #mapa
+  {const rd=document.getElementById("read"),mp=document.getElementById("mapa"),mw=rd.querySelector(".mapwrap");mp.innerHTML="";
+   if(mw){const hd=document.createElement("div");hd.className="rhead";const h=document.createElement("h2");h.textContent=`Mapa de preços · ${t} ${fmt(d.spot)}${d.ts0?` · ${d.ts0}`:""}`;hd.appendChild(h);const stb=rd.querySelector(".subtabs");if(stb)hd.appendChild(stb);mp.appendChild(hd);let n=mw;while(n){const nx=n.nextSibling;mp.appendChild(n);n=nx}mp.hidden=false}else mp.hidden=true;
+   // 2026.10.26-2 (decisão do Rafael 26/10 15:44, opção A): "Leitura rápida" retirada do painel (regime, sinal, cenários, vencimento hoje, linha de QA);
+   // o seletor 0DTE / 45 DTE foi para o título do Mapa de preços. Os dados seguem no D.
+   rd.innerHTML="";rd.hidden=true}
+  document.querySelectorAll(".subtabs button").forEach(bt=>bt.onclick=()=>{VIEW=bt.dataset.v;try{localStorage.setItem("gex-view",VIEW)}catch(e){};render(t)});
+  const CARDS=false; // cards de 0DTE e janela retirados a pedido do Rafael (23/09); dados seguem no D
+  document.getElementById("cards").innerHTML=!CARDS?"":d.cards.map(c=>`
+   <article class="card">
+    <div class="card-h"><h3>${t} ${c.t}</h3><span class="exp">${c.exp}</span><span class="pill ${c.regime}">gamma ${c.regime==="pos"?"positivo":"negativo"} · ${c.net}</span></div>
+    <div class="lv">
+     <div><span>Call wall</span><b>${c.cw}</b><small>${pct(c.cw,d.spot)}</small></div>
+     <div><span>Put wall</span><b>${c.pw}</b><small>${pct(c.pw,d.spot)}</small></div>
+     <div><span>Gamma flip (faixa)</span><b style="font-size:14px;white-space:nowrap">${c.flipTxt||fmt(c.flip)}</b><small>${pct(c.flip,d.spot)}</small></div>
+     <div><span>${c.mpl}</span><b>${c.mp}</b><small>${pct(c.mp,d.spot)}</small></div>
+    </div>
+    <div class="chart">${chart(c,d.spot)}</div>
+    <p class="sub" style="margin:4px 0 0">Curva de GEX por preço (US$ bi por 1%) — onde o colchão vira</p><div class="chart">${curve(c,d.spot)}</div>
+    <div class="legend"><span><i style="background:var(--pos)"></i>GEX líquido + (US$ mi/1%)</span><span><i style="background:var(--neg)"></i>GEX líquido −</span><span><i style="background:var(--flip)"></i>gamma flip</span><span><i style="background:var(--spot)"></i>spot</span></div>
+    <table class="vn">${c.stats.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join("")}</table>
+   </article>`).join("");
+  document.querySelectorAll(".tabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.t===t));
+  try{localStorage.setItem("gex-tab",t)}catch(e){}
+  CUR=t; renderIvr(); {const ve=document.getElementById("vol");if(ve)ve.hidden=!SHOW_VOL} if(SHOW_VOL)renderVenda(t);
+  renderEsc(); renderTrader();
+}
+
+
+function renderVenc(r){
+  const el=document.getElementById("venc");if(!el)return;
+  const h=`<h2>Vencimento hoje (0DTE)</h2>`,f=x=>x==null?"—":Number(x).toFixed(1).replace(".",","),g=x=>x==null?"—":(x>0?"+":x<0?"−":"")+Math.abs(x).toFixed(1).replace(".",","),v=r?r.venc_hoje:null;
+  if(!Array.isArray(v)){el.innerHTML=h+`<p class="note">Vencimento diário indisponível nesta rodada</p>`;return}
+  el.innerHTML=h+(v.length?`<div class="htab"><table class="dt ivt"><thead><tr>${["Ativo","IV 30d","IV Rank","IV percentil","Prêmio de vol"].map(x=>`<th>${x}</th>`).join("")}</tr></thead><tbody>${v.map(x=>`<tr><td>${x.symbol??"—"}</td><td>${x.iv==null?"—":f(x.iv)+"%"}</td><td>${f(x.ivr)}</td><td>${f(x.ivp)}</td><td class="${x.vrp>0?"up":x.vrp<0?"dn":""}">${x.vrp==null?"—":g(x.vrp)+" pts"}</td></tr>`).join("")}</tbody></table></div>`:`<p class="note">Nenhum ativo da lista vence hoje</p>`)+
+  `<p class="note">Fonte: ${r.fonte||"tastytrade"} (market metrics e cadeia de opções) · ${r.ts?when(r.ts):"—"}${r.criterio?` · ${esc(r.criterio)}`:""}. Prêmio de vol = IV 30d − realizada 30d. Só uma lista: o GEX desses ativos não é calculado.</p>`;
+}
+function renderIvr(){
+  const r=(D.meta||{}).ivrank; renderVenc(r);   // 2026.10.26-1: bloco "IV Rank ≥ 30" retirado do painel (decisão do Rafael 26/10 15:37); fica só o 0DTE
+  const el=document.getElementById("ivr");if(!el)return;
+  const h=`<h2>IV Rank ≥ 30 · ativos da lista</h2>`,f=x=>x==null?"—":Number(x).toFixed(1).replace(".",",");
+  if(!r){el.innerHTML=h+`<p class="note">IV Rank indisponível nesta rodada</p>`;return}
+  const it=r.itens||[];
+  el.innerHTML=h+(it.length?`<div class="htab"><table class="dt ivt"><thead><tr>${["ETF","IV Rank","IV percentil","IV"].map(x=>`<th>${x}</th>`).join("")}</tr></thead><tbody>${it.map(x=>`<tr><td>${x.symbol??"—"}</td><td>${f(x.ivr)}</td><td>${f(x.ivp)}</td><td>${x.iv==null?"—":f(x.iv)+"%"}</td></tr>`).join("")}</tbody></table></div>`:`<p class="note">Nenhum ETF com IV Rank ≥ 30 hoje</p>`)+
+  `<p class="note">Fonte: ${r.fonte||"tastytrade"} · ${r.ts?when(r.ts):"—"}${r.criterio?` · ${esc(r.criterio)}`:""}. Só uma lista: o GEX desses ativos não é calculado.</p>`;
+}
+// Strikes para venda (2026.10.26-6, decisão do Rafael 26/10 21:12, "A A A"): substitui a seção Volatilidade no painel.
+// 2026.10.26-7 (pedido do Rafael 26/10 21:26): sem a coluna "Faixa OTM"; a faixa só aparece no texto quando não há strike.
+// 2026.10.26-8 (decisão do Rafael 26/10 21:28, opção A): coluna "Margem req." (Reg-T por contrato, campo margem).
+// Lê D[t].venda0 / venda45 (gex_build.venda_otm). Nada calculado aqui; não monta operação nem ordem.
+function renderVenda(t){
+  const el=document.getElementById("vol"), d=D[t]||{};
+  const n=(x,c=2)=>x==null?"—":Number(x).toFixed(c).replace(".",","), pc=x=>x==null?"—":(x>0?"+":x<0?"−":"")+Math.abs(x).toFixed(2).replace(".",",")+"%";
+  const bloco=(v,tit)=>{
+    if(!v)return `<div><p class="sub">${tit}</p><p class="note">Sem dados nesta rodada.</p></div>`;
+    const lin=(lado,x)=>x.strike==null?`<tr><td>${lado}</td><td colspan="8" style="text-align:left">sem strike cotado além da parede na faixa ${x.faixa}%</td></tr>`
+      :`<tr><td>${lado}</td><td><b>${fmt(x.strike)}</b></td><td>${n(x.otm,1)}%</td><td>${n(x.pr)}</td><td>${n(x.pb)} / ${n(x.pa)}</td><td class="${x.spread_pct>10?"dn":""}">${x.spread_pct==null?"—":n(x.spread_pct,1)+"%"}</td><td>${pc(x.dist_pct)}</td><td>${x.margem==null?"—":"US$ "+Number(x.margem).toLocaleString("pt-BR")}</td><td style="text-align:left;padding-left:10px">${x.parede?"1º strike além da parede":""}</td></tr>`;
+    return `<div><p class="sub">${tit} · vencimento ${esc(v.exp)} (${v.dte} DTE) · call wall ${fmt(v.call_wall)} · put wall ${fmt(v.put_wall)}</p>
+     <div class="htab"><table class="dt"><thead><tr>${["Lado","Strike","OTM","Prêmio","Bid / Ask","Spread","Dist. do preço","Margem req.",""].map(x=>`<th>${x}</th>`).join("")}</tr></thead><tbody>
+     ${(v.call||[]).map(x=>lin("Venda de call",x)).join("")}${(v.put||[]).map(x=>lin("Venda de put",x)).join("")}</tbody></table></div></div>`};
+  el.innerHTML=`<h2>Strikes para venda · ${t} ${fmt(d.spot)}</h2>${bloco(d.venda0,"0DTE")}${bloco(d.venda45,"45 DTE")}
+   <p class="note">Call: o primeiro strike acima da call wall com probabilidade OTM ≥ 80%, 85% e 90%; put: o primeiro abaixo da put wall. Probabilidade OTM neutra a risco (Black-76, forward pela paridade, IV do smile no strike), a mesma do Mapa de preços. Prêmio = mark da tasty (US$ por ação); spread = (ask − bid) / mark. "1º strike além da parede": a parede já está além da faixa. Margem req. = venda descoberta por contrato (x100) pela regra padrão Reg-T: maior entre 20% do preço − valor OTM + prêmio e 10% do preço (call) / 10% do strike (put) + prêmio; índice 15%. Pode diferir da exigência da sua conta. Referência numérica: não monta operação, não é recomendação.</p>`;
+}
+function renderVol(t){
+  const el=document.getElementById("vol"), v=D[t]&&D[t].vol;
+  if(!v){el.innerHTML=`<h2>Volatilidade · ${t}</h2><p class="note">Sem métricas de volatilidade nesta rodada.</p>`;return}
+  const n=(x,d=1)=>x==null?"—":Number(x).toFixed(d).replace(".",",");
+  const sg=(x,d=1)=>x==null?"—":(x>0?"+":x<0?"−":"")+Math.abs(x).toFixed(d).replace(".",",");
+  const nivel=r=>r==null?"":r<30?"baixo":r<50?"médio":"alto";
+  const T=[];
+  T.push({h:"IV 30 dias (tasty)",tone:"neu",v:n(v.ivx)+"%",s:`5 dias: ${sg(v.ivx5)} pt`,d:`IV rank ${v.ivr??"—"}% · percentil ${v.ivp??"—"}%${v.ivr!=null?" ("+nivel(v.ivr)+")":""}`});
+  const atm=v.sk30&&v.sk30.atm;
+  T.push({h:"Prêmio de vol (IV − realizada)",tone:v.vrp==null?"neu":v.vrp>0?"pos":"neg",v:v.vrp==null?"—":sg(v.vrp)+" pts",
+    s:`IV/HV30 ${n(v.ivhv,2)}×${atm!=null&&v.hv30!=null?` · ATM ${v.sk30.exp} ${n(atm)}% vs HV30 ${n(v.hv30)}% (${sg(atm-v.hv30)})`:""}`,
+    d:`Realizada 30/60/90 dias: ${n(v.hv30)} · ${n(v.hv60)} · ${n(v.hv90)}%`});
+  T.push({h:"Estrutura a termo",tone:v.forma==="Invertida"?"neg":v.forma==="Contango"?"pos":"neu",v:v.forma||"—",
+    s:[v.p7,v.p30,v.p45].filter(Boolean).map(p=>`${p.exp} ${n(p.iv)}%`).join(" · "),
+    d:v.slope!=null?`~30d − ~7d: ${sg(v.slope)} pts (IV da tasty por vencimento)`:""});
+  if(v.sk30||v.sk0){const k=v.sk30||v.sk0;
+    T.push({h:`Skew 25Δ · ${k.exp}`,tone:"neu",v:sg(k.skew)+" pts",s:`put ${fmt(k.kp)} ${n(k.put)}% · ATM ${n(k.atm)}% · call ${fmt(k.kc)} ${n(k.call)}%`,
+      d:`put 25Δ − ATM: ${sg(k.dn)} pt${v.sk0&&v.sk30?` · 0DTE (${v.sk0.exp}): ${sg(v.sk0.skew)} pt`:""}`});}
+  if(v.em)T.push({h:"0DTE: implícita × realizada",tone:v.em.x>=1?"pos":"warn",v:n(v.em.x,2)+"×",
+    s:`straddle ⇒ σ diário ${n(v.em.impl,2)}% · HV30 ⇒ ${n(v.em.real,2)}%`,d:"Acima de 1×: o 0DTE cobra mais que a oscilação diária recente."});
+  if(v.vix&&v.vix.v!=null){const dv=v.vix.prev?v.vix.v-v.vix.prev:null;
+    T.push({h:"VIX",tone:"neu",v:n(v.vix.v,2),s:dv!=null?`${sg(dv,2)} (${sg(dv/v.vix.prev*100)}%) no dia`:"",d:"Índice de volatilidade do S&P 500 (referência também para QQQ)."});}
+  // curva a termo
+  let svg="";
+  if(v.term&&v.term.length>1){
+    const P=v.term, narrow=(el.clientWidth||800)<600, W=narrow?360:640,H=narrow?170:150,L=34,R=12,Tp=14,B=26, x0=Math.min(...P.map(p=>p.dte)), x1=Math.max(...P.map(p=>p.dte));
+    const y0=Math.floor(Math.min(...P.map(p=>p.iv))-1), y1=Math.ceil(Math.max(...P.map(p=>p.iv))+1);
+    const X=d=>L+(x1>x0?(d-x0)/(x1-x0):0)*(W-L-R), Y=iv=>Tp+(1-(iv-y0)/(y1-y0))*(H-Tp-B);
+    svg=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Estrutura a termo da volatilidade implícita">`;
+    [y0,(y0+y1)/2,y1].forEach(g=>{svg+=`<line x1="${L}" x2="${W-R}" y1="${Y(g)}" y2="${Y(g)}" stroke="var(--line)"/><text x="${L-6}" y="${Y(g)+4}" text-anchor="end" font-size="10" font-family="var(--mono)" fill="var(--muted)">${n(g,0)}%</text>`});
+    if(v.hv30!=null&&v.hv30>=y0&&v.hv30<=y1)svg+=`<line x1="${L}" x2="${W-R}" y1="${Y(v.hv30)}" y2="${Y(v.hv30)}" stroke="var(--neg)" stroke-dasharray="4 3"/><text x="${W-R}" y="${Y(v.hv30)-4}" text-anchor="end" font-size="10" font-family="var(--sans)" fill="var(--neg)">realizada 30d ${n(v.hv30)}%</text>`;
+    svg+=`<polyline points="${P.map(p=>X(p.dte)+","+Y(p.iv)).join(" ")}" fill="none" stroke="var(--ink)" stroke-width="1.8"/>`;
+    let lastX=-1e9; const gap=narrow?44:52, xEnd=X(P[P.length-1].dte);
+    P.forEach((p,i)=>{svg+=`<circle cx="${X(p.dte)}" cy="${Y(p.iv)}" r="2.6" fill="var(--ink)"><title>${p.exp}: ${n(p.iv)}%</title></circle>`;
+      const xx=X(p.dte), last=i===P.length-1, ok=last||(xx-lastX>=gap&&xEnd-xx>=gap); if(ok)lastX=xx;
+      if(ok)svg+=`<text x="${X(p.dte)}" y="${H-8}" text-anchor="${i===P.length-1?"end":i===0?"start":"middle"}" font-size="10" font-family="var(--mono)" fill="var(--muted)">${p.exp}</text>`});
+    svg+="</svg>";}
+  el.innerHTML=`<h2>Volatilidade · ${t}${v.stale?" · métricas da última rodada completa":""}</h2><div class="tiles">${T.map(x=>`<div class="tile ${x.tone}"><span class="h">${x.h}</span><span class="v">${x.v}</span><span class="s">${x.s}</span><span class="d">${x.d}</span></div>`).join("")}</div>`+
+    (svg?`<div><p class="sub">Estrutura a termo · IV por vencimento (0–45 DTE)</p><div class="ts">${svg}</div></div>`:"")+
+    `<p class="note">IV 30 dias, rank, percentil, realizada e IV por vencimento: market metrics da tasty${v.upd?` (${when(v.upd)})`:""}. Skew e ATM: IV própria calculada do preço das opções (Black-76, forward pela paridade put-call). Métricas, não recomendação.</p>`;}
+// Ativos escolhidos (2026.10.16-1, pedido do Rafael 16/10 08:01): uma linha por ativo de GEX_ESCOLHIDOS (padrão SPY,QQQ). Só lê o D; nada é calculado aqui.
+function renderEsc(){
+  const el=document.getElementById("esc");if(!el)return;
+  const L=((D.meta&&D.meta.escolhidos)||["SPY","QQQ"]).filter(t=>D[t]&&D[t].lv0);
+  if(!L.length){el.hidden=true;return}
+  const c0=t=>(D[t].cards||[]).find(c=>c.t==="0DTE")||{}, sg=x=>x==null?"—":(x>0?"+":x<0?"−":"")+Math.abs(x).toFixed(1).replace(".",",");
+  const sk=v=>{const k=v.sk30||v.sk0;return k&&k.skew!=null?sg(k.skew)+" pts":"—"};
+  // 2026.10.26-3 (pedido do Rafael 26/10 15:46): apto/não apto 0DTE ao lado do GEX 0DTE, do semáforo (D.meta.mapa, mapa_trader.py); motivos no título
+  const MA={};(((D.meta&&D.meta.mapa)||{}).ativos||[]).forEach(a=>{if(a&&a.symbol)MA[a.symbol]=a});
+  const ap0=t=>{const a=MA[t];if(!a||typeof a.apto_0dte!=="boolean")return `<td>—</td>`;const m=(a.motivos_0dte||[]).join(" · ")||"vence hoje";return `<td title="${esc(m)}"><span class="ap ${a.apto_0dte?"sim":"nao"}">${a.apto_0dte?"Apto":"Não apto"}</span></td>`};
+  const H=["Ativo","Preço","Regime 0DTE","GEX 0DTE","0DTE","Call wall","Put wall","Flip","Max pain","IV Rank"];   // 2026.10.26-4 (decisão do Rafael 26/10 15:48): saíram Prêmio de vol, IV 30d, IV/HV30, Termo e Skew 25Δ
+  el.innerHTML=`<h2>Ativos escolhidos</h2><div class="htab"><table class="dt ivt"><thead><tr>${H.map(x=>`<th>${x}</th>`).join("")}</tr></thead><tbody>${L.map(t=>{const d=D[t],c=c0(t),v=d.vol||{};
+    return `<tr data-t="${t}"${t===CUR?' class="cur"':""}><td>${t}</td><td>${fmt(d.spot)}</td><td class="rg ${esc(d.regime&&d.regime.tone)}">${esc(d.regime&&d.regime.label)}</td><td class="${c.tv>0?"up":c.tv<0?"dn":""}">${esc(c.net||"—")}</td>${ap0(t)}<td>${fmt(c.cw)}</td><td>${fmt(c.pw)}</td><td>${esc(c.flipTxt||fmt(c.flip))}</td><td>${fmt(c.mp)}</td><td>${v.ivr==null?"—":fmt(v.ivr)}</td></tr>`}).join("")}</tbody></table></div>
+  <p class="note">Linhas: SPY e QQQ fixos + seleção automática da rodada (24 ETFs de <code>GEX_LISTA</code>: IV Rank ≥ 30 na tasty, liquidez de opções ≥ 3 e sem earnings em 45 dias; até 10 além de SPY/QQQ, os de maior volume financeiro de opções na janela 45 DTE); clique na linha para abrir o ativo. 0DTE apto = tem vencimento hoje (data de NY); regime e walls ao lado são contexto, não barram (motivo ao passar o mouse). Regime, walls, flip e max pain do 0DTE (${esc(c0(L[0]).exp||"")}); IV Rank das market metrics da tasty. Strikes para venda (OTM 80/85/90% além das paredes) na seção abaixo do Mapa de preços. Métricas, não recomendação.</p>`;
+  el.hidden=false;
+  el.querySelectorAll("tbody tr").forEach(r=>r.onclick=()=>render(r.dataset.t));
+}
+// Mapa para o trader — semáforo (2026.10.25-3, decisão do Rafael 25/10 07:3x, opção A): lê D.meta.mapa (mapa_trader.py, o
+// mesmo de gex\data\mapa-trader.json para o bot Mercurio). Nada calculado aqui; não indica strike nem monta operação.
+function renderTrader(){
+  const el=document.getElementById("trader");if(!el)return;
+  const M=D.meta&&D.meta.mapa, A=(M&&M.ativos)||[];
+  if(!A.length){el.innerHTML=`<h2>Mapa para o trader</h2><p class="note">Mapa para o trader indisponível nesta rodada.</p>`;el.hidden=false;return}
+  const ap=x=>`<span class="ap ${x?"sim":"nao"}">${x?"Apto":"Não apto"}</span>`, C=M.criterios||{};
+  const mt=a=>{const L=[];if((a.motivos_0dte||[]).length)L.push(`<b>0DTE:</b> ${a.motivos_0dte.map(esc).join(" · ")}`);
+    if((a.motivos_45dte||[]).length)L.push(`<b>45 DTE:</b> ${a.motivos_45dte.map(esc).join(" · ")}`);
+return L.length?L.join("<br>"):"critérios atendidos"};
+  el.innerHTML=`<h2>Mapa para o trader · dá para operar?</h2><div class="htab"><table class="dt"><thead><tr><th>Ativo</th><th>0DTE</th><th>45 DTE</th><th class="mt">Motivos</th></tr></thead><tbody>${A.map(a=>
+    `<tr data-t="${esc(a.symbol)}"${a.symbol===CUR?' class="cur"':""}><td>${esc(a.symbol)}<small>${fmt(a.spot)}</small></td><td>${ap(a.apto_0dte)}</td><td>${ap(a.apto_45dte)}</td><td class="mt">${mt(a)}</td></tr>`).join("")}</tbody></table></div>
+  <p class="note">0DTE apto: ${(C["0dte"]||[]).map(esc).join(" + ")}. 45 DTE apto: ${(C["45dte"]||[]).map(esc).join(" + ")}. Faixa 45 DTE (walls, flip, max pain) e volatilidade seguem em <code>gex\\data\\mapa-trader.json</code> para o bot. Métricas, não recomendação; não indica strike nem monta operação.</p>`;
+  el.hidden=false;
+  el.querySelectorAll("tbody tr").forEach(r=>r.onclick=()=>render(r.dataset.t));
+}
+const SHOW_VOL=true; // seção de volatilidade religada a pedido do Rafael (15/10, versão 2026.10.15-9); desligada de 23/09 a 15/10
+let CUR="QQQ";
+function when(ts){try{return new Date(ts).toLocaleString("pt-BR",{timeZone:"America/Fortaleza",day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"})}catch(e){return ts}}
+
+
+// Banco do painel (uma única inicialização): dados da rodada (painel/atual). Placar retirado em 15/10 (archive/placar-2026-10-15).
+// Sem banco (arquivo local, visualização pública), as seções mostram o aviso de indisponível.
+async function initDb(){
+  let db=null;
+  try{db=window.claude&&window.claude.use?await window.claude.use("db"):null}catch(e){db=null}
+  if(!db)return;
+  const listen=(mkRef,onData,onFail)=>{try{mkRef().onSnapshot(onData,onFail)}catch(e){onFail()}};
+  // Dados do painel vindos do banco (painel/atual): a rodada atualiza sem republicar o HTML.
+  listen(()=>db.doc("painel/atual"),d=>{
+    if(!d.exists)return; let n=null; try{n=JSON.parse(d.data().json)}catch(e){return}
+    if(!n||!n.meta||(D.meta&&D.meta.ts&&n.meta.ts<=D.meta.ts))return;
+    Object.keys(D).forEach(k=>delete D[k]); Object.assign(D,n);
+    const cur=document.querySelector(".tabs button[aria-selected=true]"); buildTabs(); const tt=cur&&tabList().includes(cur.dataset.t)?cur.dataset.t:"QQQ"; render(tt);
+  },()=>{});
+}
+function tabList(){const L=["QQQ","SPY"];Object.keys(D).forEach(k=>{if(k!=="meta"&&D[k]&&D[k].lv0&&!L.includes(k))L.push(k)});((D.meta&&D.meta.extras)||[]).forEach(x=>{const k=x&&String(x.t||"").toUpperCase();if(/^[A-Z.\-]{1,6}$/.test(k)&&!L.includes(k))L.push(k)});return L}
+function extraInfo(t){return((D.meta&&D.meta.extras)||[]).find(x=>x&&String(x.t).toUpperCase()===t)}
+function buildTabs(){const box=document.querySelector(".tabs");if(!box)return;box.innerHTML=tabList().map(t=>`<button role="tab" id="tab-${t}" aria-selected="false" data-t="${t}"${D[t]&&D[t].lv0?"":' class="sob"'}>${t}</button>`).join("");box.querySelectorAll("button").forEach(b=>b.onclick=()=>render(b.dataset.t))}
+function copia(txt){if(navigator.clipboard&&navigator.clipboard.writeText){return navigator.clipboard.writeText(txt).then(()=>true,()=>fbCopy(txt))}return Promise.resolve(fbCopy(txt))}
+function fbCopy(t){try{const a=document.createElement("textarea");a.value=t;a.setAttribute("readonly","");a.style.position="fixed";a.style.left="-9999px";document.body.appendChild(a);a.select();const ok=document.execCommand("copy");document.body.removeChild(a);return ok}catch(e){return false}}
+function renderSob(t){const st=document.getElementById("stamp");if(st&&D.meta)st.textContent=D.meta.stamp;document.getElementById("read").hidden=false;const x=extraInfo(t),txt="GEX de "+t;const esc=v=>String(v).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+  document.getElementById("read").innerHTML=`<h2>${t}</h2>`+(x&&(x.status||x.nota)?`<p><b>Julia:</b> ${esc(x.status||"")}${x.nota?" · "+esc(x.nota):""}</p>`:"")+`<p class="sob-msg"><b>GEX sob demanda: peça ${txt}</b></p><p class="note" id="sob-ok">Copiando o pedido…</p>`;
+  ["cards"].forEach(i=>{const e=document.getElementById(i);if(e&&!e.hidden){e.hidden=true;e.dataset.sob="1"}});
+  {const m=document.getElementById("mapa");if(m){m.hidden=true;m.innerHTML=""}}{const v=document.getElementById("vol");if(v)v.hidden=true}
+  document.querySelectorAll(".tabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.t===t));
+  try{localStorage.setItem("gex-tab",t)}catch(e){}CUR=t;
+  copia(txt).then(ok=>{const m=document.getElementById("sob-ok");if(m)m.textContent=ok?"Pedido copiado. Cole no chat do Mercurio.":"Copie: "+txt})}
+buildTabs();
+let t0="QQQ";try{t0=localStorage.getItem("gex-tab")||"QQQ"}catch(e){}
+render(tabList().includes(t0)?t0:"QQQ");
+
+// Site: dados da última rodada do GEX em data/atual.json (o GEX grava este arquivo); o arquivo vence o retrato embutido.
+let FILE_OK=false;
+function mcStamp(){const el=document.getElementById("mc-stamp");if(!el)return;const m=D.meta||{};el.textContent=(FILE_OK?"":"Retrato salvo · ")+(m.stamp?String(m.stamp).replace("Dados tastytrade","Dados de mercado").split(" · ").slice(0,2).join(" · "):"")}
+async function loadFile(){
+  try{
+    const r=await fetch("data/atual.json?t="+Date.now(),{cache:"no-store"}); if(!r.ok)return;
+    const j=await r.json(); const n=j&&typeof j.json==="string"?JSON.parse(j.json):j;
+    if(!n||!n.meta||!Object.keys(n).some(k=>k!=="meta"&&n[k]&&n[k].spot!=null))return;
+    Object.keys(D).forEach(k=>delete D[k]); Object.assign(D,n); FILE_OK=true;
+    const cur=document.querySelector(".tabs button[aria-selected=true]"); buildTabs(); const tt=cur&&tabList().includes(cur.dataset.t)?cur.dataset.t:"QQQ"; render(tt);
+  }catch(e){}
+  finally{mcStamp()}
+}
+mcStamp();
+loadFile().then(initDb);
+</script>
+<p class="site-disc">Resultados passados não garantem resultados futuros. Não é recomendação de investimento.</p>
+
+</body></html>
