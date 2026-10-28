@@ -398,3 +398,9 @@ a:hover { color: var(--focus); }
 /* Nome no topo e no cabeçalho em Georgia (serifada); a frase fica na fonte do site. Pedido do Rafael em 27/10 */
 .hero-title, .logo-text { font-family: Georgia, "Times New Roman", serif; }
 .hero-title { letter-spacing: -.01em; }
+/* "i" explicativo (passar o mouse ou tocar) */
+.info { position: relative; display: inline-flex; align-items: center; justify-content: center; width: 1.05em; height: 1.05em; margin-left: .25em; border: 1px solid var(--gold); border-radius: 50%; color: var(--gold); font: italic 700 .72em Georgia, serif; line-height: 1; cursor: help; vertical-align: .1em; }
+.info:focus { outline: 2px solid var(--focus, var(--gold)); outline-offset: 2px; }
+.info::after { content: attr(data-tip); position: absolute; left: 50%; bottom: calc(100% + 8px); transform: translateX(-50%); width: min(300px, 80vw); padding: .65rem .8rem; border: 1px solid var(--border-subtle); border-radius: 8px; background: var(--bg-card); color: var(--text); font: 400 .82rem/1.45 "DM Sans", system-ui, sans-serif; font-style: normal; text-align: left; box-shadow: 0 6px 24px rgba(0,0,0,.45); display: none; z-index: 20; pointer-events: none; }
+.info:hover::after, .info:focus::after { display: block; }
+@media (max-width: 640px) { .info { position: static; } .perf-sub { position: relative; } .info::after { left: 0; right: 0; width: auto; transform: none; } }

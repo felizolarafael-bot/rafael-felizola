@@ -61,11 +61,12 @@
 
     var ytd = num(data.ytd_return_on_margin_pct);
     var period = data.period ? fmtDate(data.period.start) + " – " + fmtDate(data.period.end) : "";
+    if (data.period && data.period.margin_data_through && data.period.margin_data_through !== data.period.end) period += " · " + tr("perf.marginThrough") + " " + fmtDate(data.period.margin_data_through);
     var stats = "";
     if (num(data.ytd_closed_trades) !== null) stats += '<div class="perf-stat"><span class="perf-stat-v">' + data.ytd_closed_trades + '</span><span class="perf-stat-l">' + esc(tr("perf.trades")) + "</span></div>";
     if (num(data.ytd_win_rate_pct) !== null) stats += '<div class="perf-stat"><span class="perf-stat-v">' + fmtN(data.ytd_win_rate_pct, 1) + '%</span><span class="perf-stat-l">' + esc(tr("perf.winrate")) + "</span></div>";
     if (num(data.ytd_kelly_pct) !== null) stats += '<div class="perf-stat" title="' + esc(tr("perf.kelly.tip")) + '"><span class="perf-stat-v">' + fmtN(data.ytd_kelly_pct, 1) + '%</span><span class="perf-stat-l">' + esc(tr("perf.kelly")) + "</span></div>";
-    var account = data.account_label ? (lang() === "en" ? String(data.account_label).replace("conta pessoal", "personal account") : data.account_label) : "";
+    var account = data.account_label ? (lang() === "en" ? String(data.account_label).replace(/conta pessoal/i, "Personal account") : data.account_label) : "";
 
     var md = data.method || {};
     var mt = function (k) { return lang() === "en" ? (METHOD_EN[k] || md[k]) : md[k]; };
@@ -81,7 +82,7 @@
       '<div class="perf-grid">' +
         '<div class="card perf-ytd"><p class="perf-kicker">' + esc(tr("perf.ytd")) + "</p>" +
           '<p class="perf-big ' + (ytd !== null && ytd < 0 ? "neg" : "pos") + '">' + fmtPct(ytd) + "</p>" +
-          '<p class="perf-sub">' + esc(tr("perf.onMargin")) + "</p>" +
+          '<p class="perf-sub">' + esc(tr("perf.onMargin")) + ' <span class="info" tabindex="0" role="button" aria-label="' + esc(tr("perf.tradeTip")) + '" data-tip="' + esc(tr("perf.tradeTip")) + '">i</span></p>' +
           (stats ? '<div class="perf-stats">' + stats + "</div>" : "") +
           (period ? '<p class="perf-sub">' + esc(tr("perf.period")) + ": " + period + "</p>" : "") +
           (account ? '<p class="perf-sub">' + esc(account) + "</p>" : "") +
