@@ -236,19 +236,19 @@
 ];
   var UI = {
     pt: {
-      all: "Todos", filters: "Filtrar artigos", read: "Ler artigo", min: "min de leitura", back: "Todos os artigos", theme: "Tema", also: "Leia também:", empty: "Nenhum artigo neste filtro.",
+      share: "Compartilhar", copy: "Copiar link", copied: "Link copiado", igCopied: "Link copiado. Cole no Instagram.", all: "Todos", more: "Ver todos os artigos", less: "Ver menos", filters: "Filtrar artigos", read: "Ler artigo", min: "min de leitura", back: "Todos os artigos", theme: "Tema", also: "Leia também:", empty: "Nenhum artigo neste filtro.",
       level: { leigo: "Para começar", opiniao: "Para quem opera", estudo: "Estudos" },
       link: { leigo: "a versão para começar", opiniao: "a versão para quem opera", estudo: "o estudo" },
       note: ""
     },
     en: {
-      all: "All", filters: "Filter articles", read: "Read article", min: "min read", back: "All articles", theme: "Topic", also: "Also read:", empty: "No articles in this filter.",
+      share: "Share", copy: "Copy link", copied: "Link copied", igCopied: "Link copied. Paste it on Instagram.", all: "All", more: "See all articles", less: "See fewer", filters: "Filter articles", read: "Read article", min: "min read", back: "All articles", theme: "Topic", also: "Also read:", empty: "No articles in this filter.",
       level: { leigo: "Getting started", opiniao: "For traders", estudo: "Studies" },
       link: { leigo: "the getting-started version", opiniao: "the version for traders", estudo: "the study" },
       note: "Available in Portuguese"
     }
   };
-  var openId = null, filter = "all";
+  var openId = null, filter = "all", insAll = false, INS_PAGE = 4;
   // Ilustrações (SVG próprio). Uma por artigo, escolhida pelo id.
   var FIGS = {
     "investidor-especulador": function (L) {
@@ -284,6 +284,29 @@
     });
     return items.length ? '<div class="ins-also"><p>' + U.also + '</p><ul>' + items.join("") + "</ul></div>" : "";
   }
+  // Compartilhar: e-mail, WhatsApp, Instagram (menu do aparelho ou link copiado) e copiar link.
+  function artUrl(a) { return location.origin + location.pathname + "#insight-" + a.id; }
+  var IC = {
+    mail: '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" d="M3 6h18v12H3z M3 7l9 6 9-6"/></svg>',
+    wa: '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" d="M4 20l1.3-3.8A8 8 0 1 1 8 19z"/><path fill="currentColor" d="M9.2 8.3c.2-.4.5-.4.7-.4h.5c.2 0 .4.1.5.4l.6 1.5c.1.2 0 .4-.1.6l-.5.6c.6 1.1 1.5 2 2.6 2.6l.6-.5c.2-.1.4-.2.6-.1l1.5.6c.3.1.4.3.4.5v.5c0 .3-.1.5-.4.7-.5.3-1.3.5-2.2.2a8.3 8.3 0 0 1-4.9-4.9c-.3-.9-.1-1.7.1-2.3z"/></svg>',
+    ig: '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor"/></svg>',
+    link: '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1 M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg>'
+  };
+  function shareBar(a, L, t) {
+    var U = UI[L], url = artUrl(a), title = strip(t.title), msg = title + " — " + AUTHOR + "\n" + url;
+    var mail = "mailto:?subject=" + encodeURIComponent(title) + "&body=" + encodeURIComponent(msg);
+    var wa = "https://wa.me/?text=" + encodeURIComponent(msg);
+    return '<div class="ins-share" data-url="' + url + '" data-title="' + title.replace(/"/g, "&quot;") + '"><span class="ins-share-l">' + U.share + "</span>" +
+      '<a class="ins-sh" href="' + mail + '" aria-label="E-mail">' + IC.mail + "<span>E-mail</span></a>" +
+      '<a class="ins-sh" href="' + wa + '" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">' + IC.wa + "<span>WhatsApp</span></a>" +
+      '<button type="button" class="ins-sh" data-share="ig" aria-label="Instagram">' + IC.ig + "<span>Instagram</span></button>" +
+      '<button type="button" class="ins-sh" data-share="copy" aria-label="' + U.copy + '">' + IC.link + "<span>" + U.copy + "</span></button>" +
+      '<span class="ins-share-msg" role="status" aria-live="polite"></span></div>';
+  }
+  function copyText(x) {
+    if (navigator.clipboard && navigator.clipboard.writeText) return navigator.clipboard.writeText(x);
+    return new Promise(function (ok, no) { try { var ta = document.createElement("textarea"); ta.value = x; ta.style.position = "fixed"; ta.style.opacity = "0"; document.body.appendChild(ta); ta.select(); document.execCommand("copy"); document.body.removeChild(ta); ok(); } catch (e) { no(e); } });
+  }
   function firstPara(t) { var m = /<p>([\s\S]*?)<\/p>/.exec(t.body); return m ? strip(m[1]) : ""; }
   function chips(L) {
     var U = UI[L], all = ["all"].concat(LEVELS);
@@ -303,17 +326,19 @@
         '<p class="ins-kicker">' + U.level[cur.level] + " · " + minutes(t) + " " + U.min + "</p>" +
         (pt && L === "en" ? '<p class="ins-langnote">' + U.note + "</p>" : "") +
         '<div class="ins-wrap"' + (pt && L === "en" ? ' lang="pt"' : "") + "><h3>" + t.title + "</h3>" +
-        '<p class="ins-by">' + AUTHOR + " · " + date(cur, L) + "</p>" + (t.version ? '<p class="ins-version">' + t.version + "</p>" : "") +
-        figure(cur, "ins-fig") + '<div class="ins-text">' + t.body + (t.refs || "") + related(cur, L) + [].concat(t.note || []).map(function (n) { return '<p class="ins-note">' + n + "</p>"; }).join("") + "</div></div></article>";
+        '<p class="ins-by">' + AUTHOR + " · " + date(cur, L) + "</p>" + (t.version ? '<p class="ins-version">' + t.version + "</p>" : "") + shareBar(cur, L, t) +
+        figure(cur, "ins-fig") + '<div class="ins-text">' + t.body + (t.refs || "") + related(cur, L) + shareBar(cur, L, t) + [].concat(t.note || []).map(function (n) { return '<p class="ins-note">' + n + "</p>"; }).join("") + "</div></div></article>";
       return;
     }
-    var list = ARTICLES.filter(function (a) { return filter === "all" || a.level === filter; });
+    var full = ARTICLES.filter(function (a) { return filter === "all" || a.level === filter; });
+    var list = insAll ? full : full.slice(0, INS_PAGE);
+    var moreBtn = full.length > INS_PAGE ? '<button type="button" class="tr-more" data-insmore="1">' + (insAll ? U.less : U.more + " (" + full.length + ")") + "</button>" : "";
     root.innerHTML = chips(L) + '<div class="ins-list">' + (list.length ? list.map(function (a) {
       var t = pick(a, L), pt = !a[L] && L === "en";
       return '<a class="ins-card" href="#insight-' + a.id + '" data-open="' + a.id + '"><span class="ins-num">' + U.level[a.level] + (pt ? " · PT" : "") + "</span>" + figure(a, "ins-thumb") +
         '<h3 class="ins-ct"' + (pt ? ' lang="pt"' : "") + ">" + t.title + "</h3>" + (a.level === "estudo" ? "" : "<p" + (pt ? ' lang="pt"' : "") + ">" + firstPara(t) + "</p>") +
         '<span class="ins-meta">' + minutes(t) + " " + U.min + ' · <span class="ins-go">' + U.read + " →</span></span></a>";
-    }).join("") : '<p class="ins-empty">' + U.empty + "</p>") + "</div>";
+    }).join("") : '<p class="ins-empty">' + U.empty + "</p>") + "</div>" + moreBtn;
   }
   function toTop() { var s = document.getElementById("insights"); if (s && s.scrollIntoView) s.scrollIntoView(); }
   function fromHash() {
@@ -324,7 +349,17 @@
   }
   document.addEventListener("click", function (e) {
     var f = e.target.closest && e.target.closest("[data-filter]");
-    if (f) { filter = f.getAttribute("data-filter"); render(); return; }
+    if (f) { filter = f.getAttribute("data-filter"); insAll = false; render(); return; }
+    var sh = e.target.closest && e.target.closest("[data-share]");
+    if (sh) {
+      var box = sh.closest(".ins-share"), url = box.getAttribute("data-url"), ttl = box.getAttribute("data-title"), out = box.querySelector(".ins-share-msg"), U2 = UI[lang()];
+      var say = function (m) { if (out) { out.textContent = m; clearTimeout(out._t); out._t = setTimeout(function () { out.textContent = ""; }, 4000); } };
+      if (sh.getAttribute("data-share") === "ig" && navigator.share) { navigator.share({ title: ttl, text: ttl + " — " + AUTHOR, url: url }).catch(function () {}); return; }
+      copyText(url).then(function () { say(sh.getAttribute("data-share") === "ig" ? U2.igCopied : U2.copied); }, function () { say(url); });
+      return;
+    }
+    var mb = e.target.closest && e.target.closest("[data-insmore]");
+    if (mb) { var was = insAll; insAll = !insAll; render(); if (was) toTop(); return; }
     var c = e.target.closest && e.target.closest("[data-open]");
     if (c) { e.preventDefault(); openId = c.getAttribute("data-open"); try { history.replaceState(null, "", "#insight-" + openId); } catch (_) {} render(); toTop(); return; }
     var b = e.target.closest && e.target.closest("[data-back]");
@@ -333,4 +368,6 @@
   window.addEventListener("hashchange", fromHash);
   document.addEventListener("langchange", render);
   fromHash();
+  // Link compartilhado (#insight-...): desce até o artigo ao abrir a página.
+  if (openId) { var go = function () { toTop(); }; setTimeout(go, 60); window.addEventListener("load", go); }
 })();

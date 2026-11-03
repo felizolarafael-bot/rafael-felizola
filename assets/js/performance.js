@@ -93,7 +93,8 @@
         "</div>" +
       "</div>" +
       '<details class="perf-method"><summary>' + esc(tr("perf.method")) + "</summary>" +
-        (md.name ? "<p><strong>" + esc(mt("name")) + "</strong></p>" : "") + mrows + "</details>" +
+        (md.name ? "<p><strong>" + esc(mt("name")) + "</strong></p>" : "") + mrows +
+        (window.RF_AUDIT_URL ? '<p class="tr-audit"><strong>' + esc(tr("tr.audit.k")) + "</strong> " + esc(tr("tr.audit.text")) + ' <a href="' + esc(window.RF_AUDIT_URL) + '" target="_blank" rel="noopener noreferrer">' + esc(tr("tr.audit.link")) + " →</a></p>" : "") + "</details>" +
       '<p class="perf-foot">' + esc(tr("perf.updated")) + " " + (data.last_updated ? fmtDate(data.last_updated) : "—") + " · " + esc(tr("perf.disclaimer")) + "</p>";
   }
 

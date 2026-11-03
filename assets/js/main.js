@@ -23,6 +23,11 @@ window.I18N = {
     "about.title": "Conhecimento prático acima de narrativa",
     "about.lead": "João Rafael Bezerra Felizola Torres é advogado, formado pela Universidade Estadual Vale do Acaraú, com atuação profissional em mais de 1.400 processos em diversas áreas do Direito público e privado.",
     "about.p2": "Atua no mercado financeiro desde 2015, quando fez sua primeira operação em bolsa. Só entre 2019 e 2026 realizou mais de 3.700 trades, que se desdobraram em mais de 32 mil negócios. Trata a especulação financeira como ofício, com método, lógica, psicologia, números e gestão.",
+    "about.n2": "+3.700",
+    "about.n3": "+32 mil",
+        "about.f1": "tempo de tela",
+    "about.f2": "trades entre 2019 e 2026",
+    "about.f3": "negócios executados",
     "about.p3": "É autor do livro <em>Especular é Preciso: quando a sorte muda de lado</em>, obra que retrata sua visão de mercado.",
     "markets.eyebrow": "Mercados & abordagem",
     "markets.title": "Onde especulo",
@@ -91,6 +96,7 @@ window.I18N = {
     "tr.less": "Ver menos",
     "tr.empty": "Nenhuma operação neste filtro.",
     "tr.upto": "Último fechamento",
+    "tr.notes": "Notas sobre a tabela",
     "tr.audit.k": "Auditoria.",
     "tr.audit.text": "Para conferir estes números, há uma pasta aberta com cópias dos extratos mensais oficiais da corretora (tastytrade / Apex Clearing), em nome do titular, com número da conta, endereço, valores, quantidades e lado da operação cobertos por tarja.",
     "tr.audit.link": "Abrir a pasta de extratos",
@@ -106,7 +112,9 @@ window.I18N = {
     "tr.refundnote": "Estorno: trade com estorno, incluído no resultado do ano.",
     "contact.eyebrow": "Contato",
     "contact.title": "Vamos conversar",
-    "contact.lead": "Para assuntos profissionais, use o e-mail abaixo.",
+    "contact.lead": "Para conversar comigo, entre no meu Discord.",
+    "contact.dc_label": "Discord",
+    "contact.dc_btn": "Entrar no Discord",
     "contact.email_label": "E-mail",
     "footer.disclaimer": "Resultados passados não garantem resultados futuros. Não é recomendação de investimento."
   },
@@ -128,6 +136,12 @@ window.I18N = {
     "about.title": "Practical knowledge over narrative",
     "about.lead": "João Rafael Bezerra Felizola Torres is a lawyer, a graduate of the Universidade Estadual Vale do Acaraú, with professional experience in more than 1,400 legal cases across several areas of Public and Private Law.",
     "about.p2": "He has been active in the Financial Market since 2015, when he made his first trade on the Exchange. Between 2019 and 2026 alone, he made more than 3,700 trades, which unfolded into more than 32,000 executions. He treats Financial Speculation as a craft, with method, logic, psychology, numbers and management.",
+    "about.n2": "3,700+",
+    "about.n3": "32,000+",
+        "about.f1": "screen time",
+    "about.f2": "trades from 2019 to 2026",
+    "about.f3": "executions",
+
     "about.p3": "He is the author of the book <em>Especular é Preciso: quando a sorte muda de lado</em>, a work that portrays his view of the market.",
     "markets.eyebrow": "Markets & approach",
     "markets.title": "Where I speculate",
@@ -196,6 +210,7 @@ window.I18N = {
     "tr.less": "Show less",
     "tr.empty": "No trades in this filter.",
     "tr.upto": "Last close",
+    "tr.notes": "Notes on the table",
     "tr.audit.k": "Audit.",
     "tr.audit.text": "To check these numbers, an open folder holds copies of the official monthly broker statements (tastytrade / Apex Clearing), in the account holder's name, with account number, address, amounts, quantities and trade side blacked out.",
     "tr.audit.link": "Open the statements folder",
@@ -211,7 +226,9 @@ window.I18N = {
     "tr.refundnote": "Refund: trade with a refund, included in the year's result.",
     "contact.eyebrow": "Contact",
     "contact.title": "Let's talk",
-    "contact.lead": "For professional matters, use the email below.",
+    "contact.lead": "To talk with me, join my Discord.",
+    "contact.dc_label": "Discord",
+    "contact.dc_btn": "Join Discord",
     "contact.email_label": "Email",
     "footer.disclaimer": "Past performance does not guarantee future results. Not investment advice."
   }
@@ -266,4 +283,32 @@ window.I18N = {
   if (y) y.textContent = String(new Date().getFullYear());
   initMobileNav();
   setLang(getPreferredLang());
+})();
+
+
+// Tempo de tela: anos completos garantidos desde a primeira operação (2015, dia não registrado) até hoje.
+(function () {
+  function put() {
+    var el = document.getElementById("about-years"); if (!el) return;
+    var n = new Date().getFullYear() - 2016;
+    var en = (document.documentElement.lang || "pt").indexOf("en") === 0;
+    el.textContent = en ? n + "+ years" : "+" + n + " anos";
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", put); else put();
+  document.addEventListener("langchange", put);
+})();
+
+// ROI no Sobre: o mesmo retorno do ano sobre a margem de Rendimentos (data/performance.json). Sem número fixo.
+(function () {
+  var d = null;
+  function put() {
+    var v = document.getElementById("about-roi"), l = document.getElementById("about-roi-l"); if (!v || !d) return;
+    var en = (document.documentElement.lang || "pt").indexOf("en") === 0, x = Number(d.ytd_return_on_margin_pct);
+    if (!isFinite(x)) return;
+    var y = d.period && d.period.end ? String(d.period.end).slice(0, 4) : "";
+    v.textContent = (x >= 0 ? "+" : "−") + Math.abs(x).toLocaleString(en ? "en-US" : "pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + "%";
+    l.textContent = en ? "ROI " + y + " · on margin" : "ROI em " + y + " · sobre a margem";
+  }
+  fetch("data/performance.json?t=" + Date.now(), { cache: "no-store" }).then(function (r) { return r.ok ? r.json() : null; }).then(function (j) { d = j; put(); }).catch(function () {});
+  document.addEventListener("langchange", put);
 })();

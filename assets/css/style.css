@@ -404,3 +404,44 @@ a:hover { color: var(--focus); }
 .info::after { content: attr(data-tip); position: absolute; left: 50%; bottom: calc(100% + 8px); transform: translateX(-50%); width: min(300px, 80vw); padding: .65rem .8rem; border: 1px solid var(--border-subtle); border-radius: 8px; background: var(--bg-card); color: var(--text); font: 400 .82rem/1.45 "DM Sans", system-ui, sans-serif; font-style: normal; text-align: left; box-shadow: 0 6px 24px rgba(0,0,0,.45); display: none; z-index: 20; pointer-events: none; }
 .info:hover::after, .info:focus::after { display: block; }
 @media (max-width: 640px) { .info { position: static; } .perf-sub { position: relative; } .info::after { left: 0; right: 0; width: auto; transform: none; } }
+
+/* 02/11/2026 — foto do X no cabeçalho, brasão grande no topo, títulos em Georgia com linha dourada, Contato alinhado, Sobre com números, notas recolhidas */
+.logo-photo { padding: 0; overflow: hidden; background: var(--bg); border: 1px solid var(--accent-line); }
+.logo-photo img { width: 100%; height: 100%; object-fit: cover; border-radius: inherit; }
+.hero-inner.hero-brand { max-width: 1040px; display: grid; grid-template-columns: auto 1fr; align-items: center; gap: clamp(1.5rem, 4vw, 3.25rem); }
+.hero-shield { width: clamp(150px, 19vw, 230px); height: auto; filter: drop-shadow(0 0 1.4rem rgba(201,162,39,.16)); }
+.hero-text { min-width: 0; }
+@media (max-width: 720px) {
+  .hero-inner.hero-brand { grid-template-columns: 1fr; gap: 1.25rem; }
+  .hero-shield { width: 104px; }
+}
+.section-header h2 { font-family: Georgia, "Times New Roman", serif; letter-spacing: -.01em; }
+.section-header h2::after { content: ""; display: block; width: 56px; height: 2px; margin-top: .8rem; background: linear-gradient(90deg, var(--gold), rgba(201,162,39,0)); }
+.contact-inner { max-width: none; }
+.contact-card { max-width: 640px; }
+.about-layout { display: grid; gap: 2rem; }
+@media (min-width: 860px) { .about-layout { grid-template-columns: minmax(0, 40rem) minmax(0, 1fr); gap: 3.5rem; align-items: start; } }
+.about-facts { margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+.about-facts > div { background: var(--bg-card); padding: 1.25rem 1.1rem; }
+.about-facts dt { font-family: Georgia, "Times New Roman", serif; font-size: clamp(1.6rem, 3vw, 2.1rem); font-weight: 700; color: var(--gold-soft); line-height: 1.1; font-variant-numeric: tabular-nums; }
+.about-facts dd { margin: .35rem 0 0; font-size: .85rem; color: var(--text-muted); line-height: 1.4; }
+.tr-notes { margin-top: .75rem; }
+.tr-notes p { font-size: .82rem; }
+
+/* 02/11/2026 20h — Contato: Discord em destaque, e-mail como segunda opção */
+.contact-discord { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; padding: 1rem 1.15rem; margin-bottom: .75rem; background: var(--bg-elevated); border: 1px solid var(--accent-line); border-radius: var(--radius-sm); }
+.contact-dc-icon { color: var(--gold); flex: none; }
+.contact-dc-text { display: flex; flex-direction: column; gap: .15rem; flex: 1 1 auto; min-width: 8rem; }
+.contact-dc-name { font-size: 1.1rem; font-weight: 600; color: var(--text); }
+.contact-dc-btn { flex: none; }
+@media (max-width: 480px) { .contact-dc-btn { width: 100%; } }
+
+/* Compartilhar artigos: e-mail, WhatsApp, Instagram e copiar link (02/11) */
+.ins-share { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin: 0 0 1.75rem; }
+.ins-text .ins-share { margin: 1.75rem 0 0; }
+.ins-share-l { font-family: var(--mono); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--text-dim); margin-right: .25rem; }
+.ins-sh { display: inline-flex; align-items: center; gap: .4rem; padding: .45rem .8rem; font: inherit; font-size: .85rem; font-weight: 500; color: var(--gold-soft); background: transparent; border: 1px solid var(--accent-line); border-radius: 999px; text-decoration: none; cursor: pointer; transition: background .2s, color .2s; }
+.ins-sh:hover { background: var(--gold-dim); color: var(--focus); }
+.ins-sh:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.ins-share-msg { font-size: .82rem; color: var(--pos); }
+@media (max-width: 480px) { .ins-sh span { display: none; } .ins-sh { padding: .55rem; } }

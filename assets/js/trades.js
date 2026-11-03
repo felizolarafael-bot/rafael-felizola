@@ -2,7 +2,7 @@
 // Regra: só mostra o que está no arquivo (ativo, datas, ganho/perda). Nada de valores em dólar.
 (function () {
   "use strict";
-  var PAGE = 10;
+  var PAGE = 5, STEP = 20;
   var AUDIT_URL = window.RF_AUDIT_URL || "";   // definido em main.js
   var data = null, failed = false, filter = "all", shown = PAGE;
 
@@ -70,16 +70,16 @@
     root.innerHTML =
       '<div class="tr-bar"><div class="tr-chips" role="group">' + chips + '</div><p class="tr-summary">' + summary + "</p></div>" +
       table + more +
-      '<p class="tr-foot">' + esc(tr("tr.upto")) + ": " + (data.last_closed ? fmtDate(data.last_closed) : "—") + " · " + esc(tr(AUDIT_URL ? "tr.foot.audit" : "tr.foot")) +
-      "<span>" + esc(tr("tr.durnote")) + "</span><span>" + esc(tr("tr.pctnote")) + "</span>" + (hasRefund ? "<span>" + esc(tr("tr.refundnote")) + "</span>" : "") + "</p>" +
-      (AUDIT_URL ? '<p class="tr-audit"><strong>' + esc(tr("tr.audit.k")) + "</strong> " + esc(tr("tr.audit.text")) + ' <a href="' + esc(AUDIT_URL) + '" target="_blank" rel="noopener noreferrer">' + esc(tr("tr.audit.link")) + " →</a></p>" : "");
+      '<p class="tr-foot">' + esc(tr("tr.upto")) + ": " + (data.last_closed ? fmtDate(data.last_closed) : "—") + "</p>" +
+      '<details class="perf-method tr-notes"><summary>' + esc(tr("tr.notes")) + "</summary>" +
+      "<p>" + esc(tr(AUDIT_URL ? "tr.foot.audit" : "tr.foot")) + "</p><p>" + esc(tr("tr.durnote")) + "</p><p>" + esc(tr("tr.pctnote")) + "</p>" + (hasRefund ? "<p>" + esc(tr("tr.refundnote")) + "</p>" : "") + "</details>";
   }
 
   document.addEventListener("click", function (e) {
     var chip = e.target.closest && e.target.closest(".tr-chip");
     if (chip) { filter = chip.getAttribute("data-f"); shown = PAGE; render(); return; }
     var more = e.target.closest && e.target.closest(".tr-more");
-    if (more) { shown = more.getAttribute("data-more") === "1" ? shown + PAGE * 2 : PAGE; render(); }
+    if (more) { shown = more.getAttribute("data-more") === "1" ? shown + STEP : PAGE; render(); }
   });
   document.addEventListener("langchange", render);
   fetch("data/trades-fechados.json?t=" + Date.now(), { cache: "no-store" })

@@ -19,7 +19,7 @@
   <header class="site-header">
     <div class="container header-inner">
       <a href="#hero" class="logo" aria-label="Rafael Felizola">
-        <span class="logo-mark">RF</span>
+        <span class="logo-mark logo-photo"><img src="assets/img/foto.jpg" alt="" width="36" height="36"></span>
         <span class="logo-text">Rafael Felizola</span>
       </a>
       <nav class="nav" aria-label="Principal">
@@ -60,9 +60,11 @@
     <!-- 1. INÍCIO -->
     <section id="hero" class="hero">
       <div class="hero-grid" aria-hidden="true"></div>
-      <div class="container hero-inner">
+      <div class="container hero-inner hero-brand">
+        <img class="hero-shield" src="assets/img/brasao.png" alt="">
+        <div class="hero-text">
         <p class="eyebrow" data-i18n="hero.eyebrow">Especulação financeira</p>
-        <h1 class="hero-title">J.Rafael B. Felizola T.</h1>
+        <h1 class="hero-title">J.Rafael B. Felizola&nbsp;T.</h1>
         <p class="hero-tagline" data-i18n="hero.tagline">Onde a aposta termina.</p>
         <div class="hero-actions">
           <a href="gex/" class="btn btn-primary" data-i18n="hero.cta_gex">Mercúrio</a>
@@ -73,6 +75,7 @@
           <li><span class="dot"></span><span data-i18n="hero.m1">Opções US</span></li>
           <li><span class="dot"></span><span data-i18n="hero.m2">Ações &amp; ETFs</span></li>
         </ul>
+        </div>
       </div>
     </section>
 
@@ -83,10 +86,18 @@
           <p class="eyebrow" data-i18n="about.eyebrow">Sobre</p>
           <h2 data-i18n="about.title">Conhecimento prático acima de narrativa</h2>
         </header>
+        <div class="about-layout">
         <div class="about-copy">
           <p data-i18n="about.lead">João Rafael Bezerra Felizola Torres é advogado, formado pela Universidade Estadual Vale do Acaraú, com atuação profissional em mais de 1.400 processos em diversas áreas do Direito público e privado.</p>
           <p data-i18n="about.p2">Atua no mercado financeiro desde 2015, quando fez sua primeira operação em bolsa. Só entre 2019 e 2026 realizou mais de 3.700 trades, que se desdobraram em mais de 32 mil negócios. Trata a especulação financeira como ofício, com método, lógica, psicologia, números e gestão.</p>
           <p data-i18n="about.p3" data-i18n-html>É autor do livro <em>Especular é Preciso: quando a sorte muda de lado</em>, obra que retrata sua visão de mercado.</p>
+        </div>
+        <dl class="about-facts">
+          <div><dt id="about-years">+10 anos</dt><dd data-i18n="about.f1">tempo de tela</dd></div>
+          <div><dt data-i18n="about.n2">+3.700</dt><dd data-i18n="about.f2">trades entre 2019 e 2026</dd></div>
+          <div><dt data-i18n="about.n3">+32 mil</dt><dd data-i18n="about.f3">negócios executados</dd></div>
+          <div><dt id="about-roi">—</dt><dd id="about-roi-l">ROI no ano · sobre a margem</dd></div>
+        </dl>
         </div>
       </div>
     </section>
@@ -176,9 +187,17 @@
         <header class="section-header">
           <p class="eyebrow" data-i18n="contact.eyebrow">Contato</p>
           <h2 data-i18n="contact.title">Vamos conversar</h2>
-          <p class="section-lead" data-i18n="contact.lead">Para assuntos profissionais, use o e-mail abaixo.</p>
+          <p class="section-lead" data-i18n="contact.lead">Para conversar comigo, entre no meu Discord.</p>
         </header>
         <div class="contact-card">
+          <div class="contact-discord">
+            <svg class="contact-dc-icon" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path fill="currentColor" d="M19.3 5.3A16.6 16.6 0 0 0 15.2 4l-.5 1a15.4 15.4 0 0 0-5.4 0l-.5-1a16.6 16.6 0 0 0-4.1 1.3C2.1 9.2 1.4 13 1.7 16.7a16.7 16.7 0 0 0 5 2.5l1.1-1.7a10.8 10.8 0 0 1-1.7-.8l.4-.3a11.9 11.9 0 0 0 11 0l.4.3c-.5.3-1.1.6-1.7.8l1.1 1.7a16.6 16.6 0 0 0 5-2.5c.4-4.3-.7-8-2.9-11.4ZM8.5 14.5c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2Zm7 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2Z"/></svg>
+            <div class="contact-dc-text">
+              <span class="contact-label" data-i18n="contact.dc_label">Discord</span>
+              <span class="contact-dc-name">JRBFT</span>
+            </div>
+            <a class="btn btn-primary contact-dc-btn" href="https://discord.gg/CA5g3wtX7" target="_blank" rel="noopener noreferrer" data-i18n="contact.dc_btn">Entrar no Discord</a>
+          </div>
           <div class="contact-email">
             <span class="contact-label" data-i18n="contact.email_label">E-mail</span>
             <span class="contact-value">contact@rafaelfelizola.com</span>
