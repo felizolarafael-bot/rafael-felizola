@@ -41,9 +41,15 @@
   function fmtPts(v) { var s = Math.abs(v).toFixed(1); if (lang() === "pt") s = s.replace(".", ","); return s + " " + t().pts; }
   function fmtDay(iso) { var p = iso.split("-"); return lang() === "pt" ? (+p[2]) + " " + MONTHS.pt[+p[1] - 1] + " " + p[0] : MONTHS.en[+p[1] - 1] + " " + (+p[2]) + ", " + p[0]; }
 
+  // 06/11: o desenho usa a largura real do quadro (1 unidade = 1 px), para o texto do gráfico
+  // ter sempre o mesmo tamanho em qualquer janela (antes: 760 ou 400 fixos, esticados pelo navegador).
   function dims() {
-    var r = document.getElementById("bench-root"), w = r ? r.clientWidth : 720;
-    return w < 520 ? { W: 400, H: 320, L: 56, R: 14, TOP: 14, B: 28, small: true } : { W: 760, H: 300, L: 46, R: 118, TOP: 16, B: 30, small: false };
+    var r = document.getElementById("bench-root"), wrap = r && r.querySelector(".bm-wrap");
+    var w = Math.round(wrap ? wrap.clientWidth : (r ? r.clientWidth - 48 : 720));
+    w = Math.max(280, w || 720);
+    var small = w < 520;
+    return small ? { W: w, H: Math.round(Math.max(240, Math.min(320, w * 0.78))), L: 54, R: 14, TOP: 14, B: 28, small: true }
+                 : { W: w, H: Math.round(Math.max(260, Math.min(340, w * 0.42))), L: 46, R: 118, TOP: 16, B: 30, small: false };
   }
   function ytdTxt() { var b = document.querySelector("#perf-root .perf-big"); return b ? b.textContent : "número grande"; }
   function chart(s, D) {
@@ -61,10 +67,10 @@
       grid += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + y(v) + '" y2="' + y(v) + '" class="bm-grid' + (v === 0 ? " bm-zero" : "") + '"/>' +
         '<text x="' + (L - 8) + '" y="' + (y(v) + 4) + '" class="bm-ax" text-anchor="end">' + (v > 0 ? "+" : v < 0 ? "−" : "") + Math.abs(v) + "%</text>";
     }
-    var ticks = "", seen = {};
+    var ticks = "", seen = {}, nm = 0;
     s.forEach(function (p, i) {
       var m = p.date.slice(0, 7);
-      if (i > 0 && !seen[m]) { seen[m] = 1; ticks += '<text x="' + x(i) + '" y="' + (H - 8) + '" class="bm-ax" text-anchor="middle">' + MONTHS[lang()][+m.slice(5) - 1] + "</text>"; }
+      if (i > 0 && !seen[m]) { seen[m] = 1; if (D.small && (nm++ % 2)) return; ticks += '<text x="' + x(i) + '" y="' + (H - 8) + '" class="bm-ax" text-anchor="middle">' + MONTHS[lang()][+m.slice(5) - 1] + "</text>"; }
     });
     function path(k) { return s.map(function (p, i) { return (i ? "L" : "M") + x(i).toFixed(1) + " " + y(p[k]).toFixed(1); }).join(""); }
     var last = s[n];
@@ -144,10 +150,15 @@
         "</details>" +
       "</div>";
     wire(root, s, D);
-    lastSmall = D.small;
+    lastSmall = D.small; lastW = D.W;
+    var wr = root.querySelector(".bm-wrap");
+    if (wr && Math.abs(wr.clientWidth - D.W) > 8 && !again) { again = true; render(); again = false; }
   }
-  var lastSmall = null;
-  window.addEventListener("resize", function () { if (data && dims().small !== lastSmall) render(); });
+  var lastSmall = null, lastW = 0, again = false, rzT = null;
+  window.addEventListener("resize", function () {
+    clearTimeout(rzT);
+    rzT = setTimeout(function () { if (data && Math.abs(dims().W - lastW) > 8) render(); }, 120);
+  });
 
   document.addEventListener("langchange", render);
   document.addEventListener("perfrendered", render);
