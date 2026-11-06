@@ -72,7 +72,9 @@
       table + more +
       '<p class="tr-foot">' + esc(tr("tr.upto")) + ": " + (data.last_closed ? fmtDate(data.last_closed) : "—") + "</p>" +
       '<details class="perf-method tr-notes"><summary>' + esc(tr("tr.notes")) + "</summary>" +
-      "<p>" + esc(tr(AUDIT_URL ? "tr.foot.audit" : "tr.foot")) + "</p><p>" + esc(tr("tr.durnote")) + "</p><p>" + esc(tr("tr.pctnote")) + "</p>" + (hasRefund ? "<p>" + esc(tr("tr.refundnote")) + "</p>" : "") + "</details>";
+      "<p>" + esc(tr(AUDIT_URL ? "tr.foot.audit" : "tr.foot")) + "</p>" +
+      (AUDIT_URL ? '<p><a href="' + esc(AUDIT_URL) + '" target="_blank" rel="noopener noreferrer">' + esc(tr("tr.audit.link")) + " →</a></p>" : "") +
+      "<p>" + esc(tr("tr.durnote")) + "</p><p>" + esc(tr("tr.pctnote")) + "</p>" + (hasRefund ? "<p>" + esc(tr("tr.refundnote")) + "</p>" : "") + "</details>";
   }
 
   document.addEventListener("click", function (e) {
