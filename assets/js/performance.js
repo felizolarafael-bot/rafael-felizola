@@ -87,6 +87,7 @@
           (period ? '<p class="perf-sub">' + esc(tr("perf.period")) + ": " + period + "</p>" : "") +
           (account ? '<p class="perf-sub">' + esc(account) + "</p>" : "") +
         "</div>" +
+        '<div id="bench-root" class="bench"></div>' +
         '<div class="card perf-months"><p class="perf-kicker">' + esc(tr("perf.monthly")) + "</p>" +
           '<div class="perf-bars">' + bars + "</div>" +
           (foot.length ? '<p class="perf-foot">' + esc(foot.join("   ·   ")) + "</p>" : "") +
@@ -96,6 +97,7 @@
         (md.name ? "<p><strong>" + esc(mt("name")) + "</strong></p>" : "") + mrows +
         (window.RF_AUDIT_URL ? '<p class="tr-audit"><strong>' + esc(tr("tr.audit.k")) + "</strong> " + esc(tr("tr.audit.text")) + ' <a href="' + esc(window.RF_AUDIT_URL) + '" target="_blank" rel="noopener noreferrer">' + esc(tr("tr.audit.link")) + " →</a></p>" : "") + "</details>" +
       '<p class="perf-foot">' + esc(tr("perf.updated")) + " " + (data.last_updated ? fmtDate(data.last_updated) : "—") + " · " + esc(tr("perf.disclaimer")) + "</p>";
+    document.dispatchEvent(new Event("perfrendered"));
   }
 
   document.addEventListener("langchange", render);

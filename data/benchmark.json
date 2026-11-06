@@ -1,0 +1,1094 @@
+{
+ "scope": "Retorno acumulado no ano da conta inteira contra o SPY. Só porcentagens.",
+ "period": {
+  "start": "2025-12-31",
+  "end": "2026-11-05"
+ },
+ "ytd_account_pct": 71.37,
+ "ytd_spy_pct": 8.36,
+ "series": [
+  {
+   "date": "2025-12-31",
+   "account_pct": 0.0,
+   "spy_pct": 0.0
+  },
+  {
+   "date": "2026-01-02",
+   "account_pct": 2.41,
+   "spy_pct": 0.21
+  },
+  {
+   "date": "2026-01-05",
+   "account_pct": 0.56,
+   "spy_pct": 0.85
+  },
+  {
+   "date": "2026-01-06",
+   "account_pct": -2.44,
+   "spy_pct": 1.48
+  },
+  {
+   "date": "2026-01-07",
+   "account_pct": 0.12,
+   "spy_pct": 1.13
+  },
+  {
+   "date": "2026-01-08",
+   "account_pct": -2.3,
+   "spy_pct": 1.14
+  },
+  {
+   "date": "2026-01-09",
+   "account_pct": -3.28,
+   "spy_pct": 1.8
+  },
+  {
+   "date": "2026-01-12",
+   "account_pct": -6.55,
+   "spy_pct": 1.97
+  },
+  {
+   "date": "2026-01-13",
+   "account_pct": -2.45,
+   "spy_pct": 1.77
+  },
+  {
+   "date": "2026-01-14",
+   "account_pct": -4.9,
+   "spy_pct": 1.23
+  },
+  {
+   "date": "2026-01-15",
+   "account_pct": -0.42,
+   "spy_pct": 1.49
+  },
+  {
+   "date": "2026-01-16",
+   "account_pct": -3.94,
+   "spy_pct": 1.43
+  },
+  {
+   "date": "2026-01-20",
+   "account_pct": 2.76,
+   "spy_pct": -0.65
+  },
+  {
+   "date": "2026-01-21",
+   "account_pct": -0.01,
+   "spy_pct": 0.5
+  },
+  {
+   "date": "2026-01-22",
+   "account_pct": 1.4,
+   "spy_pct": 1.05
+  },
+  {
+   "date": "2026-01-23",
+   "account_pct": 2.52,
+   "spy_pct": 1.09
+  },
+  {
+   "date": "2026-01-26",
+   "account_pct": 0.75,
+   "spy_pct": 1.6
+  },
+  {
+   "date": "2026-01-27",
+   "account_pct": 1.56,
+   "spy_pct": 2.01
+  },
+  {
+   "date": "2026-01-28",
+   "account_pct": 1.14,
+   "spy_pct": 2.0
+  },
+  {
+   "date": "2026-01-29",
+   "account_pct": -4.57,
+   "spy_pct": 1.87
+  },
+  {
+   "date": "2026-01-30",
+   "account_pct": -3.83,
+   "spy_pct": 1.44
+  },
+  {
+   "date": "2026-02-02",
+   "account_pct": -7.42,
+   "spy_pct": 1.99
+  },
+  {
+   "date": "2026-02-03",
+   "account_pct": 1.68,
+   "spy_pct": 1.14
+  },
+  {
+   "date": "2026-02-04",
+   "account_pct": 3.84,
+   "spy_pct": 0.62
+  },
+  {
+   "date": "2026-02-05",
+   "account_pct": 3.49,
+   "spy_pct": -0.61
+  },
+  {
+   "date": "2026-02-06",
+   "account_pct": -0.46,
+   "spy_pct": 1.35
+  },
+  {
+   "date": "2026-02-09",
+   "account_pct": 0.86,
+   "spy_pct": 1.84
+  },
+  {
+   "date": "2026-02-10",
+   "account_pct": 2.72,
+   "spy_pct": 1.51
+  },
+  {
+   "date": "2026-02-11",
+   "account_pct": 9.95,
+   "spy_pct": 1.5
+  },
+  {
+   "date": "2026-02-12",
+   "account_pct": 15.45,
+   "spy_pct": -0.08
+  },
+  {
+   "date": "2026-02-13",
+   "account_pct": 14.7,
+   "spy_pct": -0.01
+  },
+  {
+   "date": "2026-02-17",
+   "account_pct": 16.01,
+   "spy_pct": 0.1
+  },
+  {
+   "date": "2026-02-18",
+   "account_pct": 15.77,
+   "spy_pct": 0.66
+  },
+  {
+   "date": "2026-02-19",
+   "account_pct": 17.08,
+   "spy_pct": 0.39
+  },
+  {
+   "date": "2026-02-20",
+   "account_pct": 16.88,
+   "spy_pct": 1.09
+  },
+  {
+   "date": "2026-02-23",
+   "account_pct": 25.98,
+   "spy_pct": 0.05
+  },
+  {
+   "date": "2026-02-24",
+   "account_pct": 26.08,
+   "spy_pct": 0.82
+  },
+  {
+   "date": "2026-02-25",
+   "account_pct": 23.35,
+   "spy_pct": 1.64
+  },
+  {
+   "date": "2026-02-26",
+   "account_pct": 24.0,
+   "spy_pct": 1.09
+  },
+  {
+   "date": "2026-02-27",
+   "account_pct": 23.46,
+   "spy_pct": 0.66
+  },
+  {
+   "date": "2026-03-02",
+   "account_pct": 24.59,
+   "spy_pct": 0.71
+  },
+  {
+   "date": "2026-03-03",
+   "account_pct": 26.33,
+   "spy_pct": -0.23
+  },
+  {
+   "date": "2026-03-04",
+   "account_pct": 25.61,
+   "spy_pct": 0.54
+  },
+  {
+   "date": "2026-03-05",
+   "account_pct": 24.35,
+   "spy_pct": -0.02
+  },
+  {
+   "date": "2026-03-06",
+   "account_pct": 23.54,
+   "spy_pct": -1.33
+  },
+  {
+   "date": "2026-03-09",
+   "account_pct": 25.54,
+   "spy_pct": -0.51
+  },
+  {
+   "date": "2026-03-10",
+   "account_pct": 26.38,
+   "spy_pct": -0.71
+  },
+  {
+   "date": "2026-03-11",
+   "account_pct": 27.95,
+   "spy_pct": -0.79
+  },
+  {
+   "date": "2026-03-12",
+   "account_pct": 30.01,
+   "spy_pct": -2.29
+  },
+  {
+   "date": "2026-03-13",
+   "account_pct": 31.78,
+   "spy_pct": -2.87
+  },
+  {
+   "date": "2026-03-16",
+   "account_pct": 31.68,
+   "spy_pct": -1.88
+  },
+  {
+   "date": "2026-03-17",
+   "account_pct": 31.15,
+   "spy_pct": -1.63
+  },
+  {
+   "date": "2026-03-18",
+   "account_pct": 35.99,
+   "spy_pct": -2.97
+  },
+  {
+   "date": "2026-03-19",
+   "account_pct": 36.34,
+   "spy_pct": -3.23
+  },
+  {
+   "date": "2026-03-20",
+   "account_pct": 40.15,
+   "spy_pct": -4.69
+  },
+  {
+   "date": "2026-03-23",
+   "account_pct": 38.87,
+   "spy_pct": -3.59
+  },
+  {
+   "date": "2026-03-24",
+   "account_pct": 43.16,
+   "spy_pct": -3.95
+  },
+  {
+   "date": "2026-03-25",
+   "account_pct": 42.39,
+   "spy_pct": -3.43
+  },
+  {
+   "date": "2026-03-26",
+   "account_pct": 44.71,
+   "spy_pct": -5.11
+  },
+  {
+   "date": "2026-03-27",
+   "account_pct": 47.28,
+   "spy_pct": -6.69
+  },
+  {
+   "date": "2026-03-30",
+   "account_pct": 48.41,
+   "spy_pct": -7.06
+  },
+  {
+   "date": "2026-03-31",
+   "account_pct": 46.95,
+   "spy_pct": -4.34
+  },
+  {
+   "date": "2026-04-01",
+   "account_pct": 45.42,
+   "spy_pct": -3.65
+  },
+  {
+   "date": "2026-04-02",
+   "account_pct": 42.01,
+   "spy_pct": -3.54
+  },
+  {
+   "date": "2026-04-06",
+   "account_pct": 43.64,
+   "spy_pct": -3.11
+  },
+  {
+   "date": "2026-04-07",
+   "account_pct": 44.32,
+   "spy_pct": -3.03
+  },
+  {
+   "date": "2026-04-08",
+   "account_pct": 38.02,
+   "spy_pct": -0.6
+  },
+  {
+   "date": "2026-04-09",
+   "account_pct": 36.88,
+   "spy_pct": 0.02
+  },
+  {
+   "date": "2026-04-10",
+   "account_pct": 37.7,
+   "spy_pct": -0.09
+  },
+  {
+   "date": "2026-04-13",
+   "account_pct": 34.56,
+   "spy_pct": 0.93
+  },
+  {
+   "date": "2026-04-14",
+   "account_pct": 35.05,
+   "spy_pct": 2.12
+  },
+  {
+   "date": "2026-04-15",
+   "account_pct": 36.09,
+   "spy_pct": 2.94
+  },
+  {
+   "date": "2026-04-16",
+   "account_pct": 35.34,
+   "spy_pct": 3.21
+  },
+  {
+   "date": "2026-04-17",
+   "account_pct": 36.83,
+   "spy_pct": 4.45
+  },
+  {
+   "date": "2026-04-20",
+   "account_pct": 36.43,
+   "spy_pct": 4.21
+  },
+  {
+   "date": "2026-04-21",
+   "account_pct": 36.67,
+   "spy_pct": 3.55
+  },
+  {
+   "date": "2026-04-22",
+   "account_pct": 35.65,
+   "spy_pct": 4.63
+  },
+  {
+   "date": "2026-04-23",
+   "account_pct": 43.01,
+   "spy_pct": 4.2
+  },
+  {
+   "date": "2026-04-24",
+   "account_pct": 38.9,
+   "spy_pct": 5.03
+  },
+  {
+   "date": "2026-04-27",
+   "account_pct": 40.04,
+   "spy_pct": 5.16
+  },
+  {
+   "date": "2026-04-28",
+   "account_pct": 38.65,
+   "spy_pct": 4.65
+  },
+  {
+   "date": "2026-04-29",
+   "account_pct": 40.74,
+   "spy_pct": 4.61
+  },
+  {
+   "date": "2026-04-30",
+   "account_pct": 38.74,
+   "spy_pct": 5.68
+  },
+  {
+   "date": "2026-05-01",
+   "account_pct": 38.78,
+   "spy_pct": 5.99
+  },
+  {
+   "date": "2026-05-04",
+   "account_pct": 40.04,
+   "spy_pct": 5.57
+  },
+  {
+   "date": "2026-05-05",
+   "account_pct": 40.36,
+   "spy_pct": 6.43
+  },
+  {
+   "date": "2026-05-06",
+   "account_pct": 40.16,
+   "spy_pct": 7.98
+  },
+  {
+   "date": "2026-05-07",
+   "account_pct": 39.18,
+   "spy_pct": 7.57
+  },
+  {
+   "date": "2026-05-08",
+   "account_pct": 38.7,
+   "spy_pct": 8.49
+  },
+  {
+   "date": "2026-05-11",
+   "account_pct": 40.68,
+   "spy_pct": 8.7
+  },
+  {
+   "date": "2026-05-12",
+   "account_pct": 41.79,
+   "spy_pct": 8.53
+  },
+  {
+   "date": "2026-05-13",
+   "account_pct": 42.06,
+   "spy_pct": 9.17
+  },
+  {
+   "date": "2026-05-14",
+   "account_pct": 41.57,
+   "spy_pct": 10.01
+  },
+  {
+   "date": "2026-05-15",
+   "account_pct": 41.06,
+   "spy_pct": 8.67
+  },
+  {
+   "date": "2026-05-18",
+   "account_pct": 40.71,
+   "spy_pct": 8.6
+  },
+  {
+   "date": "2026-05-19",
+   "account_pct": 40.91,
+   "spy_pct": 7.88
+  },
+  {
+   "date": "2026-05-20",
+   "account_pct": 40.3,
+   "spy_pct": 9.04
+  },
+  {
+   "date": "2026-05-21",
+   "account_pct": 30.91,
+   "spy_pct": 9.24
+  },
+  {
+   "date": "2026-05-22",
+   "account_pct": 29.96,
+   "spy_pct": 9.65
+  },
+  {
+   "date": "2026-05-26",
+   "account_pct": 31.2,
+   "spy_pct": 10.33
+  },
+  {
+   "date": "2026-05-27",
+   "account_pct": 29.77,
+   "spy_pct": 10.35
+  },
+  {
+   "date": "2026-05-28",
+   "account_pct": 26.56,
+   "spy_pct": 10.98
+  },
+  {
+   "date": "2026-05-29",
+   "account_pct": 11.43,
+   "spy_pct": 11.23
+  },
+  {
+   "date": "2026-06-01",
+   "account_pct": 1.56,
+   "spy_pct": 11.53
+  },
+  {
+   "date": "2026-06-02",
+   "account_pct": -2.79,
+   "spy_pct": 11.68
+  },
+  {
+   "date": "2026-06-03",
+   "account_pct": 8.11,
+   "spy_pct": 10.86
+  },
+  {
+   "date": "2026-06-04",
+   "account_pct": 10.28,
+   "spy_pct": 11.32
+  },
+  {
+   "date": "2026-06-05",
+   "account_pct": 18.51,
+   "spy_pct": 8.4
+  },
+  {
+   "date": "2026-06-08",
+   "account_pct": 20.69,
+   "spy_pct": 8.73
+  },
+  {
+   "date": "2026-06-09",
+   "account_pct": 25.43,
+   "spy_pct": 8.45
+  },
+  {
+   "date": "2026-06-10",
+   "account_pct": 28.5,
+   "spy_pct": 6.7
+  },
+  {
+   "date": "2026-06-11",
+   "account_pct": 24.91,
+   "spy_pct": 8.57
+  },
+  {
+   "date": "2026-06-12",
+   "account_pct": 24.34,
+   "spy_pct": 9.12
+  },
+  {
+   "date": "2026-06-15",
+   "account_pct": 19.82,
+   "spy_pct": 10.94
+  },
+  {
+   "date": "2026-06-16",
+   "account_pct": 24.12,
+   "spy_pct": 10.31
+  },
+  {
+   "date": "2026-06-17",
+   "account_pct": 31.43,
+   "spy_pct": 8.98
+  },
+  {
+   "date": "2026-06-18",
+   "account_pct": 29.48,
+   "spy_pct": 10.16
+  },
+  {
+   "date": "2026-06-22",
+   "account_pct": 25.16,
+   "spy_pct": 9.76
+  },
+  {
+   "date": "2026-06-23",
+   "account_pct": 28.36,
+   "spy_pct": 8.18
+  },
+  {
+   "date": "2026-06-24",
+   "account_pct": 24.92,
+   "spy_pct": 8.07
+  },
+  {
+   "date": "2026-06-25",
+   "account_pct": 22.11,
+   "spy_pct": 8.07
+  },
+  {
+   "date": "2026-06-26",
+   "account_pct": 20.08,
+   "spy_pct": 8.02
+  },
+  {
+   "date": "2026-06-29",
+   "account_pct": 6.07,
+   "spy_pct": 9.29
+  },
+  {
+   "date": "2026-06-30",
+   "account_pct": 5.24,
+   "spy_pct": 10.16
+  },
+  {
+   "date": "2026-07-01",
+   "account_pct": 6.11,
+   "spy_pct": 9.93
+  },
+  {
+   "date": "2026-07-02",
+   "account_pct": 3.83,
+   "spy_pct": 9.93
+  },
+  {
+   "date": "2026-07-06",
+   "account_pct": -0.31,
+   "spy_pct": 10.74
+  },
+  {
+   "date": "2026-07-07",
+   "account_pct": -5.05,
+   "spy_pct": 10.25
+  },
+  {
+   "date": "2026-07-08",
+   "account_pct": -2.9,
+   "spy_pct": 9.94
+  },
+  {
+   "date": "2026-07-09",
+   "account_pct": -0.96,
+   "spy_pct": 10.84
+  },
+  {
+   "date": "2026-07-10",
+   "account_pct": 3.99,
+   "spy_pct": 11.31
+  },
+  {
+   "date": "2026-07-13",
+   "account_pct": 6.59,
+   "spy_pct": 10.43
+  },
+  {
+   "date": "2026-07-14",
+   "account_pct": 30.37,
+   "spy_pct": 10.85
+  },
+  {
+   "date": "2026-07-15",
+   "account_pct": 32.89,
+   "spy_pct": 11.28
+  },
+  {
+   "date": "2026-07-16",
+   "account_pct": 37.7,
+   "spy_pct": 10.71
+  },
+  {
+   "date": "2026-07-17",
+   "account_pct": 39.06,
+   "spy_pct": 9.59
+  },
+  {
+   "date": "2026-07-20",
+   "account_pct": 44.33,
+   "spy_pct": 9.38
+  },
+  {
+   "date": "2026-07-21",
+   "account_pct": 21.55,
+   "spy_pct": 10.35
+  },
+  {
+   "date": "2026-07-22",
+   "account_pct": 24.78,
+   "spy_pct": 10.2
+  },
+  {
+   "date": "2026-07-23",
+   "account_pct": 29.09,
+   "spy_pct": 8.87
+  },
+  {
+   "date": "2026-07-24",
+   "account_pct": 50.06,
+   "spy_pct": 8.94
+  },
+  {
+   "date": "2026-07-27",
+   "account_pct": 50.06,
+   "spy_pct": 8.95
+  },
+  {
+   "date": "2026-07-28",
+   "account_pct": 50.06,
+   "spy_pct": 9.18
+  },
+  {
+   "date": "2026-07-29",
+   "account_pct": 50.06,
+   "spy_pct": 7.53
+  },
+  {
+   "date": "2026-07-30",
+   "account_pct": 50.06,
+   "spy_pct": 9.31
+  },
+  {
+   "date": "2026-07-31",
+   "account_pct": 50.06,
+   "spy_pct": 10.09
+  },
+  {
+   "date": "2026-08-03",
+   "account_pct": 50.06,
+   "spy_pct": 11.72
+  },
+  {
+   "date": "2026-08-04",
+   "account_pct": 50.06,
+   "spy_pct": 13.72
+  },
+  {
+   "date": "2026-08-05",
+   "account_pct": 50.48,
+   "spy_pct": 13.53
+  },
+  {
+   "date": "2026-08-06",
+   "account_pct": 50.48,
+   "spy_pct": 13.33
+  },
+  {
+   "date": "2026-08-07",
+   "account_pct": 50.48,
+   "spy_pct": 14.03
+  },
+  {
+   "date": "2026-08-10",
+   "account_pct": 50.48,
+   "spy_pct": 13.98
+  },
+  {
+   "date": "2026-08-11",
+   "account_pct": 50.48,
+   "spy_pct": 13.61
+  },
+  {
+   "date": "2026-08-12",
+   "account_pct": 50.48,
+   "spy_pct": 13.91
+  },
+  {
+   "date": "2026-08-13",
+   "account_pct": 50.48,
+   "spy_pct": 14.66
+  },
+  {
+   "date": "2026-08-14",
+   "account_pct": 50.48,
+   "spy_pct": 14.48
+  },
+  {
+   "date": "2026-08-17",
+   "account_pct": 50.48,
+   "spy_pct": 13.89
+  },
+  {
+   "date": "2026-08-18",
+   "account_pct": 50.48,
+   "spy_pct": 13.11
+  },
+  {
+   "date": "2026-08-19",
+   "account_pct": 50.48,
+   "spy_pct": 13.36
+  },
+  {
+   "date": "2026-08-20",
+   "account_pct": 50.48,
+   "spy_pct": 12.39
+  },
+  {
+   "date": "2026-08-21",
+   "account_pct": 50.48,
+   "spy_pct": 12.88
+  },
+  {
+   "date": "2026-08-24",
+   "account_pct": 50.48,
+   "spy_pct": 12.57
+  },
+  {
+   "date": "2026-08-25",
+   "account_pct": 50.48,
+   "spy_pct": 12.93
+  },
+  {
+   "date": "2026-08-26",
+   "account_pct": 50.48,
+   "spy_pct": 12.91
+  },
+  {
+   "date": "2026-08-27",
+   "account_pct": 50.48,
+   "spy_pct": 13.72
+  },
+  {
+   "date": "2026-08-28",
+   "account_pct": 50.48,
+   "spy_pct": 13.44
+  },
+  {
+   "date": "2026-08-31",
+   "account_pct": 50.48,
+   "spy_pct": 13.07
+  },
+  {
+   "date": "2026-09-01",
+   "account_pct": 50.62,
+   "spy_pct": 12.28
+  },
+  {
+   "date": "2026-09-02",
+   "account_pct": 50.68,
+   "spy_pct": 12.8
+  },
+  {
+   "date": "2026-09-03",
+   "account_pct": 50.3,
+   "spy_pct": 14.0
+  },
+  {
+   "date": "2026-09-04",
+   "account_pct": 50.02,
+   "spy_pct": 13.58
+  },
+  {
+   "date": "2026-09-08",
+   "account_pct": 50.07,
+   "spy_pct": 12.93
+  },
+  {
+   "date": "2026-09-09",
+   "account_pct": 50.73,
+   "spy_pct": 12.38
+  },
+  {
+   "date": "2026-09-10",
+   "account_pct": 52.96,
+   "spy_pct": 11.74
+  },
+  {
+   "date": "2026-09-11",
+   "account_pct": 52.48,
+   "spy_pct": 12.7
+  },
+  {
+   "date": "2026-09-14",
+   "account_pct": 53.82,
+   "spy_pct": 12.16
+  },
+  {
+   "date": "2026-09-15",
+   "account_pct": 54.98,
+   "spy_pct": 11.68
+  },
+  {
+   "date": "2026-09-16",
+   "account_pct": 56.48,
+   "spy_pct": 11.18
+  },
+  {
+   "date": "2026-09-17",
+   "account_pct": 52.69,
+   "spy_pct": 12.45
+  },
+  {
+   "date": "2026-09-18",
+   "account_pct": 50.36,
+   "spy_pct": 12.64
+  },
+  {
+   "date": "2026-09-21",
+   "account_pct": 37.79,
+   "spy_pct": 14.33
+  },
+  {
+   "date": "2026-09-22",
+   "account_pct": 34.77,
+   "spy_pct": 14.33
+  },
+  {
+   "date": "2026-09-23",
+   "account_pct": 39.34,
+   "spy_pct": 13.46
+  },
+  {
+   "date": "2026-09-24",
+   "account_pct": 40.07,
+   "spy_pct": 13.44
+  },
+  {
+   "date": "2026-09-25",
+   "account_pct": 38.18,
+   "spy_pct": 14.02
+  },
+  {
+   "date": "2026-09-28",
+   "account_pct": 42.38,
+   "spy_pct": 13.14
+  },
+  {
+   "date": "2026-09-29",
+   "account_pct": 41.68,
+   "spy_pct": 12.95
+  },
+  {
+   "date": "2026-09-30",
+   "account_pct": 41.14,
+   "spy_pct": 12.68
+  },
+  {
+   "date": "2026-10-01",
+   "account_pct": 39.47,
+   "spy_pct": 12.9
+  },
+  {
+   "date": "2026-10-02",
+   "account_pct": 35.69,
+   "spy_pct": 13.73
+  },
+  {
+   "date": "2026-10-05",
+   "account_pct": 31.72,
+   "spy_pct": 14.49
+  },
+  {
+   "date": "2026-10-06",
+   "account_pct": 29.4,
+   "spy_pct": 15.16
+  },
+  {
+   "date": "2026-10-07",
+   "account_pct": 31.6,
+   "spy_pct": 14.91
+  },
+  {
+   "date": "2026-10-08",
+   "account_pct": 37.37,
+   "spy_pct": 14.37
+  },
+  {
+   "date": "2026-10-09",
+   "account_pct": 35.93,
+   "spy_pct": 15.07
+  },
+  {
+   "date": "2026-10-12",
+   "account_pct": 39.76,
+   "spy_pct": 15.0
+  },
+  {
+   "date": "2026-10-13",
+   "account_pct": 40.9,
+   "spy_pct": 14.98
+  },
+  {
+   "date": "2026-10-14",
+   "account_pct": 50.42,
+   "spy_pct": 13.71
+  },
+  {
+   "date": "2026-10-15",
+   "account_pct": 50.72,
+   "spy_pct": 14.08
+  },
+  {
+   "date": "2026-10-16",
+   "account_pct": 59.53,
+   "spy_pct": 12.84
+  },
+  {
+   "date": "2026-10-19",
+   "account_pct": 55.71,
+   "spy_pct": 13.3
+  },
+  {
+   "date": "2026-10-20",
+   "account_pct": 55.14,
+   "spy_pct": 13.62
+  },
+  {
+   "date": "2026-10-21",
+   "account_pct": 52.14,
+   "spy_pct": 14.28
+  },
+  {
+   "date": "2026-10-22",
+   "account_pct": 59.77,
+   "spy_pct": 12.9
+  },
+  {
+   "date": "2026-10-23",
+   "account_pct": 61.25,
+   "spy_pct": 12.32
+  },
+  {
+   "date": "2026-10-26",
+   "account_pct": 56.1,
+   "spy_pct": 13.1
+  },
+  {
+   "date": "2026-10-27",
+   "account_pct": 55.88,
+   "spy_pct": 13.78
+  },
+  {
+   "date": "2026-10-28",
+   "account_pct": 54.64,
+   "spy_pct": 14.09
+  },
+  {
+   "date": "2026-10-29",
+   "account_pct": 57.43,
+   "spy_pct": 13.74
+  },
+  {
+   "date": "2026-10-30",
+   "account_pct": 59.67,
+   "spy_pct": 11.69
+  },
+  {
+   "date": "2026-11-02",
+   "account_pct": 61.2,
+   "spy_pct": 11.12
+  },
+  {
+   "date": "2026-11-03",
+   "account_pct": 58.92,
+   "spy_pct": 11.53
+  },
+  {
+   "date": "2026-11-04",
+   "account_pct": 58.45,
+   "spy_pct": 13.29
+  },
+  {
+   "date": "2026-11-05",
+   "account_pct": 71.37,
+   "spy_pct": 8.36
+  }
+ ],
+ "method": {
+  "account": "Patrimônio de fim de dia da conta (net liquidating value, snapshots oficiais da corretora). Retorno do dia = (patrimônio de hoje − depósitos e saques do dia) ÷ patrimônio de ontem − 1; os dias são encadeados (retorno ponderado pelo tempo). Inclui posições abertas, juros e taxas.",
+  "flows": "Depósitos, saques, estornos e tarifas de transferência não contam como rendimento.",
+  "adjustments": "Em 27/07 e 31/08/2026 o patrimônio mudou por um acordo com a corretora, e não por operações; esses dias contam com retorno zero, e o valor do acordo (03/09) entra como dinheiro de fora.",
+  "spy": "SPY com dividendos reinvestidos: NAV diário oficial publicado pela State Street e dividendos na data ex.",
+  "difference": "Este é o retorno sobre o patrimônio inteiro. O número grande acima é sobre a margem utilizada e só de trades fechados; por isso os dois são diferentes."
+ },
+ "adjusted_days": [
+  "2026-07-27",
+  "2026-08-31"
+ ],
+ "external_flow_days": 9,
+ "last_updated": "2026-11-06T10:58:20-03:00"
+}

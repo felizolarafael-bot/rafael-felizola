@@ -445,3 +445,27 @@ a:hover { color: var(--focus); }
 .ins-sh:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
 .ins-share-msg { font-size: .82rem; color: var(--pos); }
 @media (max-width: 480px) { .ins-sh span { display: none; } .ins-sh { padding: .55rem; } }
+/* Comparativo conta inteira × SPY (benchmark.js) */
+#bench-root { min-width: 0; }
+#bench-root:empty { display: none; }
+.perf-grid .perf-months { grid-column: 1 / -1; }
+.bm-card { height: 100%; box-sizing: border-box; }
+.bm-card { border-color: var(--accent-line); }
+.bm-legend { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; margin: 0 0 .75rem; font-size: .9rem; color: var(--text-muted); }
+.bm-legend b { color: var(--text); font-variant-numeric: tabular-nums; }
+.bm-legend i, .bm-tip i { display: inline-block; width: 14px; height: 3px; border-radius: 2px; margin-right: .45rem; vertical-align: middle; }
+.bm-gap { font-size: .8rem; color: var(--text-dim); }
+.bm-wrap { position: relative; }
+.bm-svg { display: block; width: 100%; height: auto; touch-action: pan-y; }
+.bm-grid { stroke: rgba(154,164,178,.14); stroke-width: 1; }
+.bm-zero { stroke: rgba(154,164,178,.45); }
+.bm-ax { fill: var(--text-dim); font-size: 12.5px; font-family: var(--font); }
+.bm-lbl { fill: var(--text); font-size: 14px; font-weight: 600; font-family: var(--font); font-variant-numeric: tabular-nums; }
+.bm-cross { stroke: rgba(154,164,178,.5); stroke-width: 1; stroke-dasharray: 3 3; }
+.bm-tip { position: absolute; top: 0; pointer-events: none; display: flex; flex-direction: column; gap: .2rem; padding: .5rem .65rem; background: var(--bg-elevated); border: 1px solid var(--accent-line); border-radius: 6px; font-size: .78rem; color: var(--text-muted); white-space: nowrap; }
+.bm-tip strong { color: var(--text); font-weight: 600; }
+.bm-tip b { color: var(--text); font-variant-numeric: tabular-nums; }
+.bm-diff strong { color: var(--text); }
+.bm-table td { font-variant-numeric: tabular-nums; }
+@media (max-width: 520px) { .bm-lbl { font-size: 15px; } .bm-ax { font-size: 14px; } .bm-card { padding: 1.25rem 1rem; } }
+.bm-tip[hidden] { display: none; }
