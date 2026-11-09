@@ -143,8 +143,6 @@
         "</div>" +
         '<div class="bm-wrap">' + chart(s, D) + '<div class="bm-tip" hidden></div></div>' +
         '<p class="perf-sub">' + esc(t().sub) + "</p>" +
-        '<p class="perf-sub bm-diff"><strong>' + esc(t().diff.replace("+109%", ytdTxt())) + "</strong> " + esc(t().diffText) + "</p>" +
-        '<details class="perf-method"><summary>' + esc(t().method) + "</summary>" + rows + "</details>" +
         '<details class="perf-method"><summary>' + esc(t().table) + "</summary>" +
           '<div class="ins-tablewrap"><table class="ins-table bm-table"><thead><tr><th>' + esc(t().month) + "</th><th>" + esc(t().acc) + "</th><th>SPY</th></tr></thead><tbody>" + trows + "</tbody></table></div>" +
         "</details>" +

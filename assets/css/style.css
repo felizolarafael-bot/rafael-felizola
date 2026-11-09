@@ -469,3 +469,9 @@ a:hover { color: var(--focus); }
 .bm-table td { font-variant-numeric: tabular-nums; }
 @media (max-width: 520px) { .bm-lbl { font-size: 15px; } .bm-ax { font-size: 14px; } .bm-card { padding: 1.25rem 1rem; } }
 .bm-tip[hidden] { display: none; }
+
+/* 09/11/2026 — Rendimentos: conta inteira como número principal, eficiência da margem e estatísticas dos trades */
+.perf-eff { margin-top: .35rem; }
+.perf-eff b { color: var(--text); font-variant-numeric: tabular-nums; }
+.perf-stats-h { margin-top: 1rem; font-size: .78rem; letter-spacing: .04em; color: var(--text-dim); }
+.perf-stats { flex-wrap: wrap; gap: .75rem 1.5rem; }
