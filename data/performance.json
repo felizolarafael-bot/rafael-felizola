@@ -3,14 +3,14 @@
  "scope": "Resultado dos trades fechados em 2026, do início do ano até o último pregão. Só porcentagens. Depósitos e saques não entram. Nenhum valor em dólar, saldo ou tamanho de posição.",
  "period": {
   "start": "2026-01-01",
-  "end": "2026-11-05",
-  "margin_data_through": "2026-11-05"
+  "end": "2026-11-06",
+  "margin_data_through": "2026-11-06"
  },
- "ytd_return_on_margin_pct": 108.96,
- "ytd_closed_trades": 207,
- "ytd_win_rate_pct": 60.87,
- "ytd_kelly_pct": 27.95,
- "ytd_payoff": 1.189,
+ "ytd_return_on_margin_pct": 89.97,
+ "ytd_closed_trades": 57,
+ "ytd_win_rate_pct": 61.4,
+ "ytd_kelly_pct": 39.65,
+ "ytd_payoff": 1.774,
  "method": {
   "name": "P&L fechado sobre margem utilizada",
   "numerator": "Soma do P&L líquido dos trades fechados no período, pela data de fechamento, já com comissões e taxas. Calculado pelo TT Journal (1 contrato = 1 trade, da abertura até a quantidade zerar) a partir das transações oficiais da conta.",
@@ -28,53 +28,53 @@
   },
   {
    "month": "2026-02",
-   "return_on_margin_pct": 40.48,
-   "closed_trades": 17
+   "return_on_margin_pct": 2.02,
+   "closed_trades": 2
   },
   {
    "month": "2026-03",
-   "return_on_margin_pct": 20.7,
-   "closed_trades": 49
+   "return_on_margin_pct": 20.4,
+   "closed_trades": 25
   },
   {
    "month": "2026-04",
-   "return_on_margin_pct": -15.59,
-   "closed_trades": 3
+   "return_on_margin_pct": -16.98,
+   "closed_trades": 1
   },
   {
    "month": "2026-05",
-   "return_on_margin_pct": -3.79,
+   "return_on_margin_pct": -3.98,
    "closed_trades": 1
   },
   {
    "month": "2026-06",
-   "return_on_margin_pct": -11.97,
-   "closed_trades": 41
+   "return_on_margin_pct": -9.04,
+   "closed_trades": 4
   },
   {
    "month": "2026-07",
-   "return_on_margin_pct": 19.87,
-   "closed_trades": 34
+   "return_on_margin_pct": 31.11,
+   "closed_trades": 8
   },
   {
    "month": "2026-08",
-   "return_on_margin_pct": 43.26,
-   "closed_trades": 1
+   "return_on_margin_pct": 0.0,
+   "closed_trades": 0
   },
   {
    "month": "2026-09",
-   "return_on_margin_pct": 25.38,
-   "closed_trades": 37
+   "return_on_margin_pct": 33.45,
+   "closed_trades": 7
   },
   {
    "month": "2026-10",
-   "return_on_margin_pct": 7.41,
-   "closed_trades": 17
+   "return_on_margin_pct": -0.73,
+   "closed_trades": 5
   },
   {
    "month": "2026-11",
-   "return_on_margin_pct": 2.54,
-   "closed_trades": 7
+   "return_on_margin_pct": -6.75,
+   "closed_trades": 4
   }
  ],
  "notes": [
@@ -84,6 +84,6 @@
  ],
  "closed_trades": null,
  "closed_trades_note": "Lista de operações não incluída; o site mostra só o rendimento do ano.",
- "last_updated": "2026-11-06T08:35:29-03:00",
+ "last_updated": "2026-11-09T09:19:33-03:00",
  "timezone": "America/Fortaleza"
 }

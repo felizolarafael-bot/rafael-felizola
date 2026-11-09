@@ -2,10 +2,10 @@
  "scope": "Retorno acumulado no ano da conta inteira contra o SPY. Só porcentagens.",
  "period": {
   "start": "2025-12-31",
-  "end": "2026-11-05"
+  "end": "2026-11-06"
  },
- "ytd_account_pct": 71.37,
- "ytd_spy_pct": 8.36,
+ "ytd_account_pct": 69.9,
+ "ytd_spy_pct": 8.71,
  "series": [
   {
    "date": "2025-12-31",
@@ -1076,6 +1076,11 @@
    "date": "2026-11-05",
    "account_pct": 71.37,
    "spy_pct": 8.36
+  },
+  {
+   "date": "2026-11-06",
+   "account_pct": 69.9,
+   "spy_pct": 8.71
   }
  ],
  "method": {
@@ -1083,12 +1088,12 @@
   "flows": "Depósitos, saques, estornos e tarifas de transferência não contam como rendimento.",
   "adjustments": "Em 27/07 e 31/08/2026 o patrimônio mudou por um acordo com a corretora, e não por operações; esses dias contam com retorno zero, e o valor do acordo (03/09) entra como dinheiro de fora.",
   "spy": "SPY com dividendos reinvestidos: NAV diário oficial publicado pela State Street e dividendos na data ex.",
-  "difference": "Este é o retorno sobre o patrimônio inteiro. O número grande acima é sobre a margem utilizada e só de trades fechados; por isso os dois são diferentes."
+  "difference": "Este é o retorno sobre o patrimônio inteiro. O número do cartão No ano é sobre a margem utilizada e só de trades fechados; por isso os dois são diferentes."
  },
  "adjusted_days": [
   "2026-07-27",
   "2026-08-31"
  ],
  "external_flow_days": 9,
- "last_updated": "2026-11-06T10:58:20-03:00"
+ "last_updated": "2026-11-09T09:19:42-03:00"
 }
