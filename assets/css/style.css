@@ -475,3 +475,6 @@ a:hover { color: var(--focus); }
 .perf-eff b { color: var(--text); font-variant-numeric: tabular-nums; }
 .perf-stats-h { margin-top: 1rem; font-size: .78rem; letter-spacing: .04em; color: var(--text-dim); }
 .perf-stats { flex-wrap: wrap; gap: .75rem 1.5rem; }
+
+/* 09/11/2026 — Contato só com o Discord (e-mail retirado a pedido do Rafael) */
+.contact-discord { margin-bottom: 0; }
