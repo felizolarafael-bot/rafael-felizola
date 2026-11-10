@@ -1,0 +1,20 @@
+{
+ "ok": true,
+ "date": "2026-11-10",
+ "sha256": "dd94b561fd87f57ba6729c9d28cf8b74456747c319dcf9bc22ca8d01c793ebcb",
+ "version": "2026.11.10-5",
+ "generated_at": "2026-11-10T11:24:00-03:00",
+ "source": "MyGex (tastytrade API, gex_build.py)",
+ "meta_ts": "2026-11-10T14:23:58Z",
+ "mode": "full",
+ "contratos": 7371,
+ "tickers": [
+  "SPY",
+  "QQQ",
+  "EEM",
+  "XLU",
+  "HYG",
+  "TLT"
+ ],
+ "fresh": true
+}
