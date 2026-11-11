@@ -118,6 +118,7 @@
         '<div class="card perf-ytd"><p class="perf-kicker">' + esc(tr(hasBench ? "perf.ytd" : "perf.ytdMargin")) + "</p>" +
           '<p class="perf-big ' + (big !== null && big < 0 ? "neg" : "pos") + '">' + fmtPct(big) + "</p>" +
           '<p class="perf-sub">' + esc(tr(hasBench ? "perf.twr" : "perf.onMargin")) + info(tr(hasBench ? "perf.twrTip" : "perf.marginTip")) + "</p>" +
+          (end ? '<p class="perf-sub perf-asof">' + esc(tr("perf.dataThrough")) + " <b>" + fmtDate(end) + "</b></p>" : "") +
           (hasBench && marginEff !== null ? '<p class="perf-sub perf-eff">' + esc(tr("perf.marginEff")) + ": <b>" + fmtPct(marginEff) + "</b>" + info(tr("perf.marginTip")) + "</p>" : "") +
           (stats ? '<p class="perf-sub perf-stats-h">' + esc(tr("perf.tradesHead")) + info(tr("perf.tradeTip")) + '</p><div class="perf-stats">' + stats + "</div>" : "") +
           (period ? '<p class="perf-sub">' + esc(tr("perf.period")) + ": " + period + "</p>" : "") +
