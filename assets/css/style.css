@@ -478,3 +478,14 @@ a:hover { color: var(--focus); }
 
 /* 09/11/2026 — Contato só com o Discord (e-mail retirado a pedido do Rafael) */
 .contact-discord { margin-bottom: 0; }
+
+/* 10/11/2026 — seção Mercúrio (descrição do projeto) */
+@media (min-width: 768px) { .merc-cards { grid-template-columns: repeat(3, 1fr); } }
+.merc-foot { margin-top: 1.5rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; }
+.merc-foot p { margin: 0; max-width: 46rem; color: var(--text-muted); font-size: .9rem; }
+
+/* 10/11/2026 — Contato: X abaixo do Discord */
+.contact-x { margin-top: .75rem; }
+
+/* 11/11/2026 — título do livro no Sobre: itálico mais visível */
+[data-i18n="about.p3"] em { font-style: italic; color: var(--text); font-weight: 500; }
