@@ -5,20 +5,20 @@
   var data = null, failed = false;
   var T = {
     pt: {
-      kicker: "Conta inteira × SPY no ano", acc: "Minha conta", short: "Conta", spy: "SPY",
-      sub: "Retorno acumulado sobre o patrimônio inteiro da conta, descontados depósitos e saques. SPY com dividendos reinvestidos.",
+      kicker: "Conta inteira × S&P 500 no ano", acc: "Minha conta", short: "Conta", spy: "S&P 500",
+      sub: "Retorno acumulado sobre o patrimônio inteiro da conta, descontados depósitos e saques. S&P 500 medido pelo ETF SPY, com dividendos reinvestidos.",
       diff: "Por que é diferente do +109%?", diffText: "Aqui a base é o patrimônio inteiro da conta, com as posições abertas. O número do cartão No ano é sobre a margem utilizada e conta só os trades fechados; por isso os dois são diferentes.", method: "Como é calculado",
       table: "Ver em tabela (fim de cada mês)", month: "Mês", unavailable: "Comparativo indisponível no momento.",
-      until: "até", pts: "p.p.", ahead: "acima do SPY", behind: "abaixo do SPY",
-      m: { account: "Conta", flows: "Depósitos e saques", adjustments: "Acordo com a corretora", spy: "SPY", difference: "Diferença para o número acima" }
+      until: "até", pts: "p.p.", ahead: "acima do S&P 500", behind: "abaixo do S&P 500",
+      m: { account: "Conta", flows: "Depósitos e saques", adjustments: "Acordo com a corretora", spy: "S&P 500 (SPY)", difference: "Diferença para o número acima" }
     },
     en: {
-      kicker: "Whole account × SPY this year", acc: "My account", short: "Account", spy: "SPY",
-      sub: "Cumulative return on the whole account equity, net of deposits and withdrawals. SPY with dividends reinvested.",
+      kicker: "Whole account × S&P 500 this year", acc: "My account", short: "Account", spy: "S&P 500",
+      sub: "Cumulative return on the whole account equity, net of deposits and withdrawals. S&P 500 measured by the SPY ETF, with dividends reinvested.",
       diff: "Why is it different from the big number?", diffText: "Here the base is the whole account equity, including open positions. The Year to date number is on the margin used and counts only closed trades, so the two differ.", method: "How it is calculated",
       table: "View as table (end of each month)", month: "Month", unavailable: "Comparison unavailable right now.",
-      until: "through", pts: "pts", ahead: "ahead of SPY", behind: "behind SPY",
-      m: { account: "Account", flows: "Deposits and withdrawals", adjustments: "Agreement with the broker", spy: "SPY", difference: "Difference from the number above" }
+      until: "through", pts: "pts", ahead: "ahead of the S&P 500", behind: "behind the S&P 500",
+      m: { account: "Account", flows: "Deposits and withdrawals", adjustments: "Agreement with the broker", spy: "S&P 500 (SPY)", difference: "Difference from the number above" }
     }
   };
   var METHOD_EN = {
@@ -76,14 +76,14 @@
     var last = s[n];
     var ya = y(last.account_pct), ys = y(last.spy_pct);
     if (Math.abs(ya - ys) < 16) { if (ya < ys) { ya -= 8; ys += 8; } else { ya += 8; ys -= 8; } }
-    return '<svg class="bm-svg" viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="' + esc(t().kicker + ": " + t().acc + " " + fmt(last.account_pct) + ", SPY " + fmt(last.spy_pct)) + '">' +
+    return '<svg class="bm-svg" viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="' + esc(t().kicker + ": " + t().acc + " " + fmt(last.account_pct) + ", " + t().spy + " " + fmt(last.spy_pct)) + '">' +
       grid + ticks +
       '<path d="' + path("spy_pct") + '" fill="none" stroke="' + C_SPY + '" stroke-width="2" stroke-linejoin="round"/>' +
       '<path d="' + path("account_pct") + '" fill="none" stroke="' + C_ACC + '" stroke-width="2" stroke-linejoin="round"/>' +
       '<circle cx="' + x(n) + '" cy="' + y(last.account_pct) + '" r="4" fill="' + C_ACC + '" stroke="#131920" stroke-width="2"/>' +
       '<circle cx="' + x(n) + '" cy="' + y(last.spy_pct) + '" r="4" fill="' + C_SPY + '" stroke="#131920" stroke-width="2"/>' +
       (D.small ? "" : '<text x="' + (x(n) + 10) + '" y="' + (ya + 4) + '" class="bm-lbl">' + esc(t().short) + " " + fmt(last.account_pct) + "</text>" +
-      '<text x="' + (x(n) + 10) + '" y="' + (ys + 4) + '" class="bm-lbl">SPY ' + fmt(last.spy_pct) + "</text>") +
+      '<text x="' + (x(n) + 10) + '" y="' + (ys + 4) + '" class="bm-lbl">' + esc(t().spy) + " " + fmt(last.spy_pct) + "</text>") +
       '<g class="bm-hover" style="display:none"><line class="bm-cross" y1="' + TOP + '" y2="' + (H - B) + '"/>' +
       '<circle class="bm-ha" r="4" fill="' + C_ACC + '" stroke="#131920" stroke-width="2"/><circle class="bm-hs" r="4" fill="' + C_SPY + '" stroke="#131920" stroke-width="2"/></g>' +
       '<rect class="bm-hit" x="' + L + '" y="0" width="' + (W - L - R) + '" height="' + H + '" fill="transparent"/>' +
@@ -107,7 +107,7 @@
       g.querySelector(".bm-hs").setAttribute("cx", px); g.querySelector(".bm-hs").setAttribute("cy", ysp);
       tip.innerHTML = "<strong>" + esc(fmtDay(p.date)) + "</strong>" +
         '<span><i style="background:' + C_ACC + '"></i>' + esc(t().acc) + " <b>" + fmt(p.account_pct) + "</b></span>" +
-        '<span><i style="background:' + C_SPY + '"></i>SPY <b>' + fmt(p.spy_pct) + "</b></span>";
+        '<span><i style="background:' + C_SPY + '"></i>' + esc(t().spy) + " <b>" + fmt(p.spy_pct) + "</b></span>";
       tip.hidden = false;
       var left = px / W * r.width;
       tip.style.left = Math.max(0, Math.min(r.width - tip.offsetWidth, left - tip.offsetWidth / 2)) + "px";
@@ -138,13 +138,13 @@
         '<p class="perf-kicker">' + esc(t().kicker) + "</p>" +
         '<div class="bm-legend">' +
           '<span><i style="background:' + C_ACC + '"></i>' + esc(t().acc) + " <b>" + fmt(last.account_pct) + "</b></span>" +
-          '<span><i style="background:' + C_SPY + '"></i>SPY <b>' + fmt(last.spy_pct) + "</b></span>" +
+          '<span><i style="background:' + C_SPY + '"></i>' + esc(t().spy) + " <b>" + fmt(last.spy_pct) + "</b></span>" +
           '<span class="bm-gap">' + esc(fmtPts(gap) + " " + (gap >= 0 ? t().ahead : t().behind)) + " · " + esc(t().until + " " + fmtDay(last.date)) + "</span>" +
         "</div>" +
         '<div class="bm-wrap">' + chart(s, D) + '<div class="bm-tip" hidden></div></div>' +
         '<p class="perf-sub">' + esc(t().sub) + "</p>" +
         '<details class="perf-method"><summary>' + esc(t().table) + "</summary>" +
-          '<div class="ins-tablewrap"><table class="ins-table bm-table"><thead><tr><th>' + esc(t().month) + "</th><th>" + esc(t().acc) + "</th><th>SPY</th></tr></thead><tbody>" + trows + "</tbody></table></div>" +
+          '<div class="ins-tablewrap"><table class="ins-table bm-table"><thead><tr><th>' + esc(t().month) + "</th><th>" + esc(t().acc) + "</th><th>" + esc(t().spy) + "</th></tr></thead><tbody>" + trows + "</tbody></table></div>" +
         "</details>" +
       "</div>";
     wire(root, s, D);

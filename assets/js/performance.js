@@ -77,7 +77,7 @@
       bars = months.map(function (m) {
         var v = m.acc, mi = +m.month.split("-")[1] - 1, cls = v >= 0 ? "pos" : "neg";
         var h = Math.max(2, Math.round(Math.abs(v) / max * 100));
-        var tip = MONTHS[lang()][mi] + " " + m.month.slice(0, 4) + ": " + tr("perf.acc") + " " + fmtPct(v) + " · SPY " + fmtPct(m.spy);
+        var tip = MONTHS[lang()][mi] + " " + m.month.slice(0, 4) + ": " + tr("perf.acc") + " " + fmtPct(v) + " · S&P 500 " + fmtPct(m.spy);
         return '<div class="perf-bar-col" title="' + esc(tip) + '">' +
           '<span class="perf-bar-val ' + cls + '">' + fmtPct(v) + "</span>" +
           '<div class="perf-bar-track"><div class="perf-bar ' + cls + '" style="height:' + h + '%"></div></div>' +
@@ -107,7 +107,7 @@
       if (bm.flows) rows += "<p><strong>" + esc(tr("perf.m.flows")) + ":</strong> " + esc(bt("flows")) + "</p>";
       if (bm.adjustments) rows += "<p><strong>" + esc(tr("perf.m.adj")) + ":</strong> " + esc(bt("adjustments")) + "</p>";
       rows += "<p><strong>" + esc(tr("perf.m.monthly")) + ":</strong> " + esc(tr("perf.m.monthlyText")) + "</p>";
-      if (bm.spy) rows += "<p><strong>SPY:</strong> " + esc(bt("spy")) + "</p>";
+      if (bm.spy) rows += "<p><strong>S&amp;P 500 (SPY):</strong> " + esc(bt("spy")) + "</p>";
     }
     if (marginEff !== null) rows += "<p><strong>" + esc(tr("perf.m.margin")) + ":</strong> " + esc(tr("perf.m.marginText")) + "</p>";
     rows += "<p><strong>" + esc(tr("perf.m.trade")) + ":</strong> " + esc(tr("perf.m.tradeText")) + "</p>";
