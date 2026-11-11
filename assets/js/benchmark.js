@@ -6,7 +6,7 @@
   var T = {
     pt: {
       kicker: "Conta inteira × S&P 500 no ano", acc: "Minha conta", short: "Conta", spy: "S&P 500",
-      sub: "Retorno acumulado sobre o patrimônio inteiro da conta, descontados depósitos e saques. S&P 500 medido pelo ETF SPY, com dividendos reinvestidos.",
+      sub: "Retorno acumulado sobre o patrimônio inteiro da conta. Depósitos e saques não contam como ganho nem como perda: só o resultado das operações entra neste número. S&P 500 medido pelo ETF SPY, com dividendos reinvestidos.",
       diff: "Por que é diferente do +109%?", diffText: "Aqui a base é o patrimônio inteiro da conta, com as posições abertas. O número do cartão No ano é sobre a margem utilizada e conta só os trades fechados; por isso os dois são diferentes.", method: "Como é calculado",
       table: "Ver em tabela (fim de cada mês)", month: "Mês", unavailable: "Comparativo indisponível no momento.",
       until: "até", pts: "p.p.", ahead: "acima do S&P 500", behind: "abaixo do S&P 500",
@@ -14,7 +14,7 @@
     },
     en: {
       kicker: "Whole account × S&P 500 this year", acc: "My account", short: "Account", spy: "S&P 500",
-      sub: "Cumulative return on the whole account equity, net of deposits and withdrawals. S&P 500 measured by the SPY ETF, with dividends reinvested.",
+      sub: "Cumulative return on the whole account equity. Deposits and withdrawals count neither as gains nor as losses: only the result of the trades goes into this number. S&P 500 measured by the SPY ETF, with dividends reinvested.",
       diff: "Why is it different from the big number?", diffText: "Here the base is the whole account equity, including open positions. The Year to date number is on the margin used and counts only closed trades, so the two differ.", method: "How it is calculated",
       table: "View as table (end of each month)", month: "Month", unavailable: "Comparison unavailable right now.",
       until: "through", pts: "pts", ahead: "ahead of the S&P 500", behind: "behind the S&P 500",
