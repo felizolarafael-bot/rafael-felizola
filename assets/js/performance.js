@@ -91,7 +91,8 @@
     if (num(d.ytd_closed_trades) !== null) stats += '<div class="perf-stat"><span class="perf-stat-v">' + d.ytd_closed_trades + '</span><span class="perf-stat-l">' + esc(tr("perf.trades")) + "</span></div>";
     if (num(d.ytd_win_rate_pct) !== null) stats += '<div class="perf-stat"><span class="perf-stat-v">' + fmtN(d.ytd_win_rate_pct, 1) + '%</span><span class="perf-stat-l">' + esc(tr("perf.winrate")) + "</span></div>";
     if (num(d.ytd_payoff) !== null) stats += '<div class="perf-stat"><span class="perf-stat-v">' + fmtN(d.ytd_payoff, 2) + '</span><span class="perf-stat-l">' + esc(tr("perf.payoff")) + "</span></div>";
-    if (num(d.ytd_kelly_pct) !== null) stats += '<div class="perf-stat" title="' + esc(tr("perf.kelly.tip")) + '"><span class="perf-stat-v">' + fmtN(d.ytd_kelly_pct, 1) + '%</span><span class="perf-stat-l">' + esc(tr("perf.kelly")) + "</span></div>";
+    if (num(d.ytd_kelly_pct) !== null) stats += '<div class="perf-stat"><span class="perf-stat-v">' + fmtN(d.ytd_kelly_pct, 1) + '%</span><span class="perf-stat-l">' + esc(tr("perf.kelly")) + info(tr("perf.kelly.tip") + ". " + tr("perf.kellyNote")) + "</span></div>";
+    if (marginEff !== null) stats += '<div class="perf-stat" title="' + esc(tr("perf.marginTip")) + '"><span class="perf-stat-v">' + fmtPct(marginEff) + '</span><span class="perf-stat-l">' + esc(tr("perf.marginStat")) + "</span></div>";
 
     var start = hasBench ? null : (d.period && d.period.start);
     var end = hasBench ? bench.period && bench.period.end : (d.period && d.period.end);
@@ -119,8 +120,7 @@
           '<p class="perf-big ' + (big !== null && big < 0 ? "neg" : "pos") + '">' + fmtPct(big) + "</p>" +
           '<p class="perf-sub">' + esc(tr(hasBench ? "perf.twr" : "perf.onMargin")) + info(tr(hasBench ? "perf.twrTip" : "perf.marginTip")) + "</p>" +
           (end ? '<p class="perf-sub perf-asof">' + esc(tr("perf.dataThrough")) + " <b>" + fmtDate(end) + "</b></p>" : "") +
-          (hasBench && marginEff !== null ? '<p class="perf-sub perf-eff">' + esc(tr("perf.marginEff")) + ": <b>" + fmtPct(marginEff) + "</b>" + info(tr("perf.marginTip")) + "</p>" : "") +
-          (stats ? '<p class="perf-sub perf-stats-h">' + esc(tr("perf.tradesHead")) + info(tr("perf.tradeTip")) + '</p><div class="perf-stats">' + stats + "</div>" + (num(d.ytd_kelly_pct) !== null ? '<p class="perf-sub perf-kelly-note">' + esc(tr("perf.kellyNote")) + "</p>" : "") : "") +
+          (stats ? '<p class="perf-sub perf-stats-h">' + esc(tr("perf.tradesHead")) + info(tr("perf.tradeTip")) + '</p><div class="perf-stats">' + stats + "</div>" : "") +
           (period ? '<p class="perf-sub">' + esc(tr("perf.period")) + ": " + period + "</p>" : "") +
           (account ? '<p class="perf-sub">' + esc(account) + "</p>" : "") +
         "</div>" +

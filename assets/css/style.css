@@ -493,3 +493,8 @@ a:hover { color: var(--focus); }
 
 /* 13/11/2026 — rodapé: data e hora da última atualização dos dados */
 .footer-updated { margin: 0; font-size: .8rem; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+
+/* 13/11/2026 - "i" do Kelly: dica ancorada na esquerda do numero, para nao sair do cartao */
+.perf-stat { position: relative; }
+.perf-stat .info { position: static; }
+.perf-stat .info::after { left: 0; right: auto; transform: none; width: min(290px, calc(100vw - 4rem)); bottom: calc(100% + 6px); }
