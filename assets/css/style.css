@@ -473,6 +473,7 @@ a:hover { color: var(--focus); }
 /* 09/11/2026 — Rendimentos: conta inteira como número principal, eficiência da margem e estatísticas dos trades */
 .perf-eff { margin-top: .35rem; }
 .perf-eff b { color: var(--text); font-variant-numeric: tabular-nums; }
+.perf-kelly-note { margin-top: .5rem; font-size: .78rem; }
 .perf-stats-h { margin-top: 1rem; font-size: .78rem; letter-spacing: .04em; color: var(--text-dim); }
 .perf-stats { flex-wrap: wrap; gap: .75rem 1.5rem; }
 
@@ -489,3 +490,6 @@ a:hover { color: var(--focus); }
 
 /* 11/11/2026 — título do livro no Sobre: itálico mais visível */
 [data-i18n="about.p3"] em { font-style: italic; color: var(--text); font-weight: 500; }
+
+/* 13/11/2026 — rodapé: data e hora da última atualização dos dados */
+.footer-updated { margin: 0; font-size: .8rem; color: var(--text-muted); font-variant-numeric: tabular-nums; }

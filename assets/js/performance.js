@@ -120,7 +120,7 @@
           '<p class="perf-sub">' + esc(tr(hasBench ? "perf.twr" : "perf.onMargin")) + info(tr(hasBench ? "perf.twrTip" : "perf.marginTip")) + "</p>" +
           (end ? '<p class="perf-sub perf-asof">' + esc(tr("perf.dataThrough")) + " <b>" + fmtDate(end) + "</b></p>" : "") +
           (hasBench && marginEff !== null ? '<p class="perf-sub perf-eff">' + esc(tr("perf.marginEff")) + ": <b>" + fmtPct(marginEff) + "</b>" + info(tr("perf.marginTip")) + "</p>" : "") +
-          (stats ? '<p class="perf-sub perf-stats-h">' + esc(tr("perf.tradesHead")) + info(tr("perf.tradeTip")) + '</p><div class="perf-stats">' + stats + "</div>" : "") +
+          (stats ? '<p class="perf-sub perf-stats-h">' + esc(tr("perf.tradesHead")) + info(tr("perf.tradeTip")) + '</p><div class="perf-stats">' + stats + "</div>" + (num(d.ytd_kelly_pct) !== null ? '<p class="perf-sub perf-kelly-note">' + esc(tr("perf.kellyNote")) + "</p>" : "") : "") +
           (period ? '<p class="perf-sub">' + esc(tr("perf.period")) + ": " + period + "</p>" : "") +
           (account ? '<p class="perf-sub">' + esc(account) + "</p>" : "") +
         "</div>" +
@@ -133,6 +133,8 @@
       '<details class="perf-method"><summary>' + esc(tr("perf.method")) + "</summary>" + rows +
         (window.RF_AUDIT_URL ? '<p class="tr-audit"><strong>' + esc(tr("tr.audit.k")) + "</strong> " + esc(tr("tr.audit.text")) + ' <a href="' + esc(window.RF_AUDIT_URL) + '" target="_blank" rel="noopener noreferrer">' + esc(tr("tr.audit.link")) + " →</a></p>" : "") + "</details>" +
       '<p class="perf-foot">' + esc(tr("perf.updated")) + " " + ((bench && bench.last_updated) || d.last_updated ? fmtDate((bench && bench.last_updated) || d.last_updated) : "—") + " · " + esc(tr("perf.disclaimer")) + "</p>";
+    var su = document.getElementById("site-updated"), lu = (bench && bench.last_updated) || d.last_updated;
+    if (su && lu) { su.textContent = tr("footer.updated") + " " + fmtDate(lu) + " " + tr("footer.at") + " " + String(lu).slice(11, 16) + " " + tr("footer.tz"); su.hidden = false; }
     document.dispatchEvent(new Event("perfrendered"));
   }
 

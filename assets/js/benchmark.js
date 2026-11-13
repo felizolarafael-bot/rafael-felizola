@@ -49,7 +49,7 @@
     w = Math.max(280, w || 720);
     var small = w < 520;
     return small ? { W: w, H: Math.round(Math.max(240, Math.min(320, w * 0.78))), L: 54, R: 14, TOP: 14, B: 28, small: true }
-                 : { W: w, H: Math.round(Math.max(260, Math.min(340, w * 0.42))), L: 46, R: 118, TOP: 16, B: 30, small: false };
+                 : { W: w, H: Math.round(Math.max(260, Math.min(340, w * 0.42))), L: 46, R: 142, TOP: 16, B: 30, small: false };
   }
   function ytdTxt() { var b = document.querySelector("#perf-root .perf-big"); return b ? b.textContent : "número grande"; }
   function chart(s, D) {

@@ -83,6 +83,7 @@ window.I18N = {
     "perf.kelly": "critério de Kelly",
     "perf.kelly.tip": "Kelly = acerto − (1 − acerto) ÷ payoff, dos trades fechados do ano",
     "perf.m.kelly": "Kelly",
+    "perf.kellyNote": "Kelly é uma medida histórica dos trades fechados, não uma recomendação de tamanho de posição.",
     "perf.noTrades": "sem trades fechados no mês",
     "perf.m.num": "Numerador",
     "perf.m.den": "Denominador",
@@ -145,7 +146,10 @@ window.I18N = {
     "contact.dc_label": "Discord",
     "contact.dc_btn": "Entrar no Discord",
     "contact.email_label": "E-mail",
-    "footer.disclaimer": "Resultados passados não garantem resultados futuros. Não é recomendação de investimento."
+    "footer.disclaimer": "Resultados passados não garantem resultados futuros. Não é recomendação de investimento.",
+    "footer.updated": "Dados atualizados em",
+    "footer.at": "às",
+    "footer.tz": "(horário de Fortaleza)"
   },
   en: {
     "skip": "Skip to content",
@@ -226,6 +230,7 @@ window.I18N = {
     "perf.kelly": "Kelly criterion",
     "perf.kelly.tip": "Kelly = win rate − (1 − win rate) ÷ payoff, from the year's closed trades",
     "perf.m.kelly": "Kelly",
+    "perf.kellyNote": "Kelly is a historical measure of closed trades, not a recommendation on position size.",
     "perf.noTrades": "no closed trades that month",
     "perf.m.num": "Numerator",
     "perf.m.den": "Denominator",
@@ -288,7 +293,10 @@ window.I18N = {
     "contact.dc_label": "Discord",
     "contact.dc_btn": "Join Discord",
     "contact.email_label": "Email",
-    "footer.disclaimer": "Past performance does not guarantee future results. Not investment advice."
+    "footer.disclaimer": "Past performance does not guarantee future results. Not investment advice.",
+    "footer.updated": "Data updated on",
+    "footer.at": "at",
+    "footer.tz": "(Fortaleza time)"
   }
 };
 
