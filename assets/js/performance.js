@@ -92,7 +92,7 @@
     if (num(d.ytd_win_rate_pct) !== null) stats += '<div class="perf-stat"><span class="perf-stat-v">' + fmtN(d.ytd_win_rate_pct, 1) + '%</span><span class="perf-stat-l">' + esc(tr("perf.winrate")) + "</span></div>";
     if (num(d.ytd_payoff) !== null) stats += '<div class="perf-stat"><span class="perf-stat-v">' + fmtN(d.ytd_payoff, 2) + '</span><span class="perf-stat-l">' + esc(tr("perf.payoff")) + "</span></div>";
     if (num(d.ytd_kelly_pct) !== null) stats += '<div class="perf-stat"><span class="perf-stat-v">' + fmtN(d.ytd_kelly_pct, 1) + '%</span><span class="perf-stat-l">' + esc(tr("perf.kelly")) + info(tr("perf.kelly.tip") + ". " + tr("perf.kellyNote")) + "</span></div>";
-    if (marginEff !== null) stats += '<div class="perf-stat" title="' + esc(tr("perf.marginTip")) + '"><span class="perf-stat-v">' + fmtPct(marginEff) + '</span><span class="perf-stat-l">' + esc(tr("perf.marginStat")) + "</span></div>";
+    if (marginEff !== null) stats += '<div class="perf-stat"><span class="perf-stat-v">' + fmtPct(marginEff) + '</span><span class="perf-stat-l">' + esc(tr("perf.marginStat")) + info(tr("perf.m.marginText")) + "</span></div>";
 
     var start = hasBench ? null : (d.period && d.period.start);
     var end = hasBench ? bench.period && bench.period.end : (d.period && d.period.end);

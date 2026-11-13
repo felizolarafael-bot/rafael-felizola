@@ -498,3 +498,4 @@ a:hover { color: var(--focus); }
 .perf-stat { position: relative; }
 .perf-stat .info { position: static; }
 .perf-stat .info::after { left: 0; right: auto; transform: none; width: min(290px, calc(100vw - 4rem)); bottom: calc(100% + 6px); }
+.perf-stat:last-child .info::after { left: auto; right: 0; width: min(260px, calc(100vw - 4rem)); }
