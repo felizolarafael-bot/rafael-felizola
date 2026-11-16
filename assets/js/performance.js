@@ -90,7 +90,7 @@
     var stats = "";
     if (num(d.ytd_closed_trades) !== null) stats += '<div class="perf-stat"><span class="perf-stat-v">' + d.ytd_closed_trades + '</span><span class="perf-stat-l">' + esc(tr("perf.trades")) + "</span></div>";
     if (num(d.ytd_win_rate_pct) !== null) stats += '<div class="perf-stat"><span class="perf-stat-v">' + fmtN(d.ytd_win_rate_pct, 1) + '%</span><span class="perf-stat-l">' + esc(tr("perf.winrate")) + "</span></div>";
-    if (num(d.ytd_payoff) !== null) stats += '<div class="perf-stat"><span class="perf-stat-v">' + fmtN(d.ytd_payoff, 2) + '</span><span class="perf-stat-l">' + esc(tr("perf.payoff")) + "</span></div>";
+    if (num(d.ytd_payoff) !== null) stats += '<div class="perf-stat"><span class="perf-stat-v">' + fmtN(d.ytd_payoff, 2) + '</span><span class="perf-stat-l">' + esc(tr("perf.payoff")) + info(tr("perf.payoffTip")) + "</span></div>";
     if (num(d.ytd_kelly_pct) !== null) stats += '<div class="perf-stat"><span class="perf-stat-v">' + fmtN(d.ytd_kelly_pct, 1) + '%</span><span class="perf-stat-l">' + esc(tr("perf.kelly")) + info(tr("perf.kelly.tip") + ". " + tr("perf.kellyNote")) + "</span></div>";
     if (marginEff !== null) stats += '<div class="perf-stat"><span class="perf-stat-v">' + fmtPct(marginEff) + '</span><span class="perf-stat-l">' + esc(tr("perf.marginStat")) + info(tr("perf.m.marginText")) + "</span></div>";
 
@@ -114,14 +114,16 @@
     rows += "<p><strong>" + esc(tr("perf.m.trade")) + ":</strong> " + esc(tr("perf.m.tradeText")) + "</p>";
     if (pm.kelly) rows += "<p><strong>" + esc(tr("perf.m.kelly")) + ":</strong> " + esc(lang() === "en" ? METHOD_EN.kelly : pm.kelly) + "</p>";
 
+    var luRaw = (bench && bench.last_updated) || d.last_updated;
+    var luStamp = luRaw ? fmtDate(luRaw) + " " + tr("footer.at") + " " + String(luRaw).slice(11, 16) : "";
     root.innerHTML =
       '<div class="perf-grid">' +
         '<div class="card perf-ytd"><p class="perf-kicker">' + esc(tr(hasBench ? "perf.ytd" : "perf.ytdMargin")) + "</p>" +
           '<p class="perf-big ' + (big !== null && big < 0 ? "neg" : "pos") + '">' + fmtPct(big) + "</p>" +
           '<p class="perf-sub">' + esc(tr(hasBench ? "perf.twr" : "perf.onMargin")) + info(tr(hasBench ? "perf.twrTip" : "perf.marginTip")) + "</p>" +
-          (end ? '<p class="perf-sub perf-asof">' + esc(tr("perf.dataThrough")) + " <b>" + fmtDate(end) + "</b></p>" : "") +
           (stats ? '<p class="perf-sub perf-stats-h">' + esc(tr("perf.tradesHead")) + info(tr("perf.tradeTip")) + '</p><div class="perf-stats">' + stats + "</div>" : "") +
           (period ? '<p class="perf-sub">' + esc(tr("perf.period")) + ": " + period + "</p>" : "") +
+          (luStamp ? '<p class="perf-sub perf-asof">' + esc(tr("perf.updated")) + " <b>" + luStamp + "</b> " + esc(tr("footer.tz")) + "</p>" : "") +
           (account ? '<p class="perf-sub">' + esc(account) + "</p>" : "") +
         "</div>" +
         '<div id="bench-root" class="bench"></div>' +
