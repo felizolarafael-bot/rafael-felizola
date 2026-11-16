@@ -1,24 +1,24 @@
 {
  "ok": true,
- "date": "2026-11-13",
- "sha256": "55d3fe837a2b7b2ca66a929336d0c50610decbea838c27ba94448eba2ff096fe",
- "version": "2026.11.13-22",
- "generated_at": "2026-11-13T19:00:02-03:00",
+ "date": "2026-11-16",
+ "sha256": "0fd5518bd7d25e3fd3bab7ab68490ea59ab6a3d005622e6929af6ce6752663ce",
+ "version": "2026.11.13-23",
+ "generated_at": "2026-11-16T08:07:23-03:00",
  "source": "MyGex (tastytrade API, gex_build.py)",
- "meta_ts": "2026-11-13T21:59:58Z",
+ "meta_ts": "2026-11-16T11:07:18Z",
  "mode": "full",
- "contratos": 12593,
+ "contratos": 13274,
  "tickers": [
   "SPY",
   "QQQ",
   "XSP",
   "XND",
+  "PCG",
+  "CVX",
   "EEM",
-  "HOOD",
-  "HYG",
   "IEF",
   "TLT",
-  "MARA"
+  "MSTR"
  ],
  "fresh": true
 }
