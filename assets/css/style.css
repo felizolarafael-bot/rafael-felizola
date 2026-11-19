@@ -500,3 +500,11 @@ a:hover { color: var(--focus); }
 .perf-stat .info::after { left: 0; right: auto; transform: none; width: min(290px, calc(100vw - 4rem)); bottom: calc(100% + 6px); }
 .perf-stat:last-child .info::after { left: auto; right: 0; width: min(260px, calc(100vw - 4rem)); }
 .perf-stat:nth-child(3) .info::after { left: auto; right: 0; width: min(260px, calc(100vw - 4rem)); }
+
+/* 19/11/2026 - topo: botoes de mesma largura, linha dos mercados mais legivel e ritmo vertical igual */
+.hero-tagline { margin-bottom: 1.75rem; }
+.hero-actions { margin-bottom: 1.75rem; }
+.hero-actions .btn { min-width: 9.75rem; }
+.hero-markets { color: #8b95a5; }
+.hero-markets .dot { width: 5px; height: 5px; box-shadow: 0 0 6px rgba(201, 162, 39, .35); }
+@media (max-width: 520px) { .hero-actions .btn { flex: 1 1 calc(50% - .4rem); min-width: 0; } .hero-actions .btn-primary { flex-basis: 100%; } }
