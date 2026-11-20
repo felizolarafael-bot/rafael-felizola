@@ -3,14 +3,14 @@
  "scope": "Resultado dos trades fechados em 2026, do início do ano até o último pregão. Só porcentagens. Depósitos e saques não entram. Nenhum valor em dólar, saldo ou tamanho de posição.",
  "period": {
   "start": "2026-01-01",
-  "end": "2026-11-18",
-  "margin_data_through": "2026-11-18"
+  "end": "2026-11-19",
+  "margin_data_through": "2026-11-19"
  },
- "ytd_return_on_margin_pct": 91.54,
- "ytd_closed_trades": 61,
- "ytd_win_rate_pct": 60.66,
- "ytd_kelly_pct": 39.56,
- "ytd_payoff": 1.865,
+ "ytd_return_on_margin_pct": 90.59,
+ "ytd_closed_trades": 62,
+ "ytd_win_rate_pct": 59.68,
+ "ytd_kelly_pct": 38.52,
+ "ytd_payoff": 1.906,
  "method": {
   "name": "P&L fechado sobre margem utilizada",
   "numerator": "Soma do P&L líquido dos trades fechados no período, pela data de fechamento, já com comissões e taxas. Calculado pelo TT Journal (1 contrato = 1 trade, da abertura até a quantidade zerar) a partir das transações oficiais da conta.",
@@ -73,8 +73,8 @@
   },
   {
    "month": "2026-11",
-   "return_on_margin_pct": -2.95,
-   "closed_trades": 8
+   "return_on_margin_pct": -3.74,
+   "closed_trades": 9
   }
  ],
  "notes": [
@@ -84,6 +84,6 @@
  ],
  "closed_trades": null,
  "closed_trades_note": "Lista de operações não incluída; o site mostra só o rendimento do ano.",
- "last_updated": "2026-11-19T07:30:04-03:00",
+ "last_updated": "2026-11-19T23:30:04-03:00",
  "timezone": "America/Fortaleza"
 }
