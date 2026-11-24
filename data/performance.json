@@ -3,10 +3,10 @@
  "scope": "Resultado dos trades fechados em 2026, do início do ano até o último pregão. Só porcentagens. Depósitos e saques não entram. Nenhum valor em dólar, saldo ou tamanho de posição.",
  "period": {
   "start": "2026-01-01",
-  "end": "2026-11-20",
-  "margin_data_through": "2026-11-20"
+  "end": "2026-11-23",
+  "margin_data_through": "2026-11-23"
  },
- "ytd_return_on_margin_pct": 90.7,
+ "ytd_return_on_margin_pct": 90.43,
  "ytd_closed_trades": 62,
  "ytd_win_rate_pct": 59.68,
  "ytd_kelly_pct": 38.52,
@@ -73,7 +73,7 @@
   },
   {
    "month": "2026-11",
-   "return_on_margin_pct": -3.84,
+   "return_on_margin_pct": -3.76,
    "closed_trades": 9
   }
  ],
@@ -84,6 +84,6 @@
  ],
  "closed_trades": null,
  "closed_trades_note": "Lista de operações não incluída; o site mostra só o rendimento do ano.",
- "last_updated": "2026-11-23T07:30:03-03:00",
+ "last_updated": "2026-11-23T23:30:04-03:00",
  "timezone": "America/Fortaleza"
 }
