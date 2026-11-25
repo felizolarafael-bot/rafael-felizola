@@ -2,10 +2,10 @@
  "scope": "Retorno acumulado no ano da conta inteira contra o SPY. Só porcentagens.",
  "period": {
   "start": "2025-12-31",
-  "end": "2026-11-23"
+  "end": "2026-11-24"
  },
- "ytd_account_pct": 77.35,
- "ytd_spy_pct": 6.73,
+ "ytd_account_pct": 82.27,
+ "ytd_spy_pct": 6.21,
  "series": [
   {
    "date": "2025-12-31",
@@ -1136,6 +1136,11 @@
    "date": "2026-11-23",
    "account_pct": 77.35,
    "spy_pct": 6.73
+  },
+  {
+   "date": "2026-11-24",
+   "account_pct": 82.27,
+   "spy_pct": 6.21
   }
  ],
  "method": {
@@ -1150,5 +1155,5 @@
   "2026-08-31"
  ],
  "external_flow_days": 9,
- "last_updated": "2026-11-24T07:30:05-03:00"
+ "last_updated": "2026-11-25T07:39:06-03:00"
 }
