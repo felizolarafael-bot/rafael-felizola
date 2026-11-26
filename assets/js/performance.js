@@ -140,7 +140,7 @@
         '<div class="card perf-ytd"><p class="perf-kicker">' + esc(tr(hasBench ? "perf.ytd" : "perf.ytdMargin")) + "</p>" +
           '<p class="perf-big ' + (big !== null && big < 0 ? "neg" : "pos") + '">' + fmtPct(big) + "</p>" +
           '<p class="perf-sub">' + esc(tr(hasBench ? "perf.twr" : "perf.onMargin")) + info(tr(hasBench ? "perf.twrTip" : "perf.marginTip")) + "</p>" +
-          (dd ? '<p class="perf-sub perf-dd">' + esc(tr("perf.dd")) + " <b>" + fmtPct(dd.pct) + "</b> · " + fmtDM(dd.from) + "\u00a0→\u00a0" + fmtDM(dd.to) + info(tr("perf.ddTip")) + "</p>" : "") +
+          (dd ? '<div class="perf-stats perf-dd"><div class="perf-stat"><span class="perf-stat-v neg">' + fmtPct(dd.pct) + '</span><span class="perf-stat-l">' + esc(tr("perf.dd")) + info(tr("perf.ddTip")) + "</span></div></div>" : "") +
           (stats ? '<p class="perf-sub perf-stats-h">' + esc(tr("perf.tradesHead")) + info(tr("perf.tradeTip")) + '</p><div class="perf-stats">' + stats + "</div>" : "") +
           (period ? '<p class="perf-sub">' + esc(tr("perf.period")) + ": " + period + "</p>" : "") +
           (luStamp ? '<p class="perf-sub perf-asof">' + esc(tr("perf.updated")) + " <b>" + luStamp + "</b> " + esc(tr("footer.tz")) + "</p>" : "") +
