@@ -556,3 +556,8 @@ a:hover { color: var(--focus); }
 .perf-tile .info::after{left:0;right:auto;transform:none;width:min(290px,calc(100vw - 4rem));bottom:calc(100% + 6px)}
 .perf-meta{margin-top:1rem;padding-top:.75rem;border-top:1px solid var(--border-subtle)}
 .card .perf-meta p{margin:0;font-size:.78rem;line-height:1.5;color:var(--text-dim)}
+.cal-exp{margin-top:.6rem;padding-top:.55rem;border-top:1px dashed var(--border-subtle)}
+.card .cal-exp p,.cal-exp p{margin:.15rem 0 0;font-size:.85rem;color:var(--text)}
+.cal-exp p>span:first-child{color:var(--text-muted)}
+.cal-exp-src{font-size:.75rem;color:var(--text-dim)}.cal-exp-src a{color:inherit}
+.cal-next .info::after{width:min(300px,calc(100vw - 4rem))}

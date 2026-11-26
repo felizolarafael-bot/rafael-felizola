@@ -23,7 +23,19 @@
   {
    "k": "nfp",
    "t": "2026-12-04T13:30:00Z",
-   "ref": "2026-11"
+   "ref": "2026-11",
+   "prev": {
+    "pt": "out/2026: +165 mil vagas, desemprego 4,1%",
+    "en": "Oct 2026: +165K jobs, unemployment 4.1%",
+    "src": "BLS, 06/11/2026",
+    "url": "https://www.bls.gov/news.release/empsit.htm"
+   },
+   "exp": {
+    "pt": "+95 mil vagas, desemprego 4,1%",
+    "en": "+95K jobs, unemployment 4.1%",
+    "src": "Continuum Economics, 16/11/2026",
+    "url": "https://continuumeconomics.com/a/13d43c4f/preview-due-december-4-us-november-employment-non-farm-payrolls-slower-but-far-from-weak"
+   }
   },
   {
    "k": "fomc",

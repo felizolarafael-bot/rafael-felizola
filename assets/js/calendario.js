@@ -9,6 +9,17 @@
   function isEn() { return (document.documentElement.lang || "pt").indexOf("en") === 0; }
   function tr(k) { var d = (window.I18N || {})[isEn() ? "en" : "pt"] || {}; return d[k] || k; }
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;" }[c]; }); }
+  function info(tip) { return ' <span class="info" tabindex="0" role="button" aria-label="' + esc(tip) + '" data-tip="' + esc(tip) + '">i</span>'; }
+  function evTip(k) { var t = tr("cal.tip." + k); return t === "cal.tip." + k ? "" : info(t); }
+  function srcLink(x) { return x.url ? '<a href="' + esc(x.url) + '" target="_blank" rel="noopener">' + esc(x.src) + "</a>" : esc(x.src); }
+  function expRows(items) {
+    var out = "";
+    items.forEach(function (e) {
+      if (e.prev) out += "<p><span>" + esc(tr("cal.prev")) + ":</span> " + esc(isEn() ? e.prev.en : e.prev.pt) + ' <span class="cal-exp-src">(' + srcLink(e.prev) + ")</span></p>";
+      if (e.exp) out += "<p><span>" + esc(tr("cal.exp")) + info(tr("cal.expTip")) + ":</span> " + esc(isEn() ? e.exp.en : e.exp.pt) + ' <span class="cal-exp-src">(' + srcLink(e.exp) + ")</span></p>";
+    });
+    return out ? '<div class="cal-exp">' + out + "</div>" : "";
+  }
 
   var MPT = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"];
   var MEN = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -94,7 +105,7 @@
       var g = groups[hi];
       var names = g.items.map(function (e) {
         var r = fmtRef(e.k, e.ref);
-        return '<span class="cal-next-ev"><b>' + esc(tr("cal.ev." + e.k)) + "</b>" + (r ? ' <span class="cal-next-ref">' + esc(r) + "</span>" : "") + "</span>";
+        return '<span class="cal-next-ev"><b>' + esc(tr("cal.ev." + e.k)) + "</b>" + evTip(e.k) + (r ? ' <span class="cal-next-ref">' + esc(r) + "</span>" : "") + "</span>";
       }).join("");
       var tent = g.items.some(function (e) { return e.tent; });
       main = '<div class="cal-next-main">' +
@@ -102,6 +113,7 @@
           '<div class="cal-next-names">' + names + "</div>" +
           '<p class="cal-next-when">' + esc(fmtDay(g.ms)) + " · " + esc(fmtTime(g.ms)) + " " + esc(tr("cal.tz")) +
             (tent ? ' <span class="cal-next-tent">' + esc(tr("cal.tent")) + "</span>" : "") + "</p>" +
+          expRows(g.items) +
         "</div>" +
         '<p class="cal-next-cd">' + esc(countdown(g.ms, now)) + "</p>";
     }
@@ -115,7 +127,7 @@
       var t = x.items.some(function (e) { return e.tent; });
       var hcol = mkt ? (x.items[0].k === "closed" ? tr("cal.allday") : tr("cal.until").replace("{t}", fmtTime(x.ms))) : fmtTime(x.ms);
       rows.push('<li' + (mkt ? ' class="cal-mkt"' : "") + '><span class="cal-next-d">' + esc(fmtDay(x.ms)) + '</span><span class="cal-next-h">' + esc(hcol) + "</span>" +
-        '<span class="cal-next-n">' + esc(x.items.map(evName).join(" + ")) +
+        '<span class="cal-next-n">' + x.items.map(function (e) { return esc(evName(e)) + (isMkt(e) ? "" : evTip(e.k)); }).join(" + ") +
         (t ? ' <span class="cal-next-tent">' + esc(tr("cal.tent")) + "</span>" : "") + "</span></li>");
     }
     nextBox.innerHTML = (st.html ? '<div class="cal-mkt-box">' + st.html + "</div>" : "") + main +
