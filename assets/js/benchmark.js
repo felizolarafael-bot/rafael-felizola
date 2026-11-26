@@ -10,7 +10,9 @@
       diff: "Por que é diferente do +109%?", diffText: "Aqui a base é o patrimônio inteiro da conta, com as posições abertas. O número do cartão No ano é sobre a margem utilizada e conta só os trades fechados; por isso os dois são diferentes.", method: "Como é calculado",
       table: "Ver em tabela (fim de cada mês)", month: "Mês", unavailable: "Comparativo indisponível no momento.",
       until: "até", pts: "p.p.", ahead: "acima do S&P 500", behind: "abaixo do S&P 500",
-      m: { account: "Conta", flows: "Depósitos e saques", adjustments: "Acordo com a corretora", spy: "S&P 500 (SPY)", difference: "Diferença para o número acima" }
+      m: { account: "Conta", flows: "Depósitos e saques", adjustments: "Acordo com a corretora", spy: "S&P 500 (SPY)", difference: "Diferença para o número acima" },
+      audit: "Auditoria.", updated: "Atualizado em", source: "Fonte", methodLabel: "Método",
+      dataLink: "Ver os dados"
     },
     en: {
       kicker: "Whole account × S&P 500 this year", acc: "My account", short: "Account", spy: "S&P 500",
@@ -18,7 +20,9 @@
       diff: "Why is it different from the big number?", diffText: "Here the base is the whole account equity, including open positions. The Year to date number is on the margin used and counts only closed trades, so the two differ.", method: "How it is calculated",
       table: "View as table (end of each month)", month: "Month", unavailable: "Comparison unavailable right now.",
       until: "through", pts: "pts", ahead: "ahead of the S&P 500", behind: "behind the S&P 500",
-      m: { account: "Account", flows: "Deposits and withdrawals", adjustments: "Agreement with the broker", spy: "S&P 500 (SPY)", difference: "Difference from the number above" }
+      m: { account: "Account", flows: "Deposits and withdrawals", adjustments: "Agreement with the broker", spy: "S&P 500 (SPY)", difference: "Difference from the number above" },
+      audit: "Audit.", updated: "Updated", source: "Source", methodLabel: "Method",
+      dataLink: "View the data"
     }
   };
   var METHOD_EN = {
@@ -40,6 +44,12 @@
   function fmt(v) { var s = Math.abs(v).toFixed(1); if (lang() === "pt") s = s.replace(".", ","); return (v > 0 ? "+" : v < 0 ? "−" : "") + s + "%"; }
   function fmtPts(v) { var s = Math.abs(v).toFixed(1); if (lang() === "pt") s = s.replace(".", ","); return s + " " + t().pts; }
   function fmtDay(iso) { var p = iso.split("-"); return lang() === "pt" ? (+p[2]) + " " + MONTHS.pt[+p[1] - 1] + " " + p[0] : MONTHS.en[+p[1] - 1] + " " + (+p[2]) + ", " + p[0]; }
+  function fmtUpdated(iso) {
+    if (!iso) return "";
+    var day = fmtDay(String(iso).slice(0, 10)), hm = String(iso).slice(11, 16);
+    return lang() === "pt" ? day + " às " + hm + " (horário de Fortaleza)" : day + " at " + hm + " (Fortaleza time)";
+  }
+  var DATA_URL = "https://felizolarafael-bot.github.io/rafael-felizola/data/benchmark.json";
 
   // 06/11: o desenho usa a largura real do quadro (1 unidade = 1 px), para o texto do gráfico
   // ter sempre o mesmo tamanho em qualquer janela (antes: 760 ou 400 fixos, esticados pelo navegador).
@@ -145,6 +155,14 @@
         '<p class="perf-sub">' + esc(t().sub) + "</p>" +
         '<details class="perf-method"><summary>' + esc(t().table) + "</summary>" +
           '<div class="ins-tablewrap"><table class="ins-table bm-table"><thead><tr><th>' + esc(t().month) + "</th><th>" + esc(t().acc) + "</th><th>" + esc(t().spy) + "</th></tr></thead><tbody>" + trows + "</tbody></table></div>" +
+          (function () {
+            var bits = [];
+            if (data.last_updated) bits.push(t().updated + " " + fmtUpdated(data.last_updated) + ".");
+            if (data.scope) bits.push(t().source + ": " + data.scope);
+            bits.push(t().methodLabel + ": " + t().sub);
+            return '<p class="tr-audit"><strong>' + esc(t().audit) + "</strong> " + esc(bits.join(" ")) +
+              ' <a href="' + esc(DATA_URL) + '" target="_blank" rel="noopener noreferrer">' + esc(t().dataLink) + " →</a></p>";
+          })() +
         "</details>" +
       "</div>";
     wire(root, s, D);

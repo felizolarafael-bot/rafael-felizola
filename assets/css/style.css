@@ -508,3 +508,12 @@ a:hover { color: var(--focus); }
 .hero-markets { color: #8b95a5; }
 .hero-markets .dot { width: 5px; height: 5px; box-shadow: 0 0 6px rgba(201, 162, 39, .35); }
 @media (max-width: 520px) { .hero-actions .btn { flex: 1 1 calc(50% - .4rem); min-width: 0; } .hero-actions .btn-primary { flex-basis: 100%; } }
+
+/* 26/11/2026 - Calendario economico dos EUA (widget do TradingView) */
+.cal-section { border-top: 1px solid var(--border-subtle); }
+.cal-box { min-height: 540px; padding: .5rem; background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius); overflow: hidden; }
+.cal-box .perf-empty { padding: 1rem; }
+.cal-note { margin: .85rem 0 0; font-size: .8rem; color: var(--text-dim); }
+.cal-src { margin: .35rem 0 0; font-size: .85rem; color: var(--text-muted); }
+.cal-src a { color: var(--gold-soft); }
+@media (max-width: 520px) { .cal-box { min-height: 500px; padding: .25rem; } }
