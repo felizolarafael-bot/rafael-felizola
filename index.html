@@ -25,7 +25,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css?v=051c3ca8a6">
+  <link rel="stylesheet" href="assets/css/style.css?v=2662076408">
   <link rel="icon" href="assets/img/favicon.ico?v=e6ac0f9904" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png?v=fe10eb4a48">
   <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png?v=87b5f9a053">
@@ -223,20 +223,20 @@
       </div>
     </section>
 
-    <!-- 6b. CALENDÁRIO ECONÔMICO DOS EUA (widget do TradingView, carregado só quando a seção chega perto da tela) -->
+    <!-- 6b. CALENDARIO ECONOMICO DOS EUA (datas das agendas oficiais em data/agenda-eua.json; horarios de Fortaleza) -->
     <section id="calendar" class="section cal-section">
       <div class="container">
         <header class="section-header">
           <p class="eyebrow" data-i18n="cal.eyebrow">Calendário econômico</p>
           <h2 data-i18n="cal.title">Agenda dos EUA</h2>
-          <p class="section-lead" data-i18n="cal.lead">Os eventos que mexem com o mercado americano: juros, emprego, inflação e PIB. Os horários seguem o fuso do seu aparelho.</p>
+          <p class="section-lead" data-i18n="cal.lead">Juros, emprego, inflação e PIB: os eventos que movem o mercado americano.</p>
         </header>
-        <div id="cal-widget" class="cal-box" aria-live="polite"><p class="perf-empty" data-i18n="cal.loading">Carregando o calendário…</p></div>
-        <p class="cal-note" data-i18n="cal.note">Calendário fornecido pelo TradingView. Apenas informação, não é recomendação de investimento.</p>
-        <p class="cal-src"><span data-i18n="cal.src">Fontes oficiais:</span>
-          <a href="https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm" target="_blank" rel="noopener">Federal Reserve</a> ·
+        <div id="cal-next" class="cal-next" aria-live="polite" hidden></div>
+        <p class="cal-src"><span data-i18n="cal.src">Horários de Fortaleza. Fontes oficiais:</span>
+          <a href="https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm" target="_blank" rel="noopener">Fed</a> ·
           <a href="https://www.bls.gov/schedule/" target="_blank" rel="noopener">BLS</a> ·
-          <a href="https://www.bea.gov/news/schedule" target="_blank" rel="noopener">BEA</a></p>
+          <a href="https://www.bea.gov/news/schedule" target="_blank" rel="noopener">BEA</a>.
+          <span data-i18n="cal.note">Não é recomendação de investimento.</span></p>
       </div>
     </section>
 
@@ -295,12 +295,12 @@
     </div>
   </footer>
 
-  <script src="assets/js/main.js?v=65e7a803eb"></script>
+  <script src="assets/js/main.js?v=193ca47f9b"></script>
   <script src="assets/js/performance.js?v=394fbb48ff"></script>
   <script src="assets/js/benchmark.js?v=2680a35078"></script>
   <script src="assets/js/trades.js?v=4a24140e8b"></script>
   <script src="assets/js/insights.js?v=221264cdf0"></script>
-  <script src="assets/js/calendario.js?v=663eab003b"></script>
+  <script src="assets/js/calendario.js?v=4d708d4c3b"></script>
   <script data-goatcounter="https://felizola.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>

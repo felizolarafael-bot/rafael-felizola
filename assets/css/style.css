@@ -514,10 +514,29 @@ a:hover { color: var(--focus); }
 .cal-box { min-height: 540px; padding: .5rem; background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius); overflow: hidden; }
 .cal-box .perf-empty { padding: 1rem; }
 .cal-note { margin: .85rem 0 0; font-size: .8rem; color: var(--text-dim); }
-.cal-src { margin: .35rem 0 0; font-size: .85rem; color: var(--text-muted); }
+.cal-src { margin: .75rem 0 0; font-size: .85rem; color: var(--text-muted); }
 .cal-src a { color: var(--gold-soft); }
 @media (max-width: 520px) { .cal-box { min-height: 500px; padding: .25rem; } }
 
 /* 26/11/2026 - rebaixamento maximo no cartao de Rendimentos */
 .perf-dd { margin-top: .35rem; }
 .perf-dd b { color: var(--neg); font-variant-numeric: tabular-nums; }
+
+/* 26/11/2026: faixa "Proximo grande evento" do calendario */
+.cal-next{display:grid;grid-template-columns:1fr auto;gap:.75rem 1.5rem;align-items:start;margin:0 0 1rem;padding:1.1rem 1.25rem;background:var(--bg-card);border:1px solid var(--border-subtle);border-left:3px solid var(--gold,#c9a227);border-radius:var(--radius)}
+.cal-next[hidden]{display:none}
+.cal-next-tag{margin:0 0 .35rem;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-soft)}
+.cal-next-names{display:flex;flex-direction:column;gap:.15rem}
+.cal-next-ev b{font-size:1.15rem;color:var(--text,#e6e9ef)}
+.cal-next-ref{font-size:.85rem;color:var(--text-muted)}
+.cal-next-when{margin:.4rem 0 0;color:var(--text-muted);font-variant-numeric:tabular-nums}
+.cal-next-tent{margin-left:.35rem;font-size:.75rem;color:var(--text-dim);white-space:nowrap}
+.cal-next-cd{margin:0;align-self:center;font-size:1.35rem;font-weight:600;color:var(--gold-soft);white-space:nowrap}
+.cal-next-after{grid-column:1/-1;padding-top:.75rem;border-top:1px solid var(--border-subtle)}
+.cal-next-after ul{margin:0;padding:0;list-style:none;font-size:.9rem;color:var(--text-muted)}
+.cal-next-after li{display:grid;grid-template-columns:7.5rem 4.5rem 1fr;gap:.75rem;padding:.45rem 0;border-bottom:1px solid var(--border-subtle)}
+.cal-next-after li:last-child{border-bottom:0}
+.cal-next-h{color:var(--text-dim);font-variant-numeric:tabular-nums}
+.cal-next-n{color:var(--text)}
+.cal-next-d{color:var(--text-dim);font-variant-numeric:tabular-nums}
+@media(max-width:520px){.cal-next{grid-template-columns:1fr}.cal-next-cd{align-self:start;font-size:1.15rem}.cal-next-after li{grid-template-columns:auto 1fr;gap:.1rem .6rem}.cal-next-n{grid-column:1/-1}}
