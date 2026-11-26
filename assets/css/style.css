@@ -540,3 +540,7 @@ a:hover { color: var(--focus); }
 .cal-next-n{color:var(--text)}
 .cal-next-d{color:var(--text-dim);font-variant-numeric:tabular-nums}
 @media(max-width:520px){.cal-next{grid-template-columns:1fr}.cal-next-cd{align-self:start;font-size:1.15rem}.cal-next-after li{grid-template-columns:auto 1fr;gap:.1rem .6rem}.cal-next-n{grid-column:1/-1}}
+.cal-mkt-box{grid-column:1/-1;padding:.6rem .85rem;background:rgba(201,162,39,.08);border:1px solid rgba(201,162,39,.25);border-radius:var(--radius-sm,6px)}
+.cal-mkt-st{margin:0;font-size:.9rem;color:var(--text)}.cal-mkt-st+.cal-mkt-st{margin-top:.25rem}
+.cal-mkt-st b{color:var(--gold-soft)}
+.cal-next-after li.cal-mkt .cal-next-n{color:var(--gold-soft)}

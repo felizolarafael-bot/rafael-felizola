@@ -1,5 +1,5 @@
 // Calendario economico dos EUA: proximo grande evento em destaque e os seguintes em lista.
-// Datas copiadas das agendas oficiais (Fed, BLS, BEA) em data/agenda-eua.json; horarios de Fortaleza
+// Datas copiadas das agendas oficiais (Fed, BLS, BEA, NYSE) em data/agenda-eua.json; horarios de Fortaleza
 // (UTC-3, sem horario de verao). Sem script de terceiros.
 (function () {
   "use strict";
@@ -47,6 +47,14 @@
     return tr("cal.inDays").replace("{n}", n);
   }
 
+  function isMkt(e) { return e.k === "closed" || e.k === "early"; }
+  function hol(e) { return tr("cal.h." + e.h); }
+  function evName(e) {
+    if (e.k === "closed") return tr("cal.closed") + " · " + hol(e);
+    if (e.k === "early") return tr("cal.early") + " · " + hol(e);
+    return tr("cal.ev." + e.k);
+  }
+
   // Agrupa eventos no mesmo horario (ex.: PIB + PCE)
   function upcoming(now) {
     var list = (agenda && agenda.events) || [], groups = [];
@@ -59,31 +67,59 @@
     return groups;
   }
 
+  // Aviso de bolsa fechada ou pregao reduzido hoje e amanha
+  function marketStatus(now) {
+    var list = (agenda && agenda.events) || [], today = dayKey(now), out = [], shown = {};
+    for (var i = 0; i < list.length; i++) {
+      var e = list[i];
+      if (!isMkt(e)) continue;
+      var ms = Date.parse(e.t), n = Math.round((dayKey(ms) - today) / 86400000);
+      if (n !== 0 && n !== 1) continue;
+      var txt = e.k === "closed" ? tr("cal.st.closed").replace("{h}", hol(e))
+                                 : tr("cal.st.early").replace("{t}", fmtTime(ms)).replace("{h}", hol(e));
+      out.push('<p class="cal-mkt-st"><b>' + esc(tr(n === 0 ? "cal.Today" : "cal.Tomorrow")) + ":</b> " + esc(txt) + "</p>");
+      shown[e.t] = true;
+    }
+    return { html: out.join(""), shown: shown };
+  }
+
   function renderNext() {
     if (!nextBox) return;
-    var now = Date.now(), groups = upcoming(now);
-    if (!groups.length) { nextBox.hidden = true; return; }
-    var g = groups[0];
-    var names = g.items.map(function (e) {
-      var r = fmtRef(e.k, e.ref);
-      return '<span class="cal-next-ev"><b>' + esc(tr("cal.ev." + e.k)) + "</b>" + (r ? ' <span class="cal-next-ref">' + esc(r) + "</span>" : "") + "</span>";
-    }).join("");
-    var tent = g.items.some(function (e) { return e.tent; });
-    var rest = groups.slice(1, 7).map(function (x) {
+    var now = Date.now(), groups = upcoming(now), st = marketStatus(now);
+    var hi = -1;
+    for (var i = 0; i < groups.length; i++) { if (!groups[i].items.some(isMkt)) { hi = i; break; } }
+    if (hi < 0 && !st.html) { nextBox.hidden = true; return; }
+    var main = "";
+    if (hi >= 0) {
+      var g = groups[hi];
+      var names = g.items.map(function (e) {
+        var r = fmtRef(e.k, e.ref);
+        return '<span class="cal-next-ev"><b>' + esc(tr("cal.ev." + e.k)) + "</b>" + (r ? ' <span class="cal-next-ref">' + esc(r) + "</span>" : "") + "</span>";
+      }).join("");
+      var tent = g.items.some(function (e) { return e.tent; });
+      main = '<div class="cal-next-main">' +
+          '<p class="cal-next-tag">' + esc(tr("cal.next")) + "</p>" +
+          '<div class="cal-next-names">' + names + "</div>" +
+          '<p class="cal-next-when">' + esc(fmtDay(g.ms)) + " · " + esc(fmtTime(g.ms)) + " " + esc(tr("cal.tz")) +
+            (tent ? ' <span class="cal-next-tent">' + esc(tr("cal.tent")) + "</span>" : "") + "</p>" +
+        "</div>" +
+        '<p class="cal-next-cd">' + esc(countdown(g.ms, now)) + "</p>";
+    }
+    // Lista: datas seguintes (economicas e da bolsa), ate 6 eventos economicos
+    var rows = [], econ = 0;
+    for (var k = 0; k < groups.length && econ < 6; k++) {
+      if (k === hi) continue;
+      var x = groups[k], mkt = x.items.some(isMkt);
+      if (mkt && x.items.every(function (e) { return st.shown[e.t]; })) continue;
+      if (!mkt) econ++;
       var t = x.items.some(function (e) { return e.tent; });
-      return '<li><span class="cal-next-d">' + esc(fmtDay(x.ms)) + '</span><span class="cal-next-h">' + esc(fmtTime(x.ms)) + "</span>" +
-        '<span class="cal-next-n">' + esc(x.items.map(function (e) { return tr("cal.ev." + e.k); }).join(" + ")) +
-        (t ? ' <span class="cal-next-tent">' + esc(tr("cal.tent")) + "</span>" : "") + "</span></li>";
-    }).join("");
-    nextBox.innerHTML =
-      '<div class="cal-next-main">' +
-        '<p class="cal-next-tag">' + esc(tr("cal.next")) + "</p>" +
-        '<div class="cal-next-names">' + names + "</div>" +
-        '<p class="cal-next-when">' + esc(fmtDay(g.ms)) + " · " + esc(fmtTime(g.ms)) + " " + esc(tr("cal.tz")) +
-          (tent ? ' <span class="cal-next-tent">' + esc(tr("cal.tent")) + "</span>" : "") + "</p>" +
-      "</div>" +
-      '<p class="cal-next-cd">' + esc(countdown(g.ms, now)) + "</p>" +
-      (rest ? '<div class="cal-next-after"><p class="cal-next-tag">' + esc(tr("cal.after")) + '</p><ul>' + rest + "</ul></div>" : "");
+      var hcol = mkt ? (x.items[0].k === "closed" ? tr("cal.allday") : tr("cal.until").replace("{t}", fmtTime(x.ms))) : fmtTime(x.ms);
+      rows.push('<li' + (mkt ? ' class="cal-mkt"' : "") + '><span class="cal-next-d">' + esc(fmtDay(x.ms)) + '</span><span class="cal-next-h">' + esc(hcol) + "</span>" +
+        '<span class="cal-next-n">' + esc(x.items.map(evName).join(" + ")) +
+        (t ? ' <span class="cal-next-tent">' + esc(tr("cal.tent")) + "</span>" : "") + "</span></li>");
+    }
+    nextBox.innerHTML = (st.html ? '<div class="cal-mkt-box">' + st.html + "</div>" : "") + main +
+      (rows.length ? '<div class="cal-next-after"><p class="cal-next-tag">' + esc(tr("cal.after")) + "</p><ul>" + rows.join("") + "</ul></div>" : "");
     nextBox.hidden = false;
   }
 
