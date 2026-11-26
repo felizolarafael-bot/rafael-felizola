@@ -35,6 +35,24 @@
     var m = MONTHS[lang()][+p[1] - 1];
     return lang() === "pt" ? (+p[2]) + " " + m.toLowerCase() + " " + p[0] : m + " " + (+p[2]) + ", " + p[0];
   }
+  // Maior queda do pico ao vale no retorno acumulado da conta inteira (serie diaria de data/benchmark.json)
+  function maxDrawdown(series) {
+    var peak = 1, peakDate = null, worst = 0, from = null, to = null;
+    for (var i = 0; i < series.length; i++) {
+      var r = series[i], v = 1 + num(r.account_pct) / 100;
+      if (!(v > 0)) continue;
+      if (peakDate === null || v > peak) { peak = v; peakDate = r.date; }
+      var dd = v / peak - 1;
+      if (dd < worst) { worst = dd; from = peakDate; to = r.date; }
+    }
+    return from ? { pct: worst * 100, from: from, to: to } : null;
+  }
+  function fmtDM(iso) {
+    var q = String(iso).slice(0, 10).split("-");
+    if (q.length !== 3) return esc(iso);
+    var m = MONTHS[lang()][+q[1] - 1];
+    return lang() === "pt" ? (+q[2]) + "\u00a0" + m.toLowerCase() : m + "\u00a0" + (+q[2]);
+  }
   function info(tip) { return ' <span class="info" tabindex="0" role="button" aria-label="' + esc(tip) + '" data-tip="' + esc(tip) + '">i</span>'; }
 
   // Retorno de cada mês na série acumulada: (1 + fim do mês) ÷ (1 + fim do mês anterior) − 1
@@ -114,6 +132,7 @@
     rows += "<p><strong>" + esc(tr("perf.m.trade")) + ":</strong> " + esc(tr("perf.m.tradeText")) + "</p>";
     if (pm.kelly) rows += "<p><strong>" + esc(tr("perf.m.kelly")) + ":</strong> " + esc(lang() === "en" ? METHOD_EN.kelly : pm.kelly) + "</p>";
 
+    var dd = hasBench ? maxDrawdown(bench.series) : null;
     var luRaw = (bench && bench.last_updated) || d.last_updated;
     var luStamp = luRaw ? fmtDate(luRaw) + " " + tr("footer.at") + " " + String(luRaw).slice(11, 16) : "";
     root.innerHTML =
@@ -121,6 +140,7 @@
         '<div class="card perf-ytd"><p class="perf-kicker">' + esc(tr(hasBench ? "perf.ytd" : "perf.ytdMargin")) + "</p>" +
           '<p class="perf-big ' + (big !== null && big < 0 ? "neg" : "pos") + '">' + fmtPct(big) + "</p>" +
           '<p class="perf-sub">' + esc(tr(hasBench ? "perf.twr" : "perf.onMargin")) + info(tr(hasBench ? "perf.twrTip" : "perf.marginTip")) + "</p>" +
+          (dd ? '<p class="perf-sub perf-dd">' + esc(tr("perf.dd")) + " <b>" + fmtPct(dd.pct) + "</b> · " + fmtDM(dd.from) + "\u00a0→\u00a0" + fmtDM(dd.to) + info(tr("perf.ddTip")) + "</p>" : "") +
           (stats ? '<p class="perf-sub perf-stats-h">' + esc(tr("perf.tradesHead")) + info(tr("perf.tradeTip")) + '</p><div class="perf-stats">' + stats + "</div>" : "") +
           (period ? '<p class="perf-sub">' + esc(tr("perf.period")) + ": " + period + "</p>" : "") +
           (luStamp ? '<p class="perf-sub perf-asof">' + esc(tr("perf.updated")) + " <b>" + luStamp + "</b> " + esc(tr("footer.tz")) + "</p>" : "") +
