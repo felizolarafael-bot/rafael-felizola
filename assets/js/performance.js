@@ -104,14 +104,17 @@
       if (partialM) foot.push("* " + tr("perf.partial"));
     }
 
-    // Estatísticas dos trades (regra de 16/10)
-    var stats = "";
-    if (num(d.ytd_closed_trades) !== null) stats += '<div class="perf-stat"><span class="perf-stat-v">' + d.ytd_closed_trades + '</span><span class="perf-stat-l">' + esc(tr("perf.trades")) + "</span></div>";
-    if (num(d.ytd_win_rate_pct) !== null) stats += '<div class="perf-stat"><span class="perf-stat-v">' + fmtN(d.ytd_win_rate_pct, 1) + '%</span><span class="perf-stat-l">' + esc(tr("perf.winrate")) + "</span></div>";
-    if (num(d.ytd_payoff) !== null) stats += '<div class="perf-stat"><span class="perf-stat-v">' + fmtN(d.ytd_payoff, 2) + '</span><span class="perf-stat-l">' + esc(tr("perf.payoff")) + info(tr("perf.payoffTip")) + "</span></div>";
-    if (num(d.ytd_kelly_pct) !== null) stats += '<div class="perf-stat"><span class="perf-stat-v">' + fmtN(d.ytd_kelly_pct, 1) + '%</span><span class="perf-stat-l">' + esc(tr("perf.kelly")) + info(tr("perf.kelly.tip") + ". " + tr("perf.kellyNote")) + "</span></div>";
-    if (marginEff !== null) stats += '<div class="perf-stat"><span class="perf-stat-v">' + fmtPct(marginEff) + '</span><span class="perf-stat-l">' + esc(tr("perf.marginStat")) + info(tr("perf.m.marginText")) + "</span></div>";
-
+    // Métricas do ano em blocos iguais (regra de 16/10). Verde só quando o número é bom por critério fixo:
+    // retorno sobre margem > 0, taxa de acerto >= 50%, payoff >= 1, Kelly > 0. Drawdown sempre em vermelho.
+    var tiles = [];
+    function tile(v, label, tip, cls) {
+      tiles.push('<div class="perf-tile"><span class="perf-tile-v' + (cls ? " " + cls : "") + '">' + v + '</span><span class="perf-tile-l">' + esc(label) + (tip ? info(tip) : "") + "</span></div>");
+    }
+    if (marginEff !== null) tile(fmtPct(marginEff), tr("perf.marginStat"), tr("perf.m.marginText"), marginEff > 0 ? "pos" : (marginEff < 0 ? "neg" : ""));
+    if (num(d.ytd_win_rate_pct) !== null) tile(fmtN(d.ytd_win_rate_pct, 1) + "%", tr("perf.winrate"), "", num(d.ytd_win_rate_pct) >= 50 ? "pos" : "");
+    if (num(d.ytd_payoff) !== null) tile(fmtN(d.ytd_payoff, 2), tr("perf.payoff"), tr("perf.payoffTip"), num(d.ytd_payoff) >= 1 ? "pos" : "");
+    if (num(d.ytd_kelly_pct) !== null) tile(fmtN(d.ytd_kelly_pct, 1) + "%", tr("perf.kelly"), tr("perf.kelly.tip") + ". " + tr("perf.kellyNote"), num(d.ytd_kelly_pct) > 0 ? "pos" : "");
+    if (num(d.ytd_closed_trades) !== null) tile(String(d.ytd_closed_trades), tr("perf.trades"), tr("perf.tradeTip"), "");
     var start = hasBench ? null : (d.period && d.period.start);
     var end = hasBench ? bench.period && bench.period.end : (d.period && d.period.end);
     var period = (d.period && d.period.start ? fmtDate(d.period.start) : (start ? fmtDate(start) : "")) + (end ? " – " + fmtDate(end) : "");
@@ -133,6 +136,7 @@
     if (pm.kelly) rows += "<p><strong>" + esc(tr("perf.m.kelly")) + ":</strong> " + esc(lang() === "en" ? METHOD_EN.kelly : pm.kelly) + "</p>";
 
     var dd = hasBench ? maxDrawdown(bench.series) : null;
+    if (dd) tile(fmtPct(dd.pct), tr("perf.dd"), tr("perf.ddTip"), "neg");
     var luRaw = (bench && bench.last_updated) || d.last_updated;
     var luStamp = luRaw ? fmtDate(luRaw) + " " + tr("footer.at") + " " + String(luRaw).slice(11, 16) : "";
     root.innerHTML =
@@ -140,11 +144,11 @@
         '<div class="card perf-ytd"><p class="perf-kicker">' + esc(tr(hasBench ? "perf.ytd" : "perf.ytdMargin")) + "</p>" +
           '<p class="perf-big ' + (big !== null && big < 0 ? "neg" : "pos") + '">' + fmtPct(big) + "</p>" +
           '<p class="perf-sub">' + esc(tr(hasBench ? "perf.twr" : "perf.onMargin")) + info(tr(hasBench ? "perf.twrTip" : "perf.marginTip")) + "</p>" +
-          (dd ? '<div class="perf-stats perf-dd"><div class="perf-stat"><span class="perf-stat-v neg">' + fmtPct(dd.pct) + '</span><span class="perf-stat-l">' + esc(tr("perf.dd")) + info(tr("perf.ddTip")) + "</span></div></div>" : "") +
-          (stats ? '<p class="perf-sub perf-stats-h">' + esc(tr("perf.tradesHead")) + info(tr("perf.tradeTip")) + '</p><div class="perf-stats">' + stats + "</div>" : "") +
-          (period ? '<p class="perf-sub">' + esc(tr("perf.period")) + ": " + period + "</p>" : "") +
-          (luStamp ? '<p class="perf-sub perf-asof">' + esc(tr("perf.updated")) + " <b>" + luStamp + "</b> " + esc(tr("footer.tz")) + "</p>" : "") +
-          (account ? '<p class="perf-sub">' + esc(account) + "</p>" : "") +
+          (tiles.length ? '<p class="perf-tiles-h">' + esc(tr("perf.metricsHead")) + '</p><div class="perf-tiles">' + tiles.join("") + "</div>" : "") +
+          '<div class="perf-meta">' +
+            (period ? "<p>" + period + (account ? " · " + esc(account) : "") + "</p>" : (account ? "<p>" + esc(account) + "</p>" : "")) +
+            (luStamp ? "<p>" + esc(tr("perf.updated")) + " " + luStamp + " " + esc(tr("footer.tz")) + "</p>" : "") +
+          "</div>" +
         "</div>" +
         '<div id="bench-root" class="bench"></div>' +
         (bars ? '<div class="card perf-months"><p class="perf-kicker">' + esc(tr("perf.monthly")) + "</p>" +

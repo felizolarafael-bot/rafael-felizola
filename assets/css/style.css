@@ -544,3 +544,15 @@ a:hover { color: var(--focus); }
 .cal-mkt-st{margin:0;font-size:.9rem;color:var(--text)}.cal-mkt-st+.cal-mkt-st{margin-top:.25rem}
 .cal-mkt-st b{color:var(--gold-soft)}
 .cal-next-after li.cal-mkt .cal-next-n{color:var(--gold-soft)}
+
+/* 26/11/2026: metricas do ano em blocos iguais */
+.card .perf-tiles-h{margin:1.1rem 0 .5rem;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-soft)}
+.perf-tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.5rem}
+.perf-tile{position:relative;display:flex;flex-direction:column;gap:.15rem;padding:.65rem .75rem;background:rgba(255,255,255,.025);border:1px solid var(--border-subtle);border-radius:var(--radius-sm,6px)}
+.perf-tile-v{font-size:1.3rem;font-weight:700;line-height:1.15;font-variant-numeric:tabular-nums;color:var(--text)}
+.perf-tile-v.pos{color:var(--pos)}.perf-tile-v.neg{color:var(--neg)}
+.perf-tile-l{font-size:.72rem;line-height:1.35;color:var(--text-muted)}
+.perf-tile .info{position:static}
+.perf-tile .info::after{left:0;right:auto;transform:none;width:min(290px,calc(100vw - 4rem));bottom:calc(100% + 6px)}
+.perf-meta{margin-top:1rem;padding-top:.75rem;border-top:1px solid var(--border-subtle)}
+.card .perf-meta p{margin:0;font-size:.78rem;line-height:1.5;color:var(--text-dim)}
