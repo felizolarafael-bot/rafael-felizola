@@ -561,3 +561,9 @@ a:hover { color: var(--focus); }
 .cal-exp p>span:first-child{color:var(--text-muted)}
 .cal-exp-src{font-size:.75rem;color:var(--text-dim)}.cal-exp-src a{color:inherit}
 .cal-next .info::after{width:min(300px,calc(100vw - 4rem))}
+/* 27/11/2026: "i" dos numeros do Sobre (caixa inteira como ancora do balao) */
+.about-facts{position:relative;overflow:visible}
+.about-facts>div:nth-child(1){border-top-left-radius:var(--radius)}.about-facts>div:nth-child(2){border-top-right-radius:var(--radius)}
+.about-facts>div:nth-child(3){border-bottom-left-radius:var(--radius)}.about-facts>div:nth-child(4){border-bottom-right-radius:var(--radius)}
+.about-facts .info{position:static}
+.about-facts .info::after{left:0;right:0;width:auto;transform:none;bottom:calc(100% + 8px)}
